@@ -107,7 +107,17 @@ foreach(_target
     ${hw_grpc_srcs})
   target_link_libraries(${_target}
     ${_GRPC_GRPCPP_UNSECURE}
+
     ${_PROTOBUF_LIBPROTOBUF}
 	${PCL_LIBRARIES}
 	PointCloudLib)
 endforeach()
+
+add_custom_command(
+	TARGET "AlServer"
+	POST_BUILD
+	COMMAND mkdir -p ${CMAKE_BINARY_DIR}/stripped
+	COMMAND mv ${CMAKE_BINARY_DIR}/src/App/AlServer ${CMAKE_BINARY_DIR}/stripped
+	#COMMAND mv ${CMAKE_CURRENT_BINARY_DIR}/src/App/route_guide_client ${CMAKE_CURRENT_BINARY_DIR}/stripped
+	
+)
