@@ -7,7 +7,7 @@ link_directories(${PCL_LIBRARY_DIRS})
 add_definitions(${PCL_DEFINITIONS})
 
 
-#add_subdirectory(src/Logging)
+add_subdirectory(src/Logging)
 add_subdirectory(src/PointCloudLib)
 add_subdirectory(src/GrpcLib)
 add_subdirectory(src/Main)

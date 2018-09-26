@@ -24,6 +24,7 @@
 
 #include "AppRevision.h"
 #include "GrpcServer.h"
+#include "logging.h"
 
 struct args {
 	bool use_udmabuf;
@@ -103,11 +104,16 @@ GrpcServer *g_Grpc = NULL ;
 
 int main(int argc, char **argv)
 {
+
 	int err;
+	openlog("algorithm-server",0,LOG_LOCAL0);
+	log_print(LOG_DEBUG,"maincpp","Server open");
 	g_Grpc = new GrpcServer();
 	g_Grpc->Start();
 
 	std::cout << "Server closing... " << std::endl;
+
 	delete g_Grpc;
+	closelog();
 	return true;
 }

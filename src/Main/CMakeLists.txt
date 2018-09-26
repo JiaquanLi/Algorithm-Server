@@ -9,13 +9,15 @@ add_executable(
 target_link_libraries(${TARGET_NAME}
 	-rdynamic
 	grpclib
+	logging
 )
 
 #get_filename_component(TOOLCHAIN_PATH "${CMAKE_C_COMPILER}" PATH)
-#add_custom_command(
-#	TARGET ${TARGET_NAME}
-#	POST_BUILD
-#	COMMAND mkdir -p ${CMAKE_BINARY_DIR}/stripped
-#)
+add_custom_command(
+	TARGET ${TARGET_NAME}
+	POST_BUILD
+	COMMAND mkdir -p ${CMAKE_BINARY_DIR}/stripped
+	COMMAND mv  ${TARGET_NAME} ${CMAKE_BINARY_DIR}/stripped
+)
 
 #install(TARGETS ${TARGET_NAME} DESTINATION bin)
