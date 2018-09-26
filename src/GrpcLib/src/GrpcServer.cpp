@@ -15,7 +15,7 @@
  * limitations under the License.
  *
  */
-
+#include "GrpcServer.h"
 #include <algorithm>
 #include <chrono>
 #include <cmath>
@@ -235,8 +235,8 @@ std::string GetFeatureName(const Point& point,
 
 class RouteGuideImpl final : public RouteGuide::Service {
  public:
-  explicit RouteGuideImpl(const std::string& db) {
-    routeguide::ParseDb(db, &feature_list_);
+  explicit RouteGuideImpl(/*const std::string& db*/) {
+    //routeguide::ParseDb(db, &feature_list_);
   }
 
   Status GetFeature(ServerContext* context, const Point* point,
@@ -306,8 +306,8 @@ class RouteGuideImpl final : public RouteGuide::Service {
     RouteNote note;
     while (stream->Read(&note)) {
       //stream->Write(note);
-	  fwrite((void*)note.datasend().c_str(), note.size(), 1, fileSave);
-	std::cout << "GetMessage" << note.datasend().c_str()<< "size:"<< note.size()<<std::endl;
+	   fwrite((void*)note.datasend().c_str(), note.size(), 1, fileSave);
+	   std::cout << "GetMessage" << note.datasend().c_str()<< "size:"<< note.size()<<std::endl;
     }
 	fclose(fileSave);
 	
@@ -328,9 +328,10 @@ class RouteGuideImpl final : public RouteGuide::Service {
   std::vector<Feature> feature_list_;
 };
 
-void RunServer(const std::string& db_path) {
+void GrpcServer::Start()
+{
   std::string server_address("0.0.0.0:50051");
-  RouteGuideImpl service(db_path);
+  RouteGuideImpl service;
 
   ServerBuilder builder;
   builder.AddListeningPort(server_address, grpc::InsecureServerCredentials());
@@ -338,13 +339,4 @@ void RunServer(const std::string& db_path) {
   std::unique_ptr<Server> server(builder.BuildAndStart());
   std::cout << "Server listening on " << server_address << std::endl;
   server->Wait();
-}
-
-int main(int argc, char** argv) {
-
-  // Expect only arg: --db_path=path/to/route_guide_db.json.
-  std::string db = routeguide::GetDbFileContent(argc, argv);
-  RunServer(db);
-
-  return 0;
 }
