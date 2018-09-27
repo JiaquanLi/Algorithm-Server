@@ -1,8 +1,5 @@
 /*
  * logging.h
- *
- *  Created on: Jun 7, 2016
- *      Author: honeywell
  */
 
 #ifndef SRC_LOGGING_H_
