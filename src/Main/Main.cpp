@@ -104,14 +104,17 @@ GrpcServer *g_Grpc = NULL ;
 
 int main(int argc, char **argv)
 {
-
 	int err;
+	//regist log
 	openlog("algorithm-server",0,LOG_LOCAL0);
-	log_print(LOG_DEBUG,"maincpp","Server open");
+	log_print(LOG_DEBUG,"MainAPP","Server open");
+	printf("%s\n","test" );
+
+	//start gprc server
 	g_Grpc = new GrpcServer();
 	g_Grpc->Start();
 
-	std::cout << "Server closing... " << std::endl;
+	log_print(LOG_DEBUG,"Main","Server Close");
 
 	delete g_Grpc;
 	closelog();

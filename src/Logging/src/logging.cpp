@@ -16,11 +16,41 @@
 
 #include "logging.h"
 
+static char *logFile = "server.log";
+static unsigned int LOG_SIZE = 4096;
 static unsigned char log_level = LOG_ERR;
-static const char *log_tag="";
+static const char *log_tag = "";
 static std::vector<std::function<void(const char *format, va_list ap)>> callbacks;
 
 
+void log_save_local(const char *tag,char* log)
+{
+	FILE *file;
+	//char cTime[64];
+	//char cData[64];
+	//_strtime(cTime);
+	//_strdate(cData);
+	char cDateTime[50];
+	time_t tt;
+    time( &tt );
+    tt = tt + 8*3600;  // transform the time zone
+    tm* t= gmtime( &tt );
+
+    sprintf(cDateTime,"%d-%02d-%02d %02d:%02d:%02d",
+           t->tm_year + 1900,
+           t->tm_mon + 1,
+           t->tm_mday,
+           t->tm_hour,
+           t->tm_min,
+           t->tm_sec);
+
+	if( (file =fopen(logFile,"a+")) != NULL)
+	{
+		fprintf(file, "%s  %s:  %s\n", cDateTime,tag,log);
+		fclose(file);
+	}
+
+}
 /**
  * \brief Check if a message should be filtered out.
  * \param level Log level (0 to disable all logs, 1 for errors only, ...
@@ -34,16 +64,16 @@ static std::vector<std::function<void(const char *format, va_list ap)>> callback
 bool messageIsFilteredOut(const unsigned char level, const char *tag)
 {
 	//Quick exit if level filtering applies.
-	if (log_level < level) return true;
+	if (log_level <= level) return true;
 
-	if(log_tag==NULL)
+	if (log_tag == NULL)
 	{
-		log_tag="";
+		log_tag = "";
 	}
 
-	if (tag==NULL || ((tag != NULL) && (tag[0] == '\0')))
+	if (tag == NULL || ((tag != NULL) && (tag[0] == '\0')))
 	{
-	   return false;
+		return false;
 	}
 
 #define TOKEN_SEPARATORS "+"
@@ -75,49 +105,61 @@ bool messageIsFilteredOut(const unsigned char level, const char *tag)
  * If level is below or equal to *log_level*, log is sent to websockets
  * by default or to a file in a folder set by *set_log_destination()*.
  */
-void log_print(unsigned char level,const char *tag, const char *format, ...) {
+void log_print(unsigned char level, const char *tag, const char *format, ...) {
 	va_list args_list;
 	va_start(args_list, format);
+	char buffer[LOG_SIZE];
 
-	if(messageIsFilteredOut(level,tag)){
+	/*
+	if (messageIsFilteredOut(level, tag)) {
+		printf("%s\n","debug log2" );
 		return;
 	}
-
+*/
 	std::string tag_format(tag);
 	std::string new_format(format);
 
-	if(tag_format!=""){
-		tag_format+=": ";
-		new_format=tag_format+new_format;
+	if (tag_format != "") {
+		tag_format += ": ";
+		new_format = tag_format + new_format;
 	}
 
 	if (level <= log_level) {
 		vsyslog(level, new_format.c_str(), args_list);
-		for(auto callback : callbacks)
+		for (auto callback : callbacks)
 			callback(format, args_list);
+	}
+	else {
+		vsnprintf(buffer, LOG_SIZE, format, args_list);
+		log_save_local(tag,buffer);
 	}
 
 	va_end(args_list);
 }
 
-void log_print2(unsigned char level,const char *tag, const char *format, va_list args_list) {
+void log_print2(unsigned char level, const char *tag, const char *format, va_list args_list) {
 
-	if(messageIsFilteredOut(level,tag)){
+	char buffer[LOG_SIZE];
+	if (messageIsFilteredOut(level, tag)) {
 		return;
 	}
 
 	std::string tag_format(tag);
 	std::string new_format(format);
 
-	if(tag_format!=""){
-		tag_format+=": ";
-		new_format=tag_format+new_format;
+	if (tag_format != "") {
+		tag_format += ": ";
+		new_format = tag_format + new_format;
 	}
 
 	if (level <= log_level) {
 		vsyslog(level, new_format.c_str(), args_list);
-		for(auto callback : callbacks)
+		for (auto callback : callbacks)
 			callback(format, args_list);
+	}
+	else {
+		vsnprintf(buffer, LOG_SIZE, format, args_list);
+		log_save_local(tag,buffer);
 	}
 }
 
@@ -134,3 +176,4 @@ void log_register_callback(std::function<void(const char *format, va_list ap)> f
 {
 	callbacks.push_back(f);
 }
+
