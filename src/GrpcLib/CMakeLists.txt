@@ -44,28 +44,6 @@ message(STATUS "Using gRPC ${gRPC_VERSION}")
 set(_GRPC_GRPCPP_UNSECURE gRPC::grpc++_unsecure)
 set(_GRPC_CPP_PLUGIN_EXECUTABLE $<TARGET_FILE:gRPC::grpc_cpp_plugin>)
 
-# Proto file
-get_filename_component(hw_proto "../../../protos/route_guide.proto" ABSOLUTE)
-get_filename_component(hw_proto_path "${hw_proto}" PATH)
-
-# Generated sources
-#set(hw_proto_srcs "${CMAKE_CURRENT_BINARY_DIR}/route_guide.pb.cc")
-#set(hw_proto_hdrs "${CMAKE_CURRENT_BINARY_DIR}/route_guide.pb.h")
-#set(hw_grpc_srcs "${CMAKE_CURRENT_BINARY_DIR}/route_guide.grpc.pb.cc")
-#set(hw_grpc_hdrs "${CMAKE_CURRENT_BINARY_DIR}/route_guide.grpc.pb.h")
-#add_custom_command(
-#      OUTPUT "${hw_proto_srcs}" "${hw_proto_hdrs}" "${hw_grpc_srcs}" "${hw_grpc_hdrs}"
-#      COMMAND ${_PROTOBUF_PROTOC}
-#      ARGS --grpc_out "${CMAKE_CURRENT_BINARY_DIR}"
-#        --cpp_out "${CMAKE_CURRENT_BINARY_DIR}"
-#        -I "${hw_proto_path}"
-#        --plugin=protoc-gen-grpc="${_GRPC_CPP_PLUGIN_EXECUTABLE}"
-#        "${hw_proto}"
-#      DEPENDS "${hw_proto}")
-
-# Include generated *.pb.h files
-#include_directories("${CMAKE_CURRENT_BINARY_DIR}")
-
 add_library(grpclib
     src/GrpcServer.cpp
     src/route_guide.grpc.pb.cc
@@ -79,36 +57,3 @@ target_include_directories(grpclib
   PRIVATE src)
 
 target_link_libraries (grpclib pointcloudlib ${PCL_LIBRARIES} ${_GRPC_GRPCPP_UNSECURE} ${_PROTOBUF_LIBPROTOBUF})
-
-
-#add_library(gRrpcLib
-#    src/GrpcServer.cpp
-#  )
-#target_include_directories(gRrpcLib PUBLIC
-#  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-#  PRIVATE src)
-#target_link_libraries (gRrpcLib PointCloudLib ${_GRPC_GRPCPP_UNSECURE}  ${_PROTOBUF_LIBPROTOBUF})
-
-
-# Targets greeter_[async_](client|server)
-#foreach(_target
-#    GrpcServer route_guide_client
-# )
-#  add_library(${_target} "${_target}.cpp"
-#    ${hw_proto_srcs}
-#    ${hw_grpc_srcs})
-#  target_link_libraries(${_target}
-#    ${_GRPC_GRPCPP_UNSECURE}
-
-#    ${_PROTOBUF_LIBPROTOBUF}
-#  ${PCL_LIBRARIES}
-#  PointCloudLib)
-#endforeach()
-
-#add_custom_command(
-#	TARGET "AlServer"
-#	POST_BUILD
-#	COMMAND mkdir -p ${CMAKE_BINARY_DIR}/stripped
-#	COMMAND mv ${CMAKE_BINARY_DIR}/src/App/AlServer ${CMAKE_BINARY_DIR}/stripped
-	
-#)
