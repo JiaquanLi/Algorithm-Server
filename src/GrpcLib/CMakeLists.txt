@@ -49,8 +49,8 @@ add_library(grpclib
     src/route_guide.grpc.pb.cc
     src/route_guide.pb.cc
     src/route_guide_client.cc
+    src/GrpcImpl.cpp
   )
-
 
 target_include_directories(grpclib 
   PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>

@@ -26,27 +26,20 @@ static std::vector<std::function<void(const char *format, va_list ap)>> callback
 void log_save_local(const char *tag,char* log)
 {
 	FILE *file;
-	//char cTime[64];
-	//char cData[64];
-	//_strtime(cTime);
-	//_strdate(cData);
+
 	char cDateTime[50];
 	time_t tt;
-    time( &tt );
-    tt = tt + 8*3600;  // transform the time zone
-    tm* t= gmtime( &tt );
+	time( &tt );
+	tt = tt + 8 * 3600; // transform the time zone
+	tm* t = gmtime( &tt );
 
-    sprintf(cDateTime,"%d-%02d-%02d %02d:%02d:%02d",
-           t->tm_year + 1900,
-           t->tm_mon + 1,
-           t->tm_mday,
-           t->tm_hour,
-           t->tm_min,
-           t->tm_sec);
+	sprintf(cDateTime, "%d-%02d-%02d %02d:%02d:%02d",
+	        t->tm_year + 1900,t->tm_mon + 1,t->tm_mday,
+	        t->tm_hour,t->tm_min,t->tm_sec);
 
-	if( (file =fopen(logFile,"a+")) != NULL)
+	if ( (file = fopen(logFile, "a+")) != NULL)
 	{
-		fprintf(file, "%s  %s:  %s\n", cDateTime,tag,log);
+		fprintf(file, "%s  %s:  %s\n", cDateTime, tag, log);
 		fclose(file);
 	}
 
@@ -115,7 +108,7 @@ void log_print(unsigned char level, const char *tag, const char *format, ...) {
 		printf("%s\n","debug log2" );
 		return;
 	}
-*/
+	*/
 	std::string tag_format(tag);
 	std::string new_format(format);
 
@@ -131,7 +124,7 @@ void log_print(unsigned char level, const char *tag, const char *format, ...) {
 	}
 	else {
 		vsnprintf(buffer, LOG_SIZE, format, args_list);
-		log_save_local(tag,buffer);
+		log_save_local(tag, buffer);
 	}
 
 	va_end(args_list);
@@ -159,7 +152,7 @@ void log_print2(unsigned char level, const char *tag, const char *format, va_lis
 	}
 	else {
 		vsnprintf(buffer, LOG_SIZE, format, args_list);
-		log_save_local(tag,buffer);
+		log_save_local(tag, buffer);
 	}
 }
 
