@@ -52,7 +52,6 @@ add_library(grpclib
     src/GrpcImpl.cpp
   )
 
-
 target_include_directories(grpclib 
   PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   PRIVATE src)

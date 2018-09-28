@@ -36,4 +36,13 @@ Status RouteGuideImpl::RouteChat(ServerContext* context,
 	return Status::OK;
 }
 
+Status RouteGuideImpl:: CheckServer(ServerContext* context, const ServerInfoRequest* request, ServerInfoReply* reply){
+
+	std::cout<<"read client licence:"<< request->message().c_str()<<std::endl;
+	reply->set_revsion("1.00");
+	reply->set_builddate("2018.09.28");
+	reply->set_complayname("uAI");
+	return Status::OK;
+}
+
 

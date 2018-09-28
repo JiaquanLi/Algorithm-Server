@@ -35,17 +35,18 @@ using std::chrono::system_clock;
 
 
 class RouteGuideImpl final : public RouteGuide::Service {
- public:
-  explicit RouteGuideImpl() {
+public:
+	explicit RouteGuideImpl() {
 
-  }
+	}
 
-  Status RouteChat(ServerContext* context,
-                   ServerReaderWriter<RouteNote, RouteNote>* stream) override ;
+	Status RouteChat(ServerContext* context, ServerReaderWriter<RouteNote, RouteNote>* stream) override ;
 
- private:
+	Status CheckServer(ServerContext* context, const ServerInfoRequest* request, ServerInfoReply* reply) override ;
 
-  //std::vector<Feature> feature_list_;
+private:
+
+	//std::vector<Feature> feature_list_;
 };
 
 #endif
