@@ -2,10 +2,10 @@
 /*
  * \brief Application revision information
  *
- * Versioning scheme: 
+ * Versioning scheme:
  *     Major.Minor.Patch-PreRelease+BuildMetadata
  * where only Major, Minor and Patch are mandatory.
- * For instance: 
+ * For instance:
  *     2.1.0-alpha.1+svn3456
  * Reference: http://semver.org/
  */
@@ -32,23 +32,23 @@ struct args {
 };
 
 static struct args args = {
-		.use_udmabuf = true,
-		.debugger_mode = false,
+	.use_udmabuf = true,
+	.debugger_mode = false,
 };
 
 static const char doc[] =
-		APP_NAME " version " APP_VERSION
-		" - barcode scanner app ";
+    APP_NAME " version " APP_VERSION
+    " - barcode scanner app ";
 
 static const char optionsstr[] =
-		"-d  enable debugger mode\n"
-		"      usb is not reinitialized\n"
-		"-h  display help\n"
-		"-u  disable use of udmabuf buffers (replaced by v4l2 ones)\n"
-		"-v  display version\n";
+    "-d  enable debugger mode\n"
+    "      usb is not reinitialized\n"
+    "-h  display help\n"
+    "-u  disable use of udmabuf buffers (replaced by v4l2 ones)\n"
+    "-v  display version\n";
 
 static const char usage[] =
-		"Usage: " APP_NAME "[-d] [-h] [-u] [-v]";
+    "Usage: " APP_NAME "[-d] [-h] [-u] [-v]";
 
 static int parse_opt(int argc, char * const argv[])
 {
@@ -91,8 +91,8 @@ static void sigsegv_handler(int sig)
 
 	// print out all the frames to stderr
 	char **symbols = backtrace_symbols(array, size);
-	if(symbols) {
-		for(int i=0; i<size; i++)
+	if (symbols) {
+		for (int i = 0; i < size; i++)
 			syslog(LOG_EMERG, "SIGSEGV: %s", symbols[i]);
 		free(symbols);
 	}
@@ -105,18 +105,17 @@ GrpcServer *g_Grpc = NULL ;
 int main(int argc, char **argv)
 {
 	int err;
-	//regist log
-	openlog("algorithm-server",0,LOG_LOCAL0);
-	log_print(LOG_DEBUG,"MainAPP","Server open");
-	printf("%s\n","test" );
 
-	//start gprc server
+	openlog("algorithm-server", 0, LOG_LOCAL0);
+	log_print(LOG_DEBUG, "MainAPP", "Server open");
+
 	g_Grpc = new GrpcServer();
 	g_Grpc->Start();
 
-	log_print(LOG_DEBUG,"Main","Server Close");
-
 	delete g_Grpc;
+
+	log_print(LOG_DEBUG, "Main", "Server Close");
 	closelog();
+	
 	return true;
 }
