@@ -20,6 +20,7 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include "interactive_icp.h"
 
 
 using grpc::Server;
@@ -40,12 +41,17 @@ public:
 
 	}
 
-	Status RouteChat(ServerContext* context, ServerReaderWriter<RouteNote, RouteNote>* stream) override ;
-
 	Status CheckServer(ServerContext* context, const ServerInfoRequest* request, ServerInfoReply* reply) override ;
 
-private:
+	Status SetIcpTemplet(ServerContext* context, ServerReader<TempletFileRequest>* reader,TempletFileReply* reply) override ;
 
+	Status RouteChat(ServerContext* context, ServerReaderWriter<RouteNote, RouteNote>* stream) override ;
+
+	
+	Status SetIcpMaxIterations(ServerContext* context, const IcpMaxIterationsRequest* request, IcpMaxIterationsReply* reply) override ;
+
+private:
+	ApiPCL objPcl;
 	//std::vector<Feature> feature_list_;
 };
 
