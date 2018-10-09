@@ -38,7 +38,7 @@ namespace protobuf_route_5fguide_2eproto {
 struct TableStruct {
   static const ::google::protobuf::internal::ParseTableField entries[];
   static const ::google::protobuf::internal::AuxillaryParseTableField aux[];
-  static const ::google::protobuf::internal::ParseTable schema[5];
+  static const ::google::protobuf::internal::ParseTable schema[9];
   static const ::google::protobuf::internal::FieldMetadata field_metadata[];
   static const ::google::protobuf::internal::SerializationTable serialization_table[];
   static const ::google::protobuf::uint32 offsets[];
@@ -46,6 +46,12 @@ struct TableStruct {
 void AddDescriptors();
 }  // namespace protobuf_route_5fguide_2eproto
 namespace routeguide {
+class IcpMaxIterationsReply;
+class IcpMaxIterationsReplyDefaultTypeInternal;
+extern IcpMaxIterationsReplyDefaultTypeInternal _IcpMaxIterationsReply_default_instance_;
+class IcpMaxIterationsRequest;
+class IcpMaxIterationsRequestDefaultTypeInternal;
+extern IcpMaxIterationsRequestDefaultTypeInternal _IcpMaxIterationsRequest_default_instance_;
 class LisenceInfoReply;
 class LisenceInfoReplyDefaultTypeInternal;
 extern LisenceInfoReplyDefaultTypeInternal _LisenceInfoReply_default_instance_;
@@ -61,14 +67,24 @@ extern ServerInfoReplyDefaultTypeInternal _ServerInfoReply_default_instance_;
 class ServerInfoRequest;
 class ServerInfoRequestDefaultTypeInternal;
 extern ServerInfoRequestDefaultTypeInternal _ServerInfoRequest_default_instance_;
+class TempletFileReply;
+class TempletFileReplyDefaultTypeInternal;
+extern TempletFileReplyDefaultTypeInternal _TempletFileReply_default_instance_;
+class TempletFileRequest;
+class TempletFileRequestDefaultTypeInternal;
+extern TempletFileRequestDefaultTypeInternal _TempletFileRequest_default_instance_;
 }  // namespace routeguide
 namespace google {
 namespace protobuf {
+template<> ::routeguide::IcpMaxIterationsReply* Arena::CreateMaybeMessage<::routeguide::IcpMaxIterationsReply>(Arena*);
+template<> ::routeguide::IcpMaxIterationsRequest* Arena::CreateMaybeMessage<::routeguide::IcpMaxIterationsRequest>(Arena*);
 template<> ::routeguide::LisenceInfoReply* Arena::CreateMaybeMessage<::routeguide::LisenceInfoReply>(Arena*);
 template<> ::routeguide::LisenceInfoRequest* Arena::CreateMaybeMessage<::routeguide::LisenceInfoRequest>(Arena*);
 template<> ::routeguide::RouteNote* Arena::CreateMaybeMessage<::routeguide::RouteNote>(Arena*);
 template<> ::routeguide::ServerInfoReply* Arena::CreateMaybeMessage<::routeguide::ServerInfoReply>(Arena*);
 template<> ::routeguide::ServerInfoRequest* Arena::CreateMaybeMessage<::routeguide::ServerInfoRequest>(Arena*);
+template<> ::routeguide::TempletFileReply* Arena::CreateMaybeMessage<::routeguide::TempletFileReply>(Arena*);
+template<> ::routeguide::TempletFileRequest* Arena::CreateMaybeMessage<::routeguide::TempletFileRequest>(Arena*);
 }  // namespace protobuf
 }  // namespace google
 namespace routeguide {
@@ -193,6 +209,433 @@ class RouteNote : public ::google::protobuf::Message /* @@protoc_insertion_point
 };
 // -------------------------------------------------------------------
 
+class TempletFileRequest : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:routeguide.TempletFileRequest) */ {
+ public:
+  TempletFileRequest();
+  virtual ~TempletFileRequest();
+
+  TempletFileRequest(const TempletFileRequest& from);
+
+  inline TempletFileRequest& operator=(const TempletFileRequest& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  TempletFileRequest(TempletFileRequest&& from) noexcept
+    : TempletFileRequest() {
+    *this = ::std::move(from);
+  }
+
+  inline TempletFileRequest& operator=(TempletFileRequest&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const TempletFileRequest& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const TempletFileRequest* internal_default_instance() {
+    return reinterpret_cast<const TempletFileRequest*>(
+               &_TempletFileRequest_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    1;
+
+  void Swap(TempletFileRequest* other);
+  friend void swap(TempletFileRequest& a, TempletFileRequest& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline TempletFileRequest* New() const final {
+    return CreateMaybeMessage<TempletFileRequest>(NULL);
+  }
+
+  TempletFileRequest* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<TempletFileRequest>(arena);
+  }
+  void CopyFrom(const ::google::protobuf::Message& from) final;
+  void MergeFrom(const ::google::protobuf::Message& from) final;
+  void CopyFrom(const TempletFileRequest& from);
+  void MergeFrom(const TempletFileRequest& from);
+  void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) final;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const final;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(TempletFileRequest* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // bytes datasend = 1;
+  void clear_datasend();
+  static const int kDatasendFieldNumber = 1;
+  const ::std::string& datasend() const;
+  void set_datasend(const ::std::string& value);
+  #if LANG_CXX11
+  void set_datasend(::std::string&& value);
+  #endif
+  void set_datasend(const char* value);
+  void set_datasend(const void* value, size_t size);
+  ::std::string* mutable_datasend();
+  ::std::string* release_datasend();
+  void set_allocated_datasend(::std::string* datasend);
+
+  // int32 size = 2;
+  void clear_size();
+  static const int kSizeFieldNumber = 2;
+  ::google::protobuf::int32 size() const;
+  void set_size(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:routeguide.TempletFileRequest)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::ArenaStringPtr datasend_;
+  ::google::protobuf::int32 size_;
+  mutable ::google::protobuf::internal::CachedSize _cached_size_;
+  friend struct ::protobuf_route_5fguide_2eproto::TableStruct;
+};
+// -------------------------------------------------------------------
+
+class TempletFileReply : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:routeguide.TempletFileReply) */ {
+ public:
+  TempletFileReply();
+  virtual ~TempletFileReply();
+
+  TempletFileReply(const TempletFileReply& from);
+
+  inline TempletFileReply& operator=(const TempletFileReply& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  TempletFileReply(TempletFileReply&& from) noexcept
+    : TempletFileReply() {
+    *this = ::std::move(from);
+  }
+
+  inline TempletFileReply& operator=(TempletFileReply&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const TempletFileReply& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const TempletFileReply* internal_default_instance() {
+    return reinterpret_cast<const TempletFileReply*>(
+               &_TempletFileReply_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    2;
+
+  void Swap(TempletFileReply* other);
+  friend void swap(TempletFileReply& a, TempletFileReply& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline TempletFileReply* New() const final {
+    return CreateMaybeMessage<TempletFileReply>(NULL);
+  }
+
+  TempletFileReply* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<TempletFileReply>(arena);
+  }
+  void CopyFrom(const ::google::protobuf::Message& from) final;
+  void MergeFrom(const ::google::protobuf::Message& from) final;
+  void CopyFrom(const TempletFileReply& from);
+  void MergeFrom(const TempletFileReply& from);
+  void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) final;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const final;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(TempletFileReply* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // bool retsts = 1;
+  void clear_retsts();
+  static const int kRetstsFieldNumber = 1;
+  bool retsts() const;
+  void set_retsts(bool value);
+
+  // @@protoc_insertion_point(class_scope:routeguide.TempletFileReply)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  bool retsts_;
+  mutable ::google::protobuf::internal::CachedSize _cached_size_;
+  friend struct ::protobuf_route_5fguide_2eproto::TableStruct;
+};
+// -------------------------------------------------------------------
+
+class IcpMaxIterationsRequest : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:routeguide.IcpMaxIterationsRequest) */ {
+ public:
+  IcpMaxIterationsRequest();
+  virtual ~IcpMaxIterationsRequest();
+
+  IcpMaxIterationsRequest(const IcpMaxIterationsRequest& from);
+
+  inline IcpMaxIterationsRequest& operator=(const IcpMaxIterationsRequest& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  IcpMaxIterationsRequest(IcpMaxIterationsRequest&& from) noexcept
+    : IcpMaxIterationsRequest() {
+    *this = ::std::move(from);
+  }
+
+  inline IcpMaxIterationsRequest& operator=(IcpMaxIterationsRequest&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const IcpMaxIterationsRequest& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const IcpMaxIterationsRequest* internal_default_instance() {
+    return reinterpret_cast<const IcpMaxIterationsRequest*>(
+               &_IcpMaxIterationsRequest_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    3;
+
+  void Swap(IcpMaxIterationsRequest* other);
+  friend void swap(IcpMaxIterationsRequest& a, IcpMaxIterationsRequest& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline IcpMaxIterationsRequest* New() const final {
+    return CreateMaybeMessage<IcpMaxIterationsRequest>(NULL);
+  }
+
+  IcpMaxIterationsRequest* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<IcpMaxIterationsRequest>(arena);
+  }
+  void CopyFrom(const ::google::protobuf::Message& from) final;
+  void MergeFrom(const ::google::protobuf::Message& from) final;
+  void CopyFrom(const IcpMaxIterationsRequest& from);
+  void MergeFrom(const IcpMaxIterationsRequest& from);
+  void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) final;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const final;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(IcpMaxIterationsRequest* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // int32 maxiterations = 1;
+  void clear_maxiterations();
+  static const int kMaxiterationsFieldNumber = 1;
+  ::google::protobuf::int32 maxiterations() const;
+  void set_maxiterations(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:routeguide.IcpMaxIterationsRequest)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::int32 maxiterations_;
+  mutable ::google::protobuf::internal::CachedSize _cached_size_;
+  friend struct ::protobuf_route_5fguide_2eproto::TableStruct;
+};
+// -------------------------------------------------------------------
+
+class IcpMaxIterationsReply : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:routeguide.IcpMaxIterationsReply) */ {
+ public:
+  IcpMaxIterationsReply();
+  virtual ~IcpMaxIterationsReply();
+
+  IcpMaxIterationsReply(const IcpMaxIterationsReply& from);
+
+  inline IcpMaxIterationsReply& operator=(const IcpMaxIterationsReply& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  IcpMaxIterationsReply(IcpMaxIterationsReply&& from) noexcept
+    : IcpMaxIterationsReply() {
+    *this = ::std::move(from);
+  }
+
+  inline IcpMaxIterationsReply& operator=(IcpMaxIterationsReply&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const IcpMaxIterationsReply& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const IcpMaxIterationsReply* internal_default_instance() {
+    return reinterpret_cast<const IcpMaxIterationsReply*>(
+               &_IcpMaxIterationsReply_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    4;
+
+  void Swap(IcpMaxIterationsReply* other);
+  friend void swap(IcpMaxIterationsReply& a, IcpMaxIterationsReply& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline IcpMaxIterationsReply* New() const final {
+    return CreateMaybeMessage<IcpMaxIterationsReply>(NULL);
+  }
+
+  IcpMaxIterationsReply* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<IcpMaxIterationsReply>(arena);
+  }
+  void CopyFrom(const ::google::protobuf::Message& from) final;
+  void MergeFrom(const ::google::protobuf::Message& from) final;
+  void CopyFrom(const IcpMaxIterationsReply& from);
+  void MergeFrom(const IcpMaxIterationsReply& from);
+  void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) final;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const final;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(IcpMaxIterationsReply* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // bool retsts = 1;
+  void clear_retsts();
+  static const int kRetstsFieldNumber = 1;
+  bool retsts() const;
+  void set_retsts(bool value);
+
+  // @@protoc_insertion_point(class_scope:routeguide.IcpMaxIterationsReply)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  bool retsts_;
+  mutable ::google::protobuf::internal::CachedSize _cached_size_;
+  friend struct ::protobuf_route_5fguide_2eproto::TableStruct;
+};
+// -------------------------------------------------------------------
+
 class ServerInfoReply : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:routeguide.ServerInfoReply) */ {
  public:
   ServerInfoReply();
@@ -228,7 +671,7 @@ class ServerInfoReply : public ::google::protobuf::Message /* @@protoc_insertion
                &_ServerInfoReply_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    1;
+    5;
 
   void Swap(ServerInfoReply* other);
   friend void swap(ServerInfoReply& a, ServerInfoReply& b) {
@@ -294,9 +737,9 @@ class ServerInfoReply : public ::google::protobuf::Message /* @@protoc_insertion
   ::std::string* release_revsion();
   void set_allocated_revsion(::std::string* revsion);
 
-  // string buildDate = 2;
+  // string builddate = 2;
   void clear_builddate();
-  static const int kBuildDateFieldNumber = 2;
+  static const int kBuilddateFieldNumber = 2;
   const ::std::string& builddate() const;
   void set_builddate(const ::std::string& value);
   #if LANG_CXX11
@@ -308,9 +751,9 @@ class ServerInfoReply : public ::google::protobuf::Message /* @@protoc_insertion
   ::std::string* release_builddate();
   void set_allocated_builddate(::std::string* builddate);
 
-  // string complayName = 3;
+  // string complayname = 3;
   void clear_complayname();
-  static const int kComplayNameFieldNumber = 3;
+  static const int kComplaynameFieldNumber = 3;
   const ::std::string& complayname() const;
   void set_complayname(const ::std::string& value);
   #if LANG_CXX11
@@ -369,7 +812,7 @@ class ServerInfoRequest : public ::google::protobuf::Message /* @@protoc_inserti
                &_ServerInfoRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    2;
+    6;
 
   void Swap(ServerInfoRequest* other);
   friend void swap(ServerInfoRequest& a, ServerInfoRequest& b) {
@@ -480,7 +923,7 @@ class LisenceInfoReply : public ::google::protobuf::Message /* @@protoc_insertio
                &_LisenceInfoReply_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    3;
+    7;
 
   void Swap(LisenceInfoReply* other);
   friend void swap(LisenceInfoReply& a, LisenceInfoReply& b) {
@@ -598,7 +1041,7 @@ class LisenceInfoRequest : public ::google::protobuf::Message /* @@protoc_insert
                &_LisenceInfoRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    4;
+    8;
 
   void Swap(LisenceInfoRequest* other);
   friend void swap(LisenceInfoRequest& a, LisenceInfoRequest& b) {
@@ -752,6 +1195,131 @@ inline void RouteNote::set_size(::google::protobuf::int32 value) {
 
 // -------------------------------------------------------------------
 
+// TempletFileRequest
+
+// bytes datasend = 1;
+inline void TempletFileRequest::clear_datasend() {
+  datasend_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& TempletFileRequest::datasend() const {
+  // @@protoc_insertion_point(field_get:routeguide.TempletFileRequest.datasend)
+  return datasend_.GetNoArena();
+}
+inline void TempletFileRequest::set_datasend(const ::std::string& value) {
+  
+  datasend_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:routeguide.TempletFileRequest.datasend)
+}
+#if LANG_CXX11
+inline void TempletFileRequest::set_datasend(::std::string&& value) {
+  
+  datasend_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:routeguide.TempletFileRequest.datasend)
+}
+#endif
+inline void TempletFileRequest::set_datasend(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  datasend_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:routeguide.TempletFileRequest.datasend)
+}
+inline void TempletFileRequest::set_datasend(const void* value, size_t size) {
+  
+  datasend_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:routeguide.TempletFileRequest.datasend)
+}
+inline ::std::string* TempletFileRequest::mutable_datasend() {
+  
+  // @@protoc_insertion_point(field_mutable:routeguide.TempletFileRequest.datasend)
+  return datasend_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* TempletFileRequest::release_datasend() {
+  // @@protoc_insertion_point(field_release:routeguide.TempletFileRequest.datasend)
+  
+  return datasend_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void TempletFileRequest::set_allocated_datasend(::std::string* datasend) {
+  if (datasend != NULL) {
+    
+  } else {
+    
+  }
+  datasend_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), datasend);
+  // @@protoc_insertion_point(field_set_allocated:routeguide.TempletFileRequest.datasend)
+}
+
+// int32 size = 2;
+inline void TempletFileRequest::clear_size() {
+  size_ = 0;
+}
+inline ::google::protobuf::int32 TempletFileRequest::size() const {
+  // @@protoc_insertion_point(field_get:routeguide.TempletFileRequest.size)
+  return size_;
+}
+inline void TempletFileRequest::set_size(::google::protobuf::int32 value) {
+  
+  size_ = value;
+  // @@protoc_insertion_point(field_set:routeguide.TempletFileRequest.size)
+}
+
+// -------------------------------------------------------------------
+
+// TempletFileReply
+
+// bool retsts = 1;
+inline void TempletFileReply::clear_retsts() {
+  retsts_ = false;
+}
+inline bool TempletFileReply::retsts() const {
+  // @@protoc_insertion_point(field_get:routeguide.TempletFileReply.retsts)
+  return retsts_;
+}
+inline void TempletFileReply::set_retsts(bool value) {
+  
+  retsts_ = value;
+  // @@protoc_insertion_point(field_set:routeguide.TempletFileReply.retsts)
+}
+
+// -------------------------------------------------------------------
+
+// IcpMaxIterationsRequest
+
+// int32 maxiterations = 1;
+inline void IcpMaxIterationsRequest::clear_maxiterations() {
+  maxiterations_ = 0;
+}
+inline ::google::protobuf::int32 IcpMaxIterationsRequest::maxiterations() const {
+  // @@protoc_insertion_point(field_get:routeguide.IcpMaxIterationsRequest.maxiterations)
+  return maxiterations_;
+}
+inline void IcpMaxIterationsRequest::set_maxiterations(::google::protobuf::int32 value) {
+  
+  maxiterations_ = value;
+  // @@protoc_insertion_point(field_set:routeguide.IcpMaxIterationsRequest.maxiterations)
+}
+
+// -------------------------------------------------------------------
+
+// IcpMaxIterationsReply
+
+// bool retsts = 1;
+inline void IcpMaxIterationsReply::clear_retsts() {
+  retsts_ = false;
+}
+inline bool IcpMaxIterationsReply::retsts() const {
+  // @@protoc_insertion_point(field_get:routeguide.IcpMaxIterationsReply.retsts)
+  return retsts_;
+}
+inline void IcpMaxIterationsReply::set_retsts(bool value) {
+  
+  retsts_ = value;
+  // @@protoc_insertion_point(field_set:routeguide.IcpMaxIterationsReply.retsts)
+}
+
+// -------------------------------------------------------------------
+
 // ServerInfoReply
 
 // string revsion = 1;
@@ -807,46 +1375,46 @@ inline void ServerInfoReply::set_allocated_revsion(::std::string* revsion) {
   // @@protoc_insertion_point(field_set_allocated:routeguide.ServerInfoReply.revsion)
 }
 
-// string buildDate = 2;
+// string builddate = 2;
 inline void ServerInfoReply::clear_builddate() {
   builddate_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline const ::std::string& ServerInfoReply::builddate() const {
-  // @@protoc_insertion_point(field_get:routeguide.ServerInfoReply.buildDate)
+  // @@protoc_insertion_point(field_get:routeguide.ServerInfoReply.builddate)
   return builddate_.GetNoArena();
 }
 inline void ServerInfoReply::set_builddate(const ::std::string& value) {
   
   builddate_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:routeguide.ServerInfoReply.buildDate)
+  // @@protoc_insertion_point(field_set:routeguide.ServerInfoReply.builddate)
 }
 #if LANG_CXX11
 inline void ServerInfoReply::set_builddate(::std::string&& value) {
   
   builddate_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:routeguide.ServerInfoReply.buildDate)
+  // @@protoc_insertion_point(field_set_rvalue:routeguide.ServerInfoReply.builddate)
 }
 #endif
 inline void ServerInfoReply::set_builddate(const char* value) {
   GOOGLE_DCHECK(value != NULL);
   
   builddate_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:routeguide.ServerInfoReply.buildDate)
+  // @@protoc_insertion_point(field_set_char:routeguide.ServerInfoReply.builddate)
 }
 inline void ServerInfoReply::set_builddate(const char* value, size_t size) {
   
   builddate_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:routeguide.ServerInfoReply.buildDate)
+  // @@protoc_insertion_point(field_set_pointer:routeguide.ServerInfoReply.builddate)
 }
 inline ::std::string* ServerInfoReply::mutable_builddate() {
   
-  // @@protoc_insertion_point(field_mutable:routeguide.ServerInfoReply.buildDate)
+  // @@protoc_insertion_point(field_mutable:routeguide.ServerInfoReply.builddate)
   return builddate_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* ServerInfoReply::release_builddate() {
-  // @@protoc_insertion_point(field_release:routeguide.ServerInfoReply.buildDate)
+  // @@protoc_insertion_point(field_release:routeguide.ServerInfoReply.builddate)
   
   return builddate_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -857,49 +1425,49 @@ inline void ServerInfoReply::set_allocated_builddate(::std::string* builddate) {
     
   }
   builddate_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), builddate);
-  // @@protoc_insertion_point(field_set_allocated:routeguide.ServerInfoReply.buildDate)
+  // @@protoc_insertion_point(field_set_allocated:routeguide.ServerInfoReply.builddate)
 }
 
-// string complayName = 3;
+// string complayname = 3;
 inline void ServerInfoReply::clear_complayname() {
   complayname_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline const ::std::string& ServerInfoReply::complayname() const {
-  // @@protoc_insertion_point(field_get:routeguide.ServerInfoReply.complayName)
+  // @@protoc_insertion_point(field_get:routeguide.ServerInfoReply.complayname)
   return complayname_.GetNoArena();
 }
 inline void ServerInfoReply::set_complayname(const ::std::string& value) {
   
   complayname_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:routeguide.ServerInfoReply.complayName)
+  // @@protoc_insertion_point(field_set:routeguide.ServerInfoReply.complayname)
 }
 #if LANG_CXX11
 inline void ServerInfoReply::set_complayname(::std::string&& value) {
   
   complayname_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:routeguide.ServerInfoReply.complayName)
+  // @@protoc_insertion_point(field_set_rvalue:routeguide.ServerInfoReply.complayname)
 }
 #endif
 inline void ServerInfoReply::set_complayname(const char* value) {
   GOOGLE_DCHECK(value != NULL);
   
   complayname_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:routeguide.ServerInfoReply.complayName)
+  // @@protoc_insertion_point(field_set_char:routeguide.ServerInfoReply.complayname)
 }
 inline void ServerInfoReply::set_complayname(const char* value, size_t size) {
   
   complayname_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:routeguide.ServerInfoReply.complayName)
+  // @@protoc_insertion_point(field_set_pointer:routeguide.ServerInfoReply.complayname)
 }
 inline ::std::string* ServerInfoReply::mutable_complayname() {
   
-  // @@protoc_insertion_point(field_mutable:routeguide.ServerInfoReply.complayName)
+  // @@protoc_insertion_point(field_mutable:routeguide.ServerInfoReply.complayname)
   return complayname_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* ServerInfoReply::release_complayname() {
-  // @@protoc_insertion_point(field_release:routeguide.ServerInfoReply.complayName)
+  // @@protoc_insertion_point(field_release:routeguide.ServerInfoReply.complayname)
   
   return complayname_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -910,7 +1478,7 @@ inline void ServerInfoReply::set_allocated_complayname(::std::string* complaynam
     
   }
   complayname_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), complayname);
-  // @@protoc_insertion_point(field_set_allocated:routeguide.ServerInfoReply.complayName)
+  // @@protoc_insertion_point(field_set_allocated:routeguide.ServerInfoReply.complayname)
 }
 
 // -------------------------------------------------------------------
@@ -1101,6 +1669,14 @@ inline void LisenceInfoRequest::set_allocated_clientlicense(::std::string* clien
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

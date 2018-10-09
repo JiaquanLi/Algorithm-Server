@@ -16,7 +16,7 @@
 
 #include "logging.h"
 
-static char *logFile = "server.log";
+static char *logFile = (char*)"server.log";
 static unsigned int LOG_SIZE = 4096;
 static unsigned char log_level = LOG_ERR;
 static const char *log_tag = "";

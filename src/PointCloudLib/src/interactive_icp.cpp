@@ -1,17 +1,11 @@
+#include"interactive_icp.h"
 #include <iostream>
 #include <string>
-#include"interactive_icp.h"
-#include <pcl/io/pcd_io.h>
-#include <pcl/point_types.h>
-#include <pcl/registration/icp.h>
-#include <pcl/visualization/pcl_visualizer.h>
-#include <pcl/console/time.h>   // TicToc
+#include "logging.h"
 #include <vector>
-
 using namespace std;
 
-typedef pcl::PointXYZ PointT;
-typedef pcl::PointCloud<PointT> PointCloudT;
+
 bool next_iteration = false;
 
 typedef struct tagPOINT_3D
@@ -20,37 +14,38 @@ typedef struct tagPOINT_3D
 	double y;  //mm world coordinate y
 	double z;  //mm world coordinate z
 	double r;
-}POINT_WORLD;
+} POINT_WORLD;
 
 
-void print4x4Matrix(const Eigen::Matrix4d & matrix,char* strReturn)
+void print4x4Matrix(const Eigen::Matrix4d & matrix, char* strReturn)
 {
 	char cMessage[500];
-	memset(cMessage,'\0',500);
+	memset(cMessage, '\0', 500);
 	printf("Rotation matrix :\n");
-	//printf("    | %6.3f %6.3f %6.3f | \n", matrix(0, 0), matrix(0, 1), matrix(0, 2));
-	//printf("R = | %6.3f %6.3f %6.3f | \n", matrix(1, 0), matrix(1, 1), matrix(1, 2));
-	//printf("    | %6.3f %6.3f %6.3f | \n", matrix(2, 0), matrix(2, 1), matrix(2, 2));
-	//printf("Translation vector :\n");
-	//printf("t = < %6.3f, %6.3f, %6.3f >\n\n", matrix(0, 3), matrix(1, 3), matrix(2, 3));
-	sprintf(cMessage,"R0= %6.3f %6.3f %6.3f R1= %6.3f %6.3f %6.3f R2= %6.3f %6.3f %6.3f T= %6.3f, %6.3f, %6.3f\r\n",
-			matrix(0, 0), matrix(0, 1), matrix(0, 2),
-			matrix(1, 0), matrix(1, 1), matrix(1, 2),
-			matrix(2, 0), matrix(2, 1), matrix(2, 2),
-			matrix(0, 3), matrix(1, 3), matrix(2, 3));
-	printf(cMessage);
-	strcpy(strReturn,cMessage);
+	printf("    | %6.3f %6.3f %6.3f | \n", matrix(0, 0), matrix(0, 1), matrix(0, 2));
+	printf("R = | %6.3f %6.3f %6.3f | \n", matrix(1, 0), matrix(1, 1), matrix(1, 2));
+	printf("    | %6.3f %6.3f %6.3f | \n", matrix(2, 0), matrix(2, 1), matrix(2, 2));
+	printf("Translation vector :\n");
+	printf("t = < %6.3f, %6.3f, %6.3f >\n\n", matrix(0, 3), matrix(1, 3), matrix(2, 3));
+
+	sprintf(cMessage, "R0= %6.3f %6.3f %6.3f R1= %6.3f %6.3f %6.3f R2= %6.3f %6.3f %6.3f T= %6.3f %6.3f %6.3f \r\n",
+	        matrix(0, 0), matrix(0, 1), matrix(0, 2),
+	        matrix(1, 0), matrix(1, 1), matrix(1, 2),
+	        matrix(2, 0), matrix(2, 1), matrix(2, 2),
+	        matrix(0, 3), matrix(1, 3), matrix(2, 3));
+	//printf(cMessage);
+	strcpy(strReturn, cMessage);
 	return ;
 }
 
 void keyboardEventOccurred(const pcl::visualization::KeyboardEvent& event,
-	void* nothing)
+                           void* nothing)
 {
 	if (event.getKeySym() == "space" && event.keyDown())
 		next_iteration = true;
 }
 
-bool CreatePcd(char* fileScr,char* filePcdDes)
+bool CreatePcd(char* fileScr, char* filePcdDes)
 {
 	int number_Txt;
 	FILE *fp_txt;
@@ -93,51 +88,91 @@ bool CreatePcd(char* fileScr,char* filePcdDes)
 		//std::cerr << "    " << cloud.points[i].x << " " << cloud.points[i].y << " " << cloud.points[i].z << std::endl;
 
 
-	return true;
+		return true;
 
 }
 
-ApiPCL::ApiPCL()
+ApiPCL::ApiPCL():cloud_in(new PointCloudT),cloud_tr(new PointCloudT),cloud_icp(new PointCloudT)
 {
-	iterations = 10;
+	iterations = 1;
+
+	if (pcl::io::loadPCDFile(pcdIcp, *cloud_icp) < 0)
+	{
+		PCL_ERROR("Error loading cloud %s.\n", pcdIcp);
+		//return false;
+	}
+	std::cout << "\nLoaded file " << pcdIcp << " (" << cloud_icp->size() << " points) in " << std::endl;
 }
+
 ApiPCL::~ApiPCL()
 {
+	//delete cloud_in;
+	//delete cloud_icp;
+	//delete cloud_tr;
 }
-bool ApiPCL::InteractiveIcp(char* file1,char* file2,char* result)
+
+void ApiPCL:: SetMaxIterations(int iterNumber)
+{
+	iterations = iterNumber;
+	cout << "Set max iterations: " << iterNumber << endl;
+	log_print(LOG_DEBUG, "ICP_SetMaxIterations", "MaxIterations=%d", iterations);
+}
+bool ApiPCL::CreateLoadIcpPcdFile(char* templetFileTxt)
+{
+	if (CreatePcd(templetFileTxt, pcdIcp) == false) {
+		log_print(LOG_DEBUG, "ICP_ERROR", "Create PCD %s ", pcdIcp);
+		return false;
+	}
+
+	if (pcl::io::loadPCDFile(pcdIcp, *cloud_icp) < 0)
+	{
+		PCL_ERROR("Error loading cloud %s.\n", pcdIcp);
+		return false;
+	}
+	std::cout << "\nLoaded file " << pcdIcp << " (" << cloud_icp->size() << " points) in " << std::endl;
+	return true;
+}
+
+/*
+* fileTarget: target image ,current get image
+* fileIcp : tempelete image contain pont cloud for close to the target image
+* result: matrix string
+*/
+
+bool ApiPCL::InteractiveIcp(char* fileTarget, char* result)
 {
 	char strMessage[500];
-	char *name1 = "pc1.pcd";
-	char *name2 = "pc2.pcd";
-	if (CreatePcd(file1, name1) == false)
+	//char *pcdTarget = (char*)"target.pcd";
+	//char *pcdIcp = (char*)"icp.pcd";
+	if (CreatePcd(fileTarget, pcdTarget) == false)
 		return false;
-	if (CreatePcd(file2, name2) == false)
-		return false;
+	//if (CreatePcd(fileIcp, pcdIcp) == false)
+	//	return false;
 	// Defining a rotation matrix and translation vector
 	Eigen::Matrix4d transformation_matrix = Eigen::Matrix4d::Identity();
 	// The point clouds we will be using
-	PointCloudT::Ptr cloud_in(new PointCloudT);  // Original point cloud
-	PointCloudT::Ptr cloud_tr(new PointCloudT);  // Transformed point cloud
-	PointCloudT::Ptr cloud_icp(new PointCloudT);  // ICP output point cloud
+	//PointCloudT::Ptr cloud_in(new PointCloudT);  // Original point cloud
+	//PointCloudT::Ptr cloud_tr(new PointCloudT);  // Transformed point cloud
+	//PointCloudT::Ptr cloud_icp(new PointCloudT);  // ICP output point cloud
 
 	//Read Pcd files
 	pcl::console::TicToc time;
 
 	time.tic();
-	if (pcl::io::loadPCDFile(name1, *cloud_in) < 0)
+	if (pcl::io::loadPCDFile(pcdTarget, *cloud_in) < 0)
 	{
-		PCL_ERROR("Error loading cloud %s.\n", name1);
+		PCL_ERROR("Error loading cloud %s.\n", pcdTarget);
 		return false;
 	}
-	std::cout << "\nLoaded file " << name1 << " (" << cloud_in->size() << " points) in " << time.toc() << " ms\n" << std::endl;
+	std::cout << "\nLoaded file " << pcdTarget << " (" << cloud_in->size() << " points) in " << time.toc() << " ms\n" << std::endl;
 
-	time.tic();
-	if (pcl::io::loadPCDFile(name2, *cloud_icp) < 0)
-	{
-		PCL_ERROR("Error loading cloud %s.\n", name2);
-		return false;
-	}
-	std::cout << "\nLoaded file " << name2 << " (" << cloud_icp->size() << " points) in " << time.toc() << " ms\n" << std::endl;
+	//time.tic();
+	//if (pcl::io::loadPCDFile(pcdIcp, *cloud_icp) < 0)
+	//{
+	//	PCL_ERROR("Error loading cloud %s.\n", pcdIcp);
+	//	return false;
+	//}
+	//std::cout << "\nLoaded file " << pcdIcp << " (" << cloud_icp->size() << " points) in " << time.toc() << " ms\n" << std::endl;
 
 	*cloud_tr = *cloud_icp;  // We backup cloud_icp  cloud_tr for later use
 
@@ -155,11 +190,9 @@ bool ApiPCL::InteractiveIcp(char* file1,char* file2,char* result)
 		std::cout << "\nICP has converged, score is " << icp.getFitnessScore() << std::endl;
 		std::cout << "\nICP transformation " << iterations << " : cloud_icp -> cloud_in" << std::endl;
 		transformation_matrix = icp.getFinalTransformation().cast<double>();
-		print4x4Matrix(transformation_matrix,strMessage);
-		std::cout <<"pcl res:"<< strMessage<<endl;
-		strcpy(result,strMessage);
-		//sprintf(strMessage,"%s",print4x4Matrix(transformation_matrix));
-		//memcpy(result,"send resoult",strlen("send resoult"));
+		print4x4Matrix(transformation_matrix, strMessage);
+		std::cout << "pcl res:" << strMessage << endl;
+		strcpy(result, strMessage);
 		return true;
 	}
 	else
@@ -182,7 +215,7 @@ bool ApiPCL::InteractiveIcp(char* file1,char* file2,char* result)
 
 	// Original point cloud is white
 	pcl::visualization::PointCloudColorHandlerCustom<PointT> cloud_in_color_h(cloud_in, (int)255 * txt_gray_lvl, (int)255 * txt_gray_lvl,
-		(int)255 * txt_gray_lvl);
+	        (int)255 * txt_gray_lvl);
 	viewer.addPointCloud(cloud_in, cloud_in_color_h, "cloud_in_v1", v1);
 	viewer.addPointCloud(cloud_in, cloud_in_color_h, "cloud_in_v2", v2);
 
@@ -211,11 +244,11 @@ bool ApiPCL::InteractiveIcp(char* file1,char* file2,char* result)
 	viewer.setCameraPosition(-3.68332, 2.94092, 5.71266, 0.289847, 0.921947, -0.256907, 0);
 	viewer.setSize(1280, 1024);  // Visualiser window size
 
-								 // Register keyboard callback :
+	// Register keyboard callback :
 	viewer.registerKeyboardCallback(&keyboardEventOccurred, (void*)NULL);
 
 	// Display the visualiser
-	while (/*!viewer.wasStopped()*/false)
+	while (!viewer.wasStopped())
 	{
 		viewer.spinOnce();
 
@@ -234,10 +267,6 @@ bool ApiPCL::InteractiveIcp(char* file1,char* file2,char* result)
 				std::cout << "\nICP transformation " << ++iterations << " : cloud_icp -> cloud_in" << std::endl;
 				transformation_matrix *= icp.getFinalTransformation().cast<double>();  // WARNING /!\ This is not accurate! For "educational" purpose only!
 				//print4x4Matrix(transformation_matrix);  // Print the transformation between original pose and current pose
-				//strMessage = print4x4Matrix(transformation_matrix);
-				//sprintf(strMessage,"%s",print4x4Matrix(transformation_matrix));
-				//memcpy(result,strMessage,strlen(strMessage));
-				return true;
 
 				ss.str("");
 				ss << iterations;

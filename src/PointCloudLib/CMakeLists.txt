@@ -8,4 +8,4 @@ add_library(pointcloudlib
 target_include_directories(pointcloudlib 
 	PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
 	PRIVATE src)
-target_link_libraries (pointcloudlib ${PCL_LIBRARIES})
+target_link_libraries (pointcloudlib ${PCL_LIBRARIES} logging)
