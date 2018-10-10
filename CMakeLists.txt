@@ -6,6 +6,15 @@ include_directories(${PCL_INCLUDE_DIRS})
 link_directories(${PCL_LIBRARY_DIRS})
 add_definitions(${PCL_DEFINITIONS})
 
+find_package(Protobuf CONFIG REQUIRED)
+message(STATUS "Using protobuf ${protobuf_VERSION}")
+
+find_package(gRPC CONFIG REQUIRED)
+message(STATUS "Using gRPC ${gRPC_VERSION}")
+
+add_subdirectory(libs/DCL)
+add_subdirectory(src/Helpers)
+add_subdirectory(src/OSAL)
 add_subdirectory(src/Logging)
 add_subdirectory(src/PointCloudLib)
 add_subdirectory(src/GrpcLib)

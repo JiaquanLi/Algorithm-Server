@@ -1,0 +1,198 @@
+2018.03.5735-------09.MAR.2018---------------------------------------------------------------
+   Test build based on 2017.11.5406
+      - Modified the scoring algorithm for IQ scores and reduced execution time.
+   Configurations Built
+      - Gen7
+      - OPB2
+
+2017.11.5406-------20.NOV.2017---------------------------------------------------------------
+   Standard build based on 2017.06.4948
+      - Modified FLD in order not to use several images to decode a RSS 14 or RSS Expanded barcode.
+   Configurations Built
+      - iMX25 based product line
+
+2017.06.4948-------27.JUN.2017---------------------------------------------------------------
+   Standard build based on 2017.03.300
+      - Added RS_DEC_CODE39_UNCONV_INTER_CHAR (0xFD004009) property (range 0-1) to allow decoding of Code 39 barcodes with
+        large inter characters.
+   Configurations Built
+      - iMX25 based product line
+      - bcc_6sx
+
+2017.06.314-------12.JUN.2017----------------------------------------------------------------
+   - Special version for EWR-25060 (Code 39 with large inter characters) based on 2017.06.310
+   - Added RS_DEC_CODE39_UNCONV_INTER_CHAR (0xFD004009) property (range 0-1) to allow decoding of Code 39 barcodes with
+     large inter characters.
+   Product compatibility
+      - iMX25 based product line
+      - iMX53 based product line
+      - WinCE based product line
+      - Win32
+      - Gen7: Yocto Project on i.MX6UL
+
+2017.06.310-------06.JUN.2017----------------------------------------------------------------
+   - Initial build for Gen7
+   Product compatibility
+      - iMX25 based product line
+      - iMX53 based product line
+      - WinCE based product line
+      - Win32
+      - Gen7: Yocto Project on i.MX6UL
+
+2017.03.300-------23.MAR.2017----------------------------------------------------------------
+   - Official version of FLD+.
+   - Fixed uninitialized aimer position issue.
+   Product compatibility
+      - iMX25 based product line
+      - iMX53 based product line
+      - WinCE based product line
+      - Win32
+
+2016.08.268-------26.AUG.2016----------------------------------------------------------------
+   - Official version of FLD+.
+   - Changed default settings:
+      - RS_DEC_USE_VESTA       0
+      - RS_DEC_SEARCH_AREA     0 (SEARCH_CENTER)
+      - RS_DEC_SUMMING         0
+      - RS_DEC_ROLLING_FILTERS 1
+   Product compatibility
+      - iMX25 based product line
+      - iMX53 based product line
+      - WinCE based product line
+      - Win32
+
+2016.06.266-------24.JUN.2016----------------------------------------------------------------
+   - Version for FLD+ tests.
+   - Source Code clean-up: only FLD+ is included in the library.
+   Product compatibility
+      - iMX25 based product line
+      - iMX53 based product line
+
+2016.02.247-------02.FEB.2016----------------------------------------------------------------
+   - Version for FLD+ tests.
+   - Added RS_DEC_SEARCH_AREA (0xFD012002) property (range 0-1) to select the area used to find the barcode (0: center, 1: full image)
+   - Added RS_DEC_SUMMING (0xFD012003) property (range 0-2) to select the amount of summing (0: no summing, 1: 3 lines, 2: 5 lines)
+   - Added RS_DEC_ROLLING_FILTERS (0xFD012004) property (range 0-1) to select if all the segmentation filters are applied
+     on the same image (0) or if just one part of them is applied on a first image and the other part is applied on the next image.
+   Product compatibility
+      - iMX25 based product line
+      - iMX53 based product line
+
+2015.10.226-------23.OCT.2015----------------------------------------------------------------
+   - Special version for Halcyon Island.
+   - Change barcode validation algorithm to reduce misreads:
+      - For Interleaved 2 of 5, validation must be done on the same image.
+      - For other symbologies, validation must be done on the same image or on one of the four next images.
+      - If RS_DEC_SECURITY_LEVEL > 2, validation must be done on the same image, regardless of the symbology.
+   Product compatibility
+      - iMX25 based product line
+
+2015.10.222-------16.OCT.2015----------------------------------------------------------------
+   - Special version for Halcyon Island.
+   - Fixed an increased risk of misreads due to a high amplification of the 1D scanline signal.
+   Product compatibility
+      - iMX25 based product line
+
+2015.10.219-------15.OCT.2015----------------------------------------------------------------
+   - Special version for Halcyon Island.
+   - A 2nd Vesta filter is activated to improve reading distances with some barcodes.
+   Product compatibility
+      - iMX25 based product line
+
+2015.10.216-------12.OCT.2015----------------------------------------------------------------
+   - Special version for Halcyon Island.
+   - Added filling of IQImgInfo.D_Corner for unstacked GS1 Databar.
+   - Updated range of min and max barcodes length.
+   - Fixed RS_DEC_RSS_MODS_SYMBOLOGY bug: AIM modifier value was wrong when setting active.
+   Product compatibility
+      - iMX25 based product line
+
+2015.09.209-------10.SEP.2015----------------------------------------------------------------
+   - Special version for Halcyon Island.
+   - Change RS_DEC_USE_VESTA (0xFD012001) range (INT_MIN, INT_MAX) and default value (-1).
+   Product compatibility
+      - iMX25 based product line
+
+2015.09.205-------04.SEP.2015----------------------------------------------------------------
+   - Special version for Halcyon Island.
+   - Added RS_DumpSettingsEx API function to get default value and range of each supported setting.
+   - Implemented full coupon code support (GS1-128 and GS1-Databar with 8110 or 810 application identifier).
+   - Added RS_DEC_USE_VESTA (0xFD012001) to enable/disable Vesta decoding for Code39, Code128 and EAN/UPC.
+   - Added filling of IQImgInfo.D_Corner for Code39, Code128, EAN/UPC, I2of5 and Codabar.
+   Product compatibility
+      - iMX25 based product line
+
+2015.08.198-------08.AUG.2015----------------------------------------------------------------
+   - Special version for Halcyon Island.
+   - Barcode is searched in the whole image (1280x960).
+   - IN2Dcode algorithms are used to decode the scanline.
+   - Video standard, reverse and both are supported (whitehigh = 1, 0 or 2).
+   - Monocolor images are not supported.
+   - Multi image decoding is supported.
+   - UPCE1 is not supported.
+   - BugFix AIM identifier for RSS barcodes when RS_DEC_RSS_MODS_SYMBOLOGY is active.
+   - EAN128 part of a composite barcode is only sent when RS_DEC_COMPOSITE_ENABLED is not active.
+   - RS_DEC_SECURITY_LEVEL is not used.
+   - Stacked RSS barcodes are supported.
+   Product compatibility
+      - iMX25 based product line
+
+2014.12.144-------06.DEC.2014----------------------------------------------------------------
+   - Added Code 128 FNC4 control.
+   - Improved I 2 of 5 voting.
+   - Corrected issue of scanline placement.
+   - Added garbling option for DLL building.
+   - Added DLL building.
+   - Added debug callback and control.
+   - Added FNC 1 substitute functionality.
+   - Added UPBENA functionality (true UPCA enable)
+   - Removed GS1128 functionality. 
+   Product compatibility
+      - iMX25 based product line
+      - iMX53 based product line
+      - WinCE based product line
+
+2014.10.136-------04.OCT.2014----------------------------------------------------------------
+   - Bug fix for calculating scan direction.
+   Product compatibility
+      - iMX25 based product line
+      - iMX53 based product line
+      - WinCE based product line
+
+2014.09.129-------22.SEP.2014----------------------------------------------------------------
+   - Added Code 93 decoding.
+   - Added Code 128 FNC4 control.
+   - Added Code Z decoding.
+   - Improved I 2 of 5 voting.
+   - Corrected issue of scan line placement.
+   - Added Oriented scanning method.
+   - Added garbling option for DLL building.
+   - Added DLL building.
+   - Added debug callback and control.
+   - Added FNC 1 substitute functionality.
+   Product compatibility
+      - iMX25 based product line
+      - iMX53 based product line
+      - WinCE based product line
+
+2013.02.108-------05.FEB.2013----------------------------------------------------------------
+   - Ported Code Z functionality from Adaptus and enabled Hampton Code Z.
+   Product compatibility
+      - iMX25 based product line
+      - iMX53 based product line
+   
+2012.12.103-------14.DEC.2012----------------------------------------------------------------
+   - Added settings dump functionality.
+   - Changed search center check to include any point outside the image area.
+   Product compatibility
+      - iMX25 based product line
+      - iMX53 based product line
+      - WinCE based product line
+      
+2012.12.101-------12.DEC.2012----------------------------------------------------------------
+   - Added settings dump functionality.
+   - Changed search center check to include any point outside the image area.
+   Product compatibility
+      - iMX25 based product line
+      - iMX53 based product line
+      - WinCE based product line

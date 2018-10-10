@@ -1,0 +1,989 @@
+2018.03.5790-------26.MAR.2018---------------------------------------------------------------
+   Test build for HDLS, Seychelles
+   Update from 2018.03.5760
+      - Update linear finder filtering to also include small numbers of diagonal lines.
+   Configurations Built
+      - Gen7
+      - OPB2
+
+2018.03.5760-------20.MAR.2018---------------------------------------------------------------
+   Test build for HDLS, Seychelles
+   Update from 2018.03.5698
+      - Fix an error in the sampling of the image in the linear finder when using an ROI.
+   Configurations Built
+      - Gen7
+      - OPB2
+
+
+2018.03.5735-------09.MAR.2018---------------------------------------------------------------
+   Test build for HDLS, Seychelles
+   Update from 2018.03.5698
+      - Correct error in first-derivative edge detector which could cause the output signal polarity to flip.
+      - Update linear finders to allow the center horizontal and vertical lines to also be processed with a 2D low-pass filter.
+   Configurations Built
+      - Gen7
+      - OPB2
+
+2018.03.5698-------01.MAR.2018---------------------------------------------------------------
+   Test build for HDLS
+   Update from 2018.02.5630
+      - Fix a bug where the progress callback would not be called by the Data Matrix finder during a cycle.
+      - Fix a buffer overrun in the derivative linear finder the 1m0 and 23m01 filters
+   Configurations Built
+      - Gen7
+      - OPB2
+
+2018.02.5664-------16.FEB.2018---------------------------------------------------------------
+   Standard build
+   Update from 2017.11.5343
+      - Added 64 bit support GemRelease build 
+      - Added lib files to GemRelease builds
+      - Added SD_PROP_RESULT_CODEWORDS and SD_PROP_RESULT_CODEWORD_COUNT properties to return the codewords of the barcode.
+        The properties are available with Code 128, PDF, DTM, QR, Aztec, MaxiCode and GridMatrix.
+      - Added support for unconventional inter char for code 39 (SD_PROP_C39_UNCONV_INTER_CHAR)
+   Configurations Built
+      - GemRelease
+
+2018.02.5630-------07.FEB.2018---------------------------------------------------------------
+   Test build for HDLS
+   Update from 2018.01.5566
+      - Modification of Data Matrix decoding to reduce decode time.
+      - Several bugs in Data Matrix decoding and ROI modes have been corrected.
+   Configurations Built
+      - Gen7
+
+2018.02.5580-------01.FEB.2018---------------------------------------------------------------
+   Special build for EWR-27891 with Aztec only
+   Configurations Built
+      - gen5
+      - OPB2
+      
+2018.01.5557-------17.JAN.2018---------------------------------------------------------------
+   Move Linux SDS build process to ant --> cmake --> make
+   Add automated package creation
+   Configurations Built
+      - Linux SDS
+      - OPB2
+
+2017.12.5500-------20.DEC.2017---------------------------------------------------------------
+   Test Cortex A9 build
+
+2017.12.5493-------15.DEC.2017---------------------------------------------------------------
+   Test build for HDLS
+   Update from 2017.12.5453
+      - Improvements to the damaged Data Matrix finder. To improve decode rate and reduce processing time.
+      - Remove the need to set SD_PROP_DM_ENHANCED_DAMAGE_MODE to enable damaged Data Matrix finder.
+      - Several small bugs corrected within the Data Matrix processing.
+   Configurations Built
+      - Gen7
+
+2017.12.5465-------06.DEC.2017---------------------------------------------------------------
+   Custom build for 99EX
+   Updated from 2017.12.5453
+      - Alternate external bar check is used for MSI
+      - MSI short quiet zone enabled by default
+      - Cycling Finder enabled by default
+   Configurations Built
+      - CEQ1
+
+2017.11.5406-------20.NOV.2017---------------------------------------------------------------
+   Demo build for DotCode demo
+   Update from 2017.07.5018
+      - By default, ID behavior is closer to SD (ID_PROP_CYCLING_FINDER is set to 0).
+      - Added support of Unattended operting mode.
+      - Reduced the number of thresholds used in the 1D finder to improve speed.
+      - Improved DotCode reading and speed.
+      - DPM and Datamatrix reading improvements.
+      - OCR bug fix for TD1 cards when check digit of the first line is in optional data field.
+      - OCR bug fix for French ID card when department of issuance is alpha (line 1 chars 31-36, line 2 chars 5-7).
+      - Relaxed MSI start and stop pattern verification.
+      - Improved MSI margin check and external bar check. 
+      - Forced external bar check for MSI in case of short quiet zone active.
+      - Added check in Label Code margin to prevent misreads.
+      - Fixed a bug where the code 39 check character stripping was applied to Trioptic code.
+      - Fixed bugs that could lead to floating-point exceptions in Data Matrix, Grid Matrix, MaxiCode and QR Code decoders.
+   Configurations Built
+      - iMX25 based product line
+      - ANSF (android)
+      - IOSF (IOS)
+      - UWP
+
+2017.11.5375--------14.NOV.2017--------------------------------------------------------------
+   Demo build for Printer team
+   Updated from 2017.10.5276
+      - Added Aztec, Dotcode, PDF417 and RSSexp support for verification
+   Configurations Built
+      - PRT (6DL & x86_m32)
+
+2017.11.5343--------06.NOV.2017--------------------------------------------------------------
+   Standard build for x86 x64
+   Updated from 2017.07.5018
+      - Adding lib file to GemRelease
+      - Adding x64 dll file to GemRelease
+   Configurations Built
+      - GemRelease
+
+2017.10.5316--------20.OCT.2017--------------------------------------------------------------
+   Custom build for 99EX
+   Updated from 2017.07.5018
+      - Improve reading of damaged MSI labels (EWR-25983)
+      - MSI short quiet zone enabled by default
+   Configurations Built
+      - CEQ1
+
+2017.10.5308--------19.OCT.2017--------------------------------------------------------------
+   Demo build for Gen 7 team
+   Updated from 2017.07.5018
+      - Prototype changes to accumulate segments to create finds on damaged Data Matrix codes.
+   Configurations Built
+      - Gen7
+
+2017.10.5276--------10.OCT.2017-------------------------------------------------------------
+   Demo build for Printer team
+   Updated from 2017.09.5239
+      - Fixed issue in building process
+   Configurations Built
+      - PRT (6DL & x86_m32)
+
+2017.09.5239--------14.SEP.2017-------------------------------------------------------------
+   Demo build for BCC and Printer teams
+   Updated from 2017.07.5018
+      - Reduced set of thresholds in the 1D finder
+   Configurations Built
+      - PRT (6DL & x86_m32)
+      - GCC (mips)
+
+2017.09.5194--------14.SEP.2017-------------------------------------------------------------
+   Demo build for CT50
+   Updated from 2017.07.5018
+      - Reduced set of thresholds in the 1D finder
+      - Dotcode improvements
+   Configurations Built
+      - AN1 (Android)
+      - iMX25 based product line
+      - ANSF (android)
+      - IOSF (IOS)
+      - UWP
+
+2017.09.5168--------11.SEP.2017-------------------------------------------------------------
+   Test Build for Printer team
+   Update from 2017.07.5018
+      - Correct issues causing errors when enabling Unattended operating mode.
+      - Fix errors in the Codabar and Label Code finder pattern checks.
+   Configurations Built
+      - GemRelease
+
+2017.08.5096--------24.AUG.2017-------------------------------------------------------------
+   Test Build for Printer team
+   Update from 2017.07.5018
+      - Added support to develop QR verification
+   Configurations Built
+      - IMX6UL
+
+2017.08.5084--------22.AUG.2017-------------------------------------------------------------
+   Test build for Gen7
+   Update from 2017.07.5018
+      - Reduced set of thresholds in the 1D finder
+   Configurations Built
+      - iMX25 based product line
+      - Gen7
+
+2017.07.5021--------25.JUL.2017-------------------------------------------------------------
+   Test Build for DPM
+   Update from 2017.05.4427
+      - Fixed a risk of exception in the Datamatrix decoding.
+   Configurations Built
+      - iMX25 based product line
+
+2017.07.5018--------25.JUL.2017--------------------------------------------------------------
+   Standard build
+   Update from 2017.07.4977
+      - Added DotCode decoding
+      - Added property SD_PROP_DOTCODE_ENABLED (0x40016001) to enable DotCode decoding
+      - Added property SD_PROP_DOTCODE_EXTENSIVE_SEARCH (0x40016004) to improve decoding capabilities
+        on badly printed DotCode barcodes (more processing power is required)
+   Configurations Built
+      - iMX25/iMX53 based product line
+      - ANSF (android)
+      - ANSRX (android)
+      - IOSF (IOS)
+      - UWP
+      - Gen7
+
+2017.07.4977--------7.JUL.2017--------------------------------------------------------------
+   Standard build
+   Update from 2017.06.4948
+      - Fixed a bug with ROI mode 2 (Aimer Centred) in case of large images (> 1280x960)
+   Configurations Built
+      - iMX25 based product line
+      - ANSF (android)
+      - ANSRX (android)
+      - IOSF (IOS)
+      - Gen7
+
+2017.06.4948--------27.JUN.2017--------------------------------------------------------------
+   Standard build
+   Update from 2017.06.4530
+      - Fixed a C128 issue introduced in 2017.05.4465 build
+   Configurations Built
+      - iMX25 based product line
+      - bcc_6sx
+
+2017.06.4556--------15.JUN.2017--------------------------------------------------------------
+   DotCode Demo Build for Android
+   Update from 2017.06.4545
+      - Added setting to activate DotCode decoding (0x40016001).
+   Configurations Built
+      - ANSF (android)
+      - ANSRX (android)
+
+2017.06.4545--------13.JUN.2017--------------------------------------------------------------
+   DotCode Demo Build for Android
+   Update from 2017.06.4530
+      - Added DotCode decoding (always active).
+   Configurations Built
+      - ANSF (android)
+
+2017.06.4530--------12.JUN.2017--------------------------------------------------------------
+   Standard build
+   Update from 2017.05.4465
+      - Fixed MSI issue: reverse video barcodes were not read.
+      - Fixe Aztec issue: in some cases, the last codeword was wrong (EWR-23821)
+   Configurations Built
+      - iMX25 based product line
+
+2017.05.4481--------31.MAY.2017--------------------------------------------------------------
+   Panasonic Build for EWR-23932
+   Configurations Built
+      - Windows Embedded CE 6.0 (PNA configuration)
+
+2017.05.4465--------23.MAY.2017--------------------------------------------------------------
+   Standard build
+   Update from 2017.03.4283
+      - Fixed UPC misread (EWR-23932)
+      - Added new Code 128 property: SD_PROP_C128_PARITY_THRESHOLD (EWR-23178)
+      - Added new Code 93 property: SD_PROP_C93_HIGH_DENSITY
+   Configurations Built
+      - AN1 (android)
+
+2017.05.4427--------15.MAY.2017--------------------------------------------------------------
+   Test Build for DPM
+   Update from 2017.05.4400
+      - Improved reading (binarization) of 2D barcodes (Datamatrix, QR) and Datamatrix DPM.
+   Configurations Built
+      - iMX25 based product line
+
+2017.05.4400--------5.MAY.2017--------------------------------------------------------------
+   Test Build for DPM
+   Update from 2017.03.4276
+      - Improved DPM reading (Dot Peen finder)
+      - Improved Datamatrix reading
+   Configurations Built
+      - iMX25 based product line
+
+2017.04.4370--------21.APR.2017--------------------------------------------------------------
+   Custom build for EWRs 23178 and 23500
+   Update from 2017.03.2633
+      - Made changes to enhance Code 128 security
+      - Added SD_PROP_C128_PARITY_THRESHOLD to control a threshold used by the new Code 128
+        parity check.  This defaults to the maximum value, 255, which disables the check.
+      - Added SD_PROP_C128_OUTPUT_MODE, similar to what was already done for Grid Matrix.
+        This causes the decoder to output a list of codeword values separated by commas
+        instead of the usual result string.
+      - Modified the behavior of the decoder when SD_PROP_C128_SECURITY is set to 1.
+        Left/Right bridges are no longer checked.
+   Configurations Built
+      - AN1 (android)
+
+2017.03.4293--------28.MAR.2017--------------------------------------------------------------
+   Standard build for UWP
+   Update from 2017.03.4283
+   Configurations Built
+      - FlexRelease
+
+2017.03.4283--------23.MAR.2017--------------------------------------------------------------
+   Standard build
+   Update from 2016.12.2444
+      - First standard release of ID for Windows.  This build includes the SD OPJ user's
+        guide since no user's guide exists yet for ID.  It also includes 
+        SDDemo2/SwiftDemonstrator.
+   Configurations Built
+      - GemRelease
+
+2017.03.4276--------23.MAR.2017--------------------------------------------------------------
+   Test Build for DPM
+   Update from 2016.12.2444
+      - Improved DPM reading (Dot Peen finder)
+      - Improved ability to find UPCs with short quiet zones on both sides.
+        SD_PROP_UPC_SHORT_MARGIN must be set to 2 to enable the feature.
+      - Added SD_PROP_MSIP_OUT_OF_SPEC_SYMBOL (0: disable, 1: allowed MSI with intercharacter gap)
+      - Added Grid Matrix support (SD_PROP_GM_ENABLED)
+   Configurations Built
+      - iMX25 based product line
+
+2017.03.2642--------16.MAR.2017--------------------------------------------------------------
+   Custom build
+   Added Flexera All Symbologies set.
+
+2017.02.2628--------28.FEB.2017--------------------------------------------------------------
+   Test Build for BCC team
+   Update from 2016.12.2444
+      - Improved UPC short quiet zones management (EWR-21409)
+      - Added support for Flexera (target build dependant)
+      - Added intercharacter gap support for MSI (SD_PROP_MSIP_OUT_OF_SPEC_SYMBOL)
+      - Fixed an issue with SD_Get for some properties when built in 64 bits
+      - Added Grid Matrix support (SD_PROP_GM_ENABLED)
+   Configurations Built
+      - linux build (crosstool-4.5.2)
+
+2017.01.2533--------27.JAN.2017--------------------------------------------------------------
+   Custom Build for EWR 21409
+   Update from 2017.01.2514
+      - This build helps prevent a problem in which EAN-8 extractions could occur from UPC-A.
+   Configurations Built
+      - iMX25 based product line
+
+2017.01.2514--------20.JAN.2017--------------------------------------------------------------
+   Custom Build for EWR 21409
+   Update from 2016.12.2444
+      - This build improves the decoder's ability to find UPCs with short quiet zones on both
+        sides.  SD_PROP_UPC_SHORT_MARGIN must be set to 2 to enable the feature.
+   Configurations Built
+      - iMX25 based product line
+
+2017.01.2476--------01.JAN.2017--------------------------------------------------------------
+   Demo build for MSI with intercharacter gap
+   Update from 2016.12.2444
+      - Added SD_PROP_MSIP_OUT_OF_SPEC_SYMBOL (0: disable, 1: allowed MSI with intercharacter gap)
+   Configurations Built
+      - Android based product line
+
+2016.12.2444--------14.DEC.2016--------------------------------------------------------------
+   Standard build
+   Update from 2016.09.2252
+      - Added Support of KIX Track and Trace format
+      - Added support of short margin on one side for MSI (SD_PROP_MSIP_SHORT_MARGIN 0:disable, 1:allowed on one side)
+      - Added support of short margin on both sides for UPC (SD_PROP_UPC_SHORT_MARGIN = 2)
+      - Added support of short margin on both sides for ITF (SD_PROP_I25_SHORT_MARGIN = 2)
+      - Low-contrast improvement for 1D barcodes (finder)
+      - Fixed a Postal finder issue
+   Configurations Built
+      - iMX25 based product line
+
+2016.12.2427--------08.DEC.2016--------------------------------------------------------------
+   Demo build for MSI Short Quiet Zone
+   Update from 2016.09.2252
+      - Added SD_PROP_MSIP_SHORT_MARGIN (0: disable, 1: allowed on one side)
+   Configurations Built
+      - Win8/10
+
+2016.12.2403--------06.DEC.2016--------------------------------------------------------------
+   DPM test build
+   Update from 2016.07.2215
+      - big Dot peen module decoding improvements
+      - Dot peen detection algorithm improvements
+   Configurations Built
+      - iMX25 based product line
+
+2016.12.2392--------02.DEC.2016--------------------------------------------------------------
+   Demo build ITF and UPC short margins
+   Update from 2016.11.2366
+      - Decreased ITF short margin size in case of SD_PROP_I25_SHORT_MARGIN = 2 (both sides)
+   Configurations Built
+      - iMX25 based product line
+
+2016.11.2372--------28.NOV.2016--------------------------------------------------------------
+   DotCode test build based on 2016.08.2182
+      - Special version for DotCode tests on IOS
+   Configurations Built
+      - IOS
+
+2016.11.2366--------23.NOV.2016--------------------------------------------------------------
+   Demo build ITF and UPC short margins
+   Update from 2016.09.2252
+      - Low-contrast improvement for 1D barcodes
+      - Fixed a Postal finder issue
+      - Support of short margin for UPC (SD_PROP_UPC_SHORT_MARGIN = 2)
+      - Support of short margin for ITF (SD_PROP_I25_SHORT_MARGIN = 2)
+   Configurations Built
+      - iMX25 based product line
+
+2016.11.2341--------10.NOV.2016--------------------------------------------------------------
+   DPM test build based on 2016.09.2215
+      - Fixed Windows 8 build issue
+   Configurations Built
+      - Win8/10
+
+2016.09.2290--------11.OCT.2016--------------------------------------------------------------
+   IOS SDM build
+   Similar to recent SDM build but includes IOS standalone (needs to be copied to OSX) machine to built
+      - Initially for Patient Safe
+      - Has general growth of low contrast linear setting so that thresholds are added at high end for improved reading of IV bags
+      - Also selected OCR fix from trunk
+      - Added FCC87 support for Australian Postal codes
+      - Fixed a problem in OCR that was occasionally causing an exception due to a buffer 
+        overflow.
+      - Fixed an issue where SD_PROP_VERSION_COMPONENTS_AUTHORIZED_EX was always returning that EIB 
+        was not authorized.
+   Configurations Built
+      - IOS only
+      
+2016.09.2252--------21.SEP.2016--------------------------------------------------------------
+   Standard build
+   Update from 2016.08.2182
+      - Added FCC87 support for Australian Postal codes
+      - Fixed a problem in OCR that was occasionally causing an exception due to a buffer 
+        overflow.
+      - Fixed an issue where SD_PROP_VERSION_COMPONENTS_AUTHORIZED_EX was always returning that EIB 
+        was not authorized.
+   Configurations Built
+      - iMX25 based product line
+      - Android based product line
+
+2016.09.2244--------21.SEP.2016--------------------------------------------------------------
+   Demo build for Grid Matrix
+   Update from 2016.07.2141
+      - Improved Grid Matrix damage handling
+      - Added the ability to read inverse and mirrored codes
+      - Fixed a problem in OCR that was occasionally causing an exception due to a buffer 
+        overflow.
+   Configurations Built
+      - iMX25 based product line
+      - Android based product line
+
+2016.09.2225--------15.SEP.2016---------------------------------------------------------------
+   Customer build, based on 2182 build
+   EWR22315 required to add ID into SwiftDecoderMobile Android
+      - Adding Flexera Security 
+      - Adding AndroidSDM on top level ant + Project\Engine\mobile for SDM configurations
+      - SDM specifics configurations:
+   Configurations Built
+      ANS:   Android SwiftDecoder
+      ANSF:  Android SwiftDecoder Flexera
+      ANSRX: Android SwiftDecoder limited
+      ANSX:  Android SwiftDecoder garbled
+
+2016.09.2215--------12.SEP.2016---------------------------------------------------------------
+   DPM test build based on 2016.07.2169
+      - DPM feature could use any ROI mode other than a specific one.
+      - Dot peen detection algorithm improved.
+   Configurations Built
+      - iMX25 based product line
+
+2016.08.2182--------24.AUG.2016---------------------------------------------------------------
+   Standard Build 
+   Update from 2016.02.1995
+      - Added Multi ROI feature, disabled by default
+      - Set SD_PROP_HX_BINARY_REMOVE_FIRST_BYTE (0x40013602) to 0 by default
+   Configurations Built
+      - iMX25 based product line
+      - Android (armeabi, arm64-v8a, x86, x86_64)
+      - WinCe (ARMV4, built on June 2016, 23rd)
+
+2016.07.2169--------29.JULY.2016--------------------------------------------------------------
+   DPM test build 
+      - DPM ROI improvements
+      - Dot peen processed area improved.
+      - Datamatrix corner finder improvements  
+      - This version includes Multi-ROIs feature 
+   Configurations Built
+      - iMX25 based product line
+
+2016.07.2141--------11.JULY.2016--------------------------------------------------------------
+   Demo build for Grid Matrix
+   Update from 2016.07.2130
+      - Changed thresholding for shape finder used by Grid Matrix for lower SNR handling
+      - Fixed 2 areas which could cause exceptions in some cases
+   Configurations Built
+      - iMX25 based product line
+      - Android based product line
+
+2016.07.2130--------01.JULY.2016--------------------------------------------------------------
+   Demo build for Grid Matrix
+   Based on 2016.02.1859
+      - First edition of Grid Matrix code decoding
+      - Currently does not support Inverse or Mirrored code reading, or structured append
+   Configurations Built
+      - iMX25 based product line
+      - Android based product line
+   
+2016.05.1995--------17.MAY.2016---------------------------------------------------------------
+   Standard Build 
+   Update from 2016.02.1859
+      - Reduced the number of linear find lines that are low-pass filtered (improve QR decode time)
+      - Increased the minimum linear find line spacing when in passthrough mode.
+      - Fixed a bug in cb_simple_lookup, the alternate Codabar lookup function
+      - Changed the value of hpf_coef when the midzone edge detector is disabled
+   Configurations Built
+      - iMX25 based product line
+      - Android (armeabi, arm64-v8a, x86, x86_64)
+      - WinCe (ARMV4, built on June 2016, 23rd)
+
+2016.05.1985--------06.MAY.2016---------------------------------------------------------------
+   Custom Build for Panasonic EWR 19163 (slow QR performance)
+      - Reduced the number of linear find lines that are low-pass filtered
+   Configurations Built
+      - Windows Embedded CE 6.0 (PNA configuration)
+      - Windows x86 (PNA_w32 configuration)
+
+2016.05.1958--------03.MAI.2016---------------------------------------------------------------
+   Test Build for DPM Santorini project (Only for test version)
+      - Added noise estimation algorithm
+      - Change Dot peen windows size and location (aimer coordinates centered)
+      - Changes DPM ROI starting point (Centroid calculated on 5x5 cells instead of 81 cells)
+      - Added Gamma correction applied to entire image (temporary and only for test).
+   Configurations Built      
+      - iMX25 based product line
+
+2016.02.1915--------24.MAR.2016---------------------------------------------------------------
+   Demo build for Hitachi for EWR-19630
+      - Added new checksum types for Codabar symbology
+         - Mod 10 weight 3
+         - Mod 10 weight 2
+         - Mod 11
+         - 7 check DR
+         - Custom wighted Mod 11
+         - Mod 10 rune
+      - Added values to the SD_PROP_CB_CHECKSUM setting for configuration
+         - NOTE: The settings may have to change if/when integrated into the trunk
+   Configurations Built
+      - iMX25 based product line
+
+2016.03.1889--------11.MAR.2016---------------------------------------------------------------
+   Custom Build for Panasonic EWR 18831
+      - Fixed a bug in cb_simple_lookup, the alternate Codabar lookup function
+      - Changed the value of hpf_coef when the midzone edge detector is disabled
+   Configurations Built
+      - Windows Embedded CE 6.0 (PNA configuration)
+      - Windows x86 (PNA_w32 configuration)
+
+2016.02.1859--------23.FEB.2016---------------------------------------------------------------
+   Standard build for Mobility products upadte
+   Update from 2016.02.1847
+      - Fixed Windows 8 build issue
+   Configurations Built
+      - iMX25 based product line
+      - iMX53 based product line
+      - Win8/10 
+      - Android armeabi
+
+2016.02.1847--------19.FEB.2016---------------------------------------------------------------
+   Standard build for Mobility products upadte
+   Update from 2015.12.1730
+      - slight OCR improvements (at low PPM and for OCR lines not perfectely horizontal)
+      - Added support for Russian National passport (supported as standard passport template), EWR-17006
+      - Quiet zone bugfix for Interleaved 2 of 5, EWR-17777
+      - Fixed codabar misread in UPC 5-addenda, EWR-18829
+      - Native handling of Video Reverse for all linear, stacked, and composite codes except 
+        Patch code, Pharma code, and GS1-Databar (including GS1-Databar based composites), EWR-16115
+      - Enabled Rectangular datamatrix by default
+   Configurations Built
+      - iMX25 based product line
+      - Win8/10 
+      - Android armeabi
+
+2016.02.1808--------12.FEB.2016---------------------------------------------------------------
+   Custom build for Panasonic EWRs 18831 and 18829
+      - Added new Panasonic-specific Win32 build
+      - Added SD-like uniform linear finder pattern
+      - Fixed center-biased finder diagonal line positions
+      - Changed defaults for PNA and PNA_w32 configurations to disable cycling finder, Vesta
+        subpixel finder, and midzone edge detector
+      - Fixed scaling bug in scores in Code 39 and Codabar lookup functions.
+      - Enhanced Codabar security check so there is no effect on codes longer than 4 chars
+        (including start/stop)
+   Configurations Built
+      - Windows Embedded CE 6.0 (PNA configuration)
+      - Windows x86 (PNA_w32 configuration)
+   
+2016.02.1790--------05.FEB.2016---------------------------------------------------------------
+   Custom build for Panasonic EWR 18829
+      - Added security check to prevent UPC 5 digit addenda to be read as 2 digit Codabar
+      - Setting tied to the 3rd bit of SD_PROP_CB_MISC propert (i.e. enabled by adding the
+        value 0x4 to the setting)
+   Configurations Built
+      - Windows Embedded CE 6.0 (PNA configuration)
+      - Windows x86 (ID_w32_safe1 configuration)
+
+2016.01.1767--------20.DEC.2016---------------------------------------------------------------
+   Test build for i.MX25( for DPM test only )
+   First Build from ID_MROIS_DPM_Merge branch 
+      - This version includes MultiROIs and DPM Dot peen as well
+   Configurations Built
+      - iMX25 based product line
+
+2016.01.1759--------13.JAN.2016---------------------------------------------------------------
+   Custom build : 'print_verif' build for printer team and 'gnulinux.n329' build for BCC team
+      - There are no functional changes to the library.  These are new configurations.
+   Configurations Built
+      - Both builds are for (different) ARM926EJ-S devices running Linux.
+
+2015.12.1742--------16.DEC.2015---------------------------------------------------------------
+   Prototype build of trunk for Nuvoton N329 for BCC group in SZ
+
+2015.12.1730--------11.DEC.2015---------------------------------------------------------------
+   Standard build for i.MX25
+   Update from 2015.12.1708
+      - Fixed Maxicode issue in case of no primary message (ARS-859).
+   Configurations Built
+      - iMX25 based product line
+
+2015.12.1719--------06.DEC.2015---------------------------------------------------------------
+   Test build for EWR 17777 - Granit 191Xi scanners
+      - Quiet zone update for Interleaved 2 of 5 where the sampling which is done to determine
+        a maximum and minimum of a signal is limited to the end codewords of the code itself
+        to prevent things outside of the code from influencing the processing of the signal.
+   Configurations Built
+      - iMX25 based product line
+
+
+2015.12.1708--------01.DEC.2015---------------------------------------------------------------
+   Standard build for i.MX25
+   Update from 2015.10.1641
+      - Bugfix of AIM modifier for codabar (ARS-604)
+      - Add C39 full ascii conversion for /M and /N (EWR-16520).
+   Configurations Built
+      - iMX25 based product line
+
+2015.11.1702--------20.NOV.2015---------------------------------------------------------------
+   Custom build for Panasonic EWR 17383
+      - Panasonic requested:
+      - We add release notes outlining differences between SwiftDecoder and ID
+      - We provide a Windows version of the decoder that is comparable to PNA
+   Configurations Built
+      - Windows Embedded CE 6.0 (PNA configuration)
+      - Windows x86 (ID_w32_safe1 configuration)
+
+2015.11.1676--------06.NOV.2015---------------------------------------------------------------
+   Custom build for Panasonic EWR 17383
+      - Panasonic requested we re-add the AGC component
+   Configurations Built
+      - Windows Embedded CE 6.0 (PNA configuration)
+
+2015.11.1671--------05.NOV.2015---------------------------------------------------------------
+   Custom build for Panasonic EWR 17383
+      - Switched from simple malloc/free to standard malloc/free to fix allocation failure
+        on larger images
+   Configurations Built
+      - Windows Embedded CE 6.0 (PNA configuration)
+
+2015.10.1655--------23.OCT.2015---------------------------------------------------------------
+   Custom build for Panasonic EWR 17383
+      - Reduced code space:
+         - Eliminated AGC, Han Xin, Brazilian 4-state, and Japan Post
+         - Added macro to remove support for non-ECC200 Data Matrix
+         - Used COMPONENT_xxx macros to eliminate Code 11, MSI Plessey, Matrix 2 of 5, Telepen,
+           Hong Kong 2 of 5, and Korean Post
+         - Reduced the size of two Data Matrix tables by changing type from int to char
+   Configurations Built
+      - Windows Embedded CE 6.0 (PNA configuration)
+
+2015.10.1641--------23.OCT.2015---------------------------------------------------------------
+   Standard build for i.MX25
+   Update from 2015.10.1605
+   Based on trunk
+      - Add new API function to dump all properties (needed for HDPS).
+      - Fixed the AIM identifier for MSI
+   Configurations Built
+      - iMX25 based product line
+
+2015.10.1622--------15.OCT.2015---------------------------------------------------------------
+   Custom build for Panasonic EWR 17383
+      - No changes to decoder itself
+      - A SwiftDecoder-like PNA release package can now be built using Ant PNA target
+      - Only the manual is omitted from the release package
+      - The release version number still must be manually appended to the file, which is at
+        redist/PNA/PNA.zip
+   Configurations Built
+      - Windows Embedded CE 6.0 (PNA configuration)
+
+2015.10.1605--------9.OCT.2015---------------------------------------------------------------
+   Standard build for i.MX25
+   Update from 2015.09.1576
+   Based on Halcyon_BarcodeDensityCheck branch
+      - Added barcode size measurement in modules/narrow elements for QR, microPDF, UPC, Code11, Code93, MSI,
+        RSS_14, RSS_14_ST, RSS_14_LIM, RSS_EXP and RSS_EXP_ST.
+   Configurations Built
+      - iMX25 based product line
+
+2015.09.1594--------25.SEP.2015---------------------------------------------------------------
+   Custom build for Panasonic EWR 17383
+      - Improved Codabar finder to increase read rate on low-quality codes
+   Configurations Built
+      - Windows Embedded CE 6.0 (PNA configuration)
+
+2015.09.1582--------15.SEP.2015---------------------------------------------------------------
+   Beta build for i.MX25, EWR 17006 
+      - Accept up to 4 non-alpha characters on the first row   
+      - Modified checksum on the second row to accept empty expiry date.
+      This build is intended only to demo the reading capability of such passport.
+   Configurations Built
+      - iMX25 based product line
+
+2015.09.1576--------2.SEP.2015----------------------------------------------------------------
+   Standard build for i.MX25
+   Based on trunk
+   Changes since 2015.08.1545:
+      - Additional OCR Travel docs bugfix: prevents non-alpha digits in alpha-only rows
+      - Merged changes from Casio build 2015.07.1503
+   Configurations Built
+      - iMX25 based product line
+      - iMX53 based product line
+
+2015.09.1569--------1.SEP.2015----------------------------------------------------------------
+   Build for EWR-16115 Casio, Windows Embedded (CEQ1) build  
+   Update from 2015.07.1503
+   Based on 2015.08_Feature_CasioVideoReverseSmallStack branch
+   Features:
+      - Native handling of Video Reverse for all linear, stacked, and composite codes except 
+        Patch code, Pharma code, and GS1-Databar (including GS1-Databar based composites)
+      - Single ROI functionality similar to what was released in Andaman
+   Configurations Built
+      - Windows CE (CEQ1)
+
+2015.08.1545-------10.AUG.2015----------------------------------------------------------------
+   Standard build for i.MX25
+   Based on trunk
+   Changes since 2015.03.1532 affecting i.MX25 build:
+      - OCR bug fixed, which incorrectly allowed numeric digits in the top row of passports
+   Configurations Built
+      - iMX25 based product line
+      - iMX53 based product line
+
+2015.08.1532-------07.AUG.2015----------------------------------------------------------------
+   Standard build for i.MX25
+   Based on HEAD of trunk
+   Changes since 2015.03.1351 affecting i.MX25 build:
+      - Valgrind fixes (incl. some from 2015.03_Feature_LinuxAndWarningsAndValgring branch)
+      - ROI features from Feature_18_ROI & ID_ROI_2015.01 branches
+      - Callback status codes exposed in SD.H
+      - Improvements from 2015.05_Feature_SMALL_STACK (includes more Valgrind fixes)
+      - passport bugfixes and general OCR performance enhancements
+   Configurations Built
+      - iMX25 based product line
+      - iMX53 based product line
+   
+2015.08.1523-------06.AUG.2015----------------------------------------------------------------
+   Second Custom Build for Xenon/1900 for Busicom EWR 16080
+   Based on EWR-16080_OCR_PassportProcessingImprovements branch
+   There was another bug in the passport template that allowed non-alphabetic characters
+      in the top row of a passport.
+   Configurations Built
+      - iMX25 based product line
+
+2015.08.1519-------05.AUG.2015----------------------------------------------------------------
+   Custom Build for Xenon/1900 for Busicom EWR 16080
+   Based on EWR-16080_OCR_PassportProcessingImprovements branch
+      - Contains OCR improvements and passport template fixes
+   Configurations Built
+      - iMX25 based product line
+   
+2015.08.1506-------04.AUG.2015----------------------------------------------------------------
+   First Standard build of ID_w32_safe1 configuration (Sentinel LDK protected)
+   Configurations Built
+      - Microsoft Windows XP and later
+
+2015.07.1503-------31.JUL.2015----------------------------------------------------------------
+   Custom Build for EWR-16115 Casio, Windows Embedded (CEQ1) build
+   Update from 2015.07.1487
+   Based on 2015.07_Feature_CasioSmallStackBuild_and_UPC-A-EAN-13noGuardBarsOneSideReading branch
+       which is based on the 2015.05_Feature_CasioSmallStackTestBuild branch
+   Features:
+      1) Bug fix where small-stack pointer was not being initialized in the SD_Destroy function
+          and the decoder gets called with a NULL image in there so in case of a reset it shuts 
+          down properly
+      2) Update to bar growth estimation in UPC where a variable had the potential of being used 
+         without being initialized
+      3) Bug fix in postal stemming from the small stack changes.  A structure which was originally
+         declared as a global was moved to being a local variable on the small stack, but was not
+         initialized properly in all cases.  This was throwing an exception in our CE build
+      4) New setting value of 2 for SD_PROP_C128_OUT_OF_SPEC_SYMBOL (configurable now from 0-2).
+         This will enable the use of the high pass filtered signal array for use with the midzone
+         edge detector, as well as strengthening the high-pass-filter to account for extreme
+         overgrowth
+      5) Ted's testing showed that our stack usage was on the order of 800K for USPS intelligent
+         mail, so I updated the small stack size from 100,000 ints (400K) to 250,000 ints (1MB).
+         Having too little memory was also causing an exception in CE, and this change fixed that.
+   Configurations Built
+      - Windows CE (CEQ1).
+
+2015.07.1491-------22.JUL.2015----------------------------------------------------------------
+   Custom Build for EWR-16080 (only given out for Xenon platform)
+   Based on 1351
+     - Updates and bug fixes related to identification of OCR passport types and rows as they relate
+       to the specification.  Much more stringent now.
+   Configurations Built
+      - iMX25 based product line
+
+2015.07.1487-------15.JUL.2015----------------------------------------------------------------
+   Custom Build for EWR-16115 Casio, Windows Embedded (CEQ1) build - TEST BUILD FOR CASIO
+   - Use of SMALL_STACK to stay under the 64K stack limit for Windows CE 6.0 and later
+   - bug fix making sure that small stack is initialized when doing SD_Destroy because
+          in the threaded model, sr_decode is called during a destroy which requires the
+          static stack memory
+   - UPC-A/EAN-13 do not require guards or a quiet zone on one side.
+
+2015.07.1465-------02.JUL.2015----------------------------------------------------------------
+   Custom Build for EWR 15201 Panasonic, Windows Embedded CE 6.0, similar to SwiftDecoder PNA
+
+2015.06.1431-------16.JUN.2015----------------------------------------------------------------
+   Test Build for EWR-16080 (only given out for Xenon platform)
+   Based on Top-of-Trunk - build 1416
+     - Updates and bug fixes related to identification of OCR passport types and rows as they relate
+       to the specification.  Much more stringent now.
+   Configurations Built
+      - iMX25 based product line
+      
+2015.03.1351-------23.MAR.2015----------------------------------------------------------------
+   Standard Build (candidate to update the Xenon decoder in production)
+   Based on 1345
+     - Add flexibility for code 39 and code 128 decoding (better management of perspective)
+   Configurations Built
+      - iMX25 based product line
+      - iMX53 based product line
+      - WinCE based product line
+      - WinPhone8 based product line
+      - Android based product line
+
+2015.03.1345-------16.MAR.2015----------------------------------------------------------------
+   Standard Build (candidate to update the Xenon decoder in production)
+   Based on 1198
+     - Fixed issues with Codablock A and Codablock F, these both work again
+     - Bug fix for one row Codablock A reading
+     - Included changes to correct some errors in Han Xin
+     - Update to Han Xin translation including a couple more checks to make sure bit processing doesn't go out of bounds
+     - PDF417 enhancements: 
+         - nav fix and error correction improvements
+         - new mode to enhance reading of very damaged labels - SD_PROP_PDF_ENHANCED_DAMAGE_HANDLING property
+     - Enhanced linear margin checking for Interleaved 2 of 5, GS1-Databar Limited, and Code 128
+     - Property to control the external bar checking, and the required area around the code that must be in the image
+       SD_PROP_MISC_LINEAR_BOUNDARY_CHECK
+     - new property to manage the Code 39 extended depth of field decoding - ID_PROP_USE_VESTA property
+     - bugfix to prevent a very rare scanner reset at the very first read (race condition)
+     - Ability to read UPC-A/EAN-13 bar codes that have a single guard bar on one side
+   EWRs:
+      - EWR-13113     fixed false read of GS1-Databar inside of a Code 39
+      - EWR-13114     fixed false read of Interleaved 2 of 5 inside of a UPC
+      - EWR-13878     ability to read UPC-A/EAN-13 with a single guard bar on one side
+   Configurations Built
+      - iMX25 based product line
+      - iMX53 based product line
+      - WinCE based product line
+      - WinPhone8 based product line
+      - Android based product line
+
+2015.02.1286-------13.FEB.2015----------------------------------------------------------------
+   Standard Build for Andaman
+   Based on 1250 build
+     - Fixed issues with Codablock A and Codablock F, these both work again
+     - Bug fix for one row Codablock A reading
+     - Included changes between builds 1279 and 1280 to correct some errors in Han Xin
+     - Update to Han Xin translation including a couple more checks to make sure bit processing doesn't go out of bounds
+   Configurations Built
+     - iMX25 based product line
+
+2015.02.1271-------09.FEB.2015----------------------------------------------------------------
+   Build for Xenon/1450 to read Russian PDF labels
+   Based on 1260 build
+     - PDF enhancements (nav fix and error correction improvements).
+   Product compatibility
+     - iMX25 based product line
+     
+2015.01.1260-------04.FEB.2015----------------------------------------------------------------
+   Build for Xenon/1450 to read Russian PDF labels
+   Based on 1250 build
+     - Added High Pass Filtering to improve readability
+     - DECSET40008016 to choose HPF on the image (1) or HPF during sampling (2, default value)
+   Configurations Built
+     - iMX25 based product line
+     
+2015.01.1250-------27.JAN.2015----------------------------------------------------------------
+   Build for Andaman
+   Based on 1219 build
+     - Enhanced linear margin checking for Code 39 and code 128
+   Configurations Built
+     - iMX25 based product line
+
+2014.12.1224-------17.DEC.2014----------------------------------------------------------------
+   Beta build for EWR-13878
+   Based on 1198 build
+      - allow the reads of UPC-A and EAN-13 codes that on one side have only a single guard bar (hard coded)
+   Configurations Built
+      - iMX25 based product line
+   
+2014.12.1219-------17.DEC.2014----------------------------------------------------------------
+   Beta build for Andaman
+   Based on 1198 build
+      - Add ROI feature ( 0 : disabled, 1 : standard ROI, 2 : centered ROI, 3 : DPM ROI )
+   Configurations Built
+      - iMX25 based product line
+
+2014.12.1198-------05.DEC.2014----------------------------------------------------------------
+   New build for Mobility team (Paris project) as well as 145x team
+   Based on 1146 build
+      - Code 128 High Security mode based on changes done for EWR-13014 (build 2014.10.1140), now configurable based on SD_PROP_C128_SECURITY property (0=disable, 1=enable)
+      - New Code 39 margin area checking to prevent Code 39 short reads
+      - Bug fix in the configuration to enable Canadian Post
+      - Improved DOF on Code 39 and UPC when Linear Damage is active
+   Configurations Built
+      - iMX25 based product line
+      - iMX53 based product line
+      - WinCE based product line
+      - WinPhone8 based product line
+      - Android based product line
+
+2014.10.1146-------17.OCT.2014----------------------------------------------------------------
+   Build needed for Mobility team (Paris project)
+   Based on 1142 build
+      - Minor compiler fixes for WinPhone 8
+   Configurations Built
+      - WinCe based product line
+      - WinPhone8 based product line
+
+2014.10.1142-------16.OCT.2014----------------------------------------------------------------
+   Replace build 1124 needed for 145X team for EVT1
+   Based on 1124 build
+      - Enhancements when SD_PROP_MISC_CELLPHONE_IMPROVEMENTS enabled to better handle bright cellphone screens with dark background
+   Configurations Built
+      - iMX25 based product line
+      - iMX53 based product line
+
+2014.10.1140-------14.OCT.2014----------------------------------------------------------------
+   Beta build for EWR-13014 (Code 128 misread)
+   Based on 1124
+   Configurations Built
+      - iMX25 based product line
+
+2014.10.1124-------01.OCT.2014----------------------------------------------------------------
+   Build needed for 145X team for EVT1 tests
+   Based on 702 build
+      - PDF417 codeword decode improvements (EWR-12071)
+      - PDF417 stitching and added properties SD_PROP_PDF_HISTORY_EXPIRE_COUNT and SD_PROP_PDF_HISTORY_MIN_MATCH_PERCENT (EWR-11988)
+      - Improvements added for decoding on low contrast images from cellphone screen, applied when SD_PROP_MISC_CELLPHONE_IMPROVEMENTS is enabled.
+      - QR decode improvements for codes with gap and/or overlaps (EWR-11674)
+      - Add postal symbologies:  support for Swedish Post, Mailmark 4-state, CEPNET, Brazil Post
+      - Code39 decode improvements for greater depth of field and poor printing
+      - New mode for enhanced linear damage handling
+      - Add no-checkdigit option for Code 11 decoding (SD_PROP_C11_CHECKSUM == 4) - (EWR-10729)
+      - Corrected Aztec output in misencoded symbols with invalid terminator pattern (EWR-10733)
+      - Reduced minimum quiet zone requirements for UPC
+      - Add Modified Code 128 Decoder (EWR-10074)
+   Configurations Built
+      - iMX25 based product line
+      - iMX53 based product line
+   New features
+      - PDF Stitching across images - new properties SD_PROP_PDF_HISTORY_EXPIRE_COUNT and SD_PROP_PDF_HISTORY_MIN_MATCH_PERCENT
+      - Added postal symbologies - Swedish Post, Mailmark 4-state, CEPNET, and Brazil Post
+      - New mode for enhanced linear damage - SD_PROP_MISC_LINEAR_DAMAGE_IMPROVEMENTS property
+      - Enhanced cellphone reading performance - SD_PROP_MISC_CELLPHONE_IMPROVEMENTS property
+   EWRs:
+      - EWR-12071     Enhanced damage handling in codeword decoder
+      - EWR-10074     Tassimo/Kraft - modified fixed length Code 128 reading
+      - EWR-10355     Casio - Improved scanning for damaged bar codes
+      - EWR-11674     Bluebird - poor quality QR codes
+      - EWR-10733     Aztec code added character in data output
+      - EWR-11988     OEM Abbott Diagnostics - request for PDF Stitching
+      - EWR-10729     Add no-checkdigit option for Code 11 decoding
+
+2013.4.702-------19.APR.2013----------------------------------------------------------------
+>>>>>>> .r5022

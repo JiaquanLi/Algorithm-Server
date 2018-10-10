@@ -1,0 +1,96 @@
+20180515: bluecode_honeywell_18_1_V6_Hotfix3
+
+- Fix HID crash with some Samsung Android phone
+- Fix the crash when BlueBorne test
+
+
+
+20180423: BlueCode+ for Honeywell: Release (V6)
+
+- a minor change in functionality: fixed an issue that could cause GATT attribute update requests to send a notification unencrypted when the request is placed 
+  immediately after connection establishment, before encryption is active, even if the attribute specifies an encryption requirement
+
+
+
+20180404: Engineering release V5R3
+
+- Fix the issue of SPP profile, failed to connect to Windows
+- Support the set the battery level to BAS
+
+
+
+20180330: a new engineering release “V5RC1”. 
+
+- This includes support for Marvell
+- Basic API for MFI
+- Support to read DID value
+
+
+
+20180312: Honeywell18_CustomerPackage_Engineering_V4RC2
+- HoGP reconnection failed under specific conditions, this is now fixed
+
+
+
+20180309: Honeywell 2018 with TI CC2564C: Engineering release V4RC1
+
+- BlueCode+ is now provided as a static library again, the file name is libbluecode.a
+- BlueCode+ stack reset for power suspending
+- RSSI polling for HID/HoGP protection: blueAPI_ACLConfigLinkstatusReq can now be used to configure an RSSI polling interval. Remains of a previous similar feature 
+  with slightly different implementation have accidentally been included in previous releases, but the polling only returned a single sample in that case.
+- External Changes (BlueCode+):
+  1. BlueAPI
+  - Three new messages: ReleaseInd, ReleaseConf and DeactInfo
+  - A BlueAPI application that operates on BlueCode+ when it can be reset, shall handle an incoming ReleaseInd:
+      - ReleaseInd is sent to the app during a stack reset
+      - On reception, the app should discard (not release!) all pointers into BlueCode+ memory (e.g., pBuffer from previous messages, or blueAPI_BufferGet)
+      - Only after this has been done, the app shall respond with a ReleaseConf. The stack will then continue with the reset procedure
+      - After the reception of a ReleaseInd, the app may not send any BlueAPI messages except for the ReleaseConf and shall be considered released from the stack
+  - A BlueAPI application that has been released from the stack may not send any messages. Once the stack reset is complete, it will receive a DeactInfo message
+  - Once the application has received the DeactInfo AND BlueCode+ has been reinitialized via stOsifInit, the app may issue a RegisterReq to enter normal operation again
+  - After a reset, all handles previously given to the app (like MDL IDs) shall be considered invalidated
+
+  2. COMAPI
+  - The interface of COMAPI has not changed
+  - For the stack reset feature, must be ensured that comClose is implemented correctly. All pointers into BlueCode+ memory (comWrites) must be discarded, and only after completion, the COMAPI shall send a comCloseCompleted event to its client
+
+  3. OSIF
+  - See also the doxygen output for stosif.h
+  - Three new functions: OsifShallExit, OsifRelease and OsifShallExit
+  - OsifShallExit shall be called by the external porting code when a reset is required (for example, due to power suspending)
+      - BlueCode+ will then call OsifRelease to signal that all dependencies are ready for the reset (Application, COMAPI, ...)
+      - Only after the reception of OsifRelease, OsifExit may be called to perform the actual reset. Any connected BlueAPI application will receive a DeactInfo.
+      - BlueCode+ can then be re-initialized using stOsifInit
+  - The "NVRAM" and "Trace" external functions (in previous demo packages, implemented in hw_btl_linux.c) have been moved into the OSIF structure. See the new reference implementation.
+
+
+
+20180202: V3 Engineering Release of BlueCode+: RC1
+
+- Support for 7 concurrent SPP connections 
+  The recommended mode of operation is: 
+  A server (cradle) contains one registered SPP MDEP and requests operation as Master, while remaining discoverable as Slave
+  Up to 7 clients (scanner) connect as Master using the server’s BDADDR. With the correct configuration, the server will accept the connection (as Slave) and 
+  automatically perform a role switch. In the end, the server acts as one master connected to seven slaves.
+- Support for 3 concurrent TIO connections 
+  The recommended mode of operation is: 
+  A server (cradle) operates as central and scans for peripherals. When a received advertisement contains the server’s BDADDR, it establishes as TIO connection.
+  Up to 3 clients (scanner) operate as peripheral. When requested, they send a burst of advertisement containing the server’s BDADDR. In the end, the server acts as 
+  one central connected to three peripherals.
+- Fix: The long version of the local name can now be set via both the static and runtime configuration.
+- SONAME: The shared library now includes the SONAME “libbluecodesr1352.so.3”
+
+
+
+20171218: V1 Enginerring release of BlueCode+: RC1
+
+- Terminal I/O client & server
+- LE Device Identification Service based on cfgblb.c
+- Extended size of Classic HID descriptor (for “eject” key)
+- Extended friendly name length
+- Stack provided as shared library
+
+
+
+Old Releases:
+- Static library

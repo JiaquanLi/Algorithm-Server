@@ -22,6 +22,7 @@
 #include <unistd.h>
 #include <iostream>
 
+#include "exception-log.h"
 #include "AppRevision.h"
 #include "GrpcServer.h"
 #include "logging.h"
@@ -106,6 +107,12 @@ int main(int argc, char **argv)
 {
 	int err;
 
+	install_terminate_handler();
+	signal(SIGSEGV, sigsegv_handler);
+
+	err = parse_opt(argc,argv);
+	if(err) return err;
+	
 	openlog("algorithm-server", 0, LOG_LOCAL0);
 	log_print(LOG_DEBUG, "MainAPP", "Server open");
 
@@ -116,6 +123,6 @@ int main(int argc, char **argv)
 
 	log_print(LOG_DEBUG, "Main", "Server Close");
 	closelog();
-	
+
 	return true;
 }

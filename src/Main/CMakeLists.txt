@@ -10,6 +10,7 @@ target_link_libraries(${TARGET_NAME}
 	-rdynamic
 	grpclib
 	logging
+	osal
 )
 
 #get_filename_component(TOOLCHAIN_PATH "${CMAKE_C_COMPILER}" PATH)
