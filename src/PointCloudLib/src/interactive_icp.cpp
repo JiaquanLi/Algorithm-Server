@@ -92,9 +92,9 @@ bool CreatePcd(char* fileScr, char* filePcdDes)
 
 }
 
-ApiPCL::ApiPCL():cloud_in(new PointCloudT),cloud_tr(new PointCloudT),cloud_icp(new PointCloudT)
+ApiPCL::ApiPCL(): cloud_in(new PointCloudT), cloud_tr(new PointCloudT), cloud_icp(new PointCloudT)
 {
-	iterations = 1;
+	iterations = 100;
 
 	if (pcl::io::loadPCDFile(pcdIcp, *cloud_icp) < 0)
 	{
@@ -154,6 +154,7 @@ bool ApiPCL::InteractiveIcp(char* fileTarget, char* result)
 	//PointCloudT::Ptr cloud_in(new PointCloudT);  // Original point cloud
 	//PointCloudT::Ptr cloud_tr(new PointCloudT);  // Transformed point cloud
 	//PointCloudT::Ptr cloud_icp(new PointCloudT);  // ICP output point cloud
+	PointCloudT::Ptr cloud_temp(new PointCloudT);
 
 	//Read Pcd files
 	pcl::console::TicToc time;
@@ -175,13 +176,19 @@ bool ApiPCL::InteractiveIcp(char* fileTarget, char* result)
 	//std::cout << "\nLoaded file " << pcdIcp << " (" << cloud_icp->size() << " points) in " << time.toc() << " ms\n" << std::endl;
 
 	*cloud_tr = *cloud_icp;  // We backup cloud_icp  cloud_tr for later use
-
+	*cloud_temp = *cloud_icp;//use cloud_temp to save templet file ,make sure templet keep the same
 	time.tic();
 	pcl::IterativeClosestPoint<PointT, PointT> icp;
 	icp.setMaximumIterations(iterations);
-	icp.setInputSource(cloud_icp);
+
+	//icp.setInputSource(cloud_icp);
+	icp.setInputSource(cloud_temp);
+
 	icp.setInputTarget(cloud_in);
-	icp.align(*cloud_icp);
+
+	//icp.align(*cloud_icp);
+	icp.align(*cloud_temp);
+
 	icp.setMaximumIterations(1);  // We set this variable to 1 for the next time we will call .align () function
 	std::cout << "Applied " << iterations << " ICP iteration(s) in " << time.toc() << " ms" << std::endl;
 
@@ -285,3 +292,126 @@ bool ApiPCL::InteractiveIcp(char* fileTarget, char* result)
 	}
 	return true;
 }
+/*
+bool ApiPCL::DownSampleIcp()
+{
+	Eigen::Vector3d ea0(yaw, pitching, droll);
+	Eigen::Matrix3d rotationMatrix;
+	rotationMatrix = Eigen::AngleAxisd(ea0[0], Eigen::Vector3d::UnitZ()).toRotationMatrix()
+	                 * Eigen::AngleAxisd(ea0[1], Eigen::Vector3d::UnitY()).toRotationMatrix()
+	                 * Eigen::AngleAxisd(ea0[2], Eigen::Vector3d::UnitX()).toRotationMatrix();
+
+	//Eigen::AngleAxisd rotation_vector(M_PI / 4, Eigen::Vector3d(0, 0, 1));
+	//Eigen::Matrix3d rotation_matrix = Eigen::Matrix3d::Identity();//µ¥Î»Õó
+	//rotation_matrix = rotation_vector.toRotationMatrix();//×ª³ÉÐý×ªŸØÕó¡¡ÓÉÂÞµÂÀïžñ¹«ÊœœøÐÐ×ª»»
+
+	//œšÁ¢×ª»¯ŸØÕó
+	Eigen::Translation3d init_translation(tx, ty, tz);
+	Eigen::Matrix4d init_guess = (init_translation * rotationMatrix).matrix();
+
+	//Íê³ÉŽÖÅä×Œ
+	pcl::transformPointCloud(*cloud_flan, *cloud_tr, init_guess);
+
+	//ICP
+	//cloud_tr.reset(new PointCloudT);
+	//pcl::io::loadPCDFile(name2, *cloud_tr);
+
+	//cloud_tr.reset(new PointCloudT);
+	//cloud_tr = lmicloud;
+
+
+
+	PointCloudT::Ptr output(new PointCloudT);
+
+	PointCloudT::Ptr src(new PointCloudT);   //ŽæŽ¢ÂË²šºóµÄÔŽµãÔÆ
+	PointCloudT::Ptr tgt(new PointCloudT);   //ŽæŽ¢ÂË²šºóµÄÄ¿±êµãÔÆ
+
+	pcl::VoxelGrid<PointT> grid;         /////ÂË²šŽŠÀí¶ÔÏó
+
+	bool downsample = true;
+
+	if (downsample)
+	{
+		grid.setLeafSize(0.5, 0.5, 0.5);    //ÉèÖÃÂË²šÊ±²ÉÓÃµÄÌåËØŽóÐ¡
+		grid.setInputCloud(cloud_in);
+		grid.filter(*src);
+
+		grid.setInputCloud(cloud_tr);
+		grid.filter(*tgt);
+	}
+	else
+	{
+		src = cloud_in;
+		tgt = cloud_tr;
+	}
+	int number = src->points.size();
+
+	//PointCloudT::Ptr points_with_normals_src(new PointCloudT);   //ŽæŽ¢ÂË²šºóµÄÔŽµãÔÆ
+	//PointCloudT::Ptr points_with_normals_tgt(new PointCloudT);   //ŽæŽ¢ÂË²šºóµÄÄ¿±êµãÔÆ
+	//points_with_normals_src = src;
+	//points_with_normals_tgt = tgt;
+
+	PointCloudWithNormals::Ptr points_with_normals_src(new PointCloudWithNormals);
+	PointCloudWithNormals::Ptr points_with_normals_tgt(new PointCloudWithNormals);
+
+	pcl::NormalEstimation<PointT, PointNormalT> norm_est;     //µãÔÆ·šÏß¹ÀŒÆ¶ÔÏó
+	pcl::search::KdTree<pcl::PointXYZRGBA>::Ptr tree(new pcl::search::KdTree<pcl::PointXYZRGBA>());
+	norm_est.setSearchMethod(tree);
+	norm_est.setKSearch(1);
+
+	norm_est.setInputCloud(src);
+	norm_est.compute(*points_with_normals_src);
+	pcl::copyPointCloud(*src, *points_with_normals_src);
+
+	norm_est.setInputCloud(tgt);
+	norm_est.compute(*points_with_normals_tgt);
+	pcl::copyPointCloud(*tgt, *points_with_normals_tgt);
+
+	// Åä×Œ
+	pcl::IterativeClosestPoint<PointNormalT, PointNormalT> reg;   // Åä×Œ¶ÔÏó
+
+	//pcl::IterativeClosestPoint<PointT, PointT> reg;   // Åä×Œ¶ÔÏó
+	//reg.setTransformationEpsilon(1e-6);   ///ÉèÖÃÊÕÁ²ÅÐ¶ÏÌõŒþ£¬ÔœÐ¡Ÿ«¶ÈÔœŽó£¬ÊÕÁ²Ò²ÔœÂý
+	// Set the maximum distance between two correspondences (src<->tgt) to 10cmŽóÓÚŽËÖµµÄµã¶Ô²»¿ŒÂÇ
+	// Note: adjust this based on the size of your datasets
+	//reg.setMaxCorrespondenceDistance(0.1);
+	reg.setInputSource(points_with_normals_src);   // ÉèÖÃÔŽµãÔÆ
+	reg.setInputTarget(points_with_normals_tgt);    // ÉèÖÃÄ¿±êµãÔÆ
+	Eigen::Matrix4f Ti = Eigen::Matrix4f::Identity(), prev, targetToSource;
+	PointCloudWithNormals::Ptr reg_result = points_with_normals_src;
+	reg.setMaximumIterations(5);////ÉèÖÃ×îŽóµÄµüŽúŽÎÊý£¬ŒŽÃ¿µüŽúÁœŽÎŸÍÈÏÎªÊÕÁ²£¬Í£Ö¹ÄÚ²¿µüŽú
+
+	for (int i = 0; i < 10; ++i)   ////ÊÖ¶¯µüŽú£¬Ã¿ÊÖ¶¯µüŽúÒ»ŽÎ£¬ÔÚÅä×Œœá¹ûÊÓ¿Ú¶ÔµüŽúµÄ×îÐÂœá¹ûœøÐÐË¢ÐÂÏÔÊŸ
+	{
+		//PCL_INFO("Iteration Nr. %d.\n", i);
+
+		// ŽæŽ¢µãÔÆÒÔ±ã¿ÉÊÓ»¯
+		points_with_normals_src = reg_result;
+
+		// Estimate
+		reg.setInputSource(points_with_normals_src);
+		reg.align(*reg_result);
+
+		//accumulate transformation between each Iteration
+		Ti = reg.getFinalTransformation() * Ti;
+
+		//if the difference between this transformation and the previous one
+		//is smaller than the threshold, refine the process by reducing
+		//the maximal correspondence distance
+		if (fabs((reg.getLastIncrementalTransformation() - prev).sum()) < reg.getTransformationEpsilon())
+			reg.setMaxCorrespondenceDistance(reg.getMaxCorrespondenceDistance() - 0.001);
+
+		prev = reg.getLastIncrementalTransformation();
+
+		// visualize current state
+		//showCloudsRight(points_with_normals_tgt, points_with_normals_src);
+	}
+	//
+	// Get the transformation from target to source
+	targetToSource = Ti.inverse();//deidao
+
+	//
+	// Transform target back in source frame
+	pcl::transformPointCloud(*cloud_tr, *output, targetToSource);
+}
+*/
