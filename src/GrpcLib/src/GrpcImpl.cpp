@@ -50,7 +50,7 @@ Status RouteGuideImpl::RouteChat(ServerContext* context,
 
 	//char* targetFile = (char*)"target.txt";
 	//char* templetFile = (char*)"templet.txt";
-
+	long fileSize = 0;
 	FILE* fileSave;
 	fileSave = fopen(TARGET_FILE, "wb+");
 	RouteNote server_note;
@@ -58,10 +58,11 @@ Status RouteGuideImpl::RouteChat(ServerContext* context,
 	while (stream->Read(&note)) {
 		//stream->Write(note);
 		fwrite((void*)note.datasend().c_str(), note.size(), 1, fileSave);
+		fileSize += note.size();
 		//std::cout << "GetMessage" << note.datasend().c_str() << "size:" << note.size() << std::endl;
 	}
 	fclose(fileSave);
-	std::cout << "Get Target File " << "size:" << note.size() << std::endl;
+	std::cout << "Get Target File " << "size:" << fileSize << std::endl;
 
 	char tempMsg[500];
 	memset(tempMsg, '\0', 500);
@@ -79,6 +80,7 @@ Status RouteGuideImpl::RouteChat(ServerContext* context,
 Status RouteGuideImpl::SetIcpMaxIterations(ServerContext* context, const IcpMaxIterationsRequest* request, IcpMaxIterationsReply* reply) {
 
 	objPcl.SetMaxIterations(request->maxiterations());
+	std::cout << "request->maxiterations() " << request->maxiterations() << std::endl;
 	reply->set_retsts(true);
 	return Status::OK;
 }

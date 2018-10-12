@@ -24,7 +24,7 @@ private:
 	int iterations ;//= 100;  // Default number of ICP iterations
 	PointCloudT::Ptr cloud_in;  // Original point cloud
 	PointCloudT::Ptr cloud_tr;  // Transformed point cloud
-	PointCloudT::Ptr cloud_icp;  // ICP output point cloud
+	const PointCloudT::Ptr cloud_icp;  // ICP output point cloud
 
 	char *pcdTarget = (char*)"target.pcd";
 	char *pcdIcp = (char*)"icp.pcd";

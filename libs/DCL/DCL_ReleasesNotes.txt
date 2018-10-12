@@ -1,0 +1,760 @@
+2018.04.5818-------04.APR.2018---------------------------------------------------------------
+   Test build based on 2018.03.5760
+   ID specific:
+      - Added a lite version of the linear averaging code, automatically enabled with  
+	    the changes to the linear finder algorithms from 5735.
+
+2018.03.5776-------23.MAR.2018---------------------------------------------------------------
+   Standard build based on 2018.02.5640
+   ID specific:
+      - Improved DPM decoding to support reflective barcodes (EWR-25381)
+        Now, the property DEC_DPM_ENABLED can take the following values:
+        - 0: Disabled
+        - 1: Dotpeen
+        - 2: Reflective
+   FLD specific:
+      - Fixed a risk of misread with EAN/UPC (EWR-27880)
+      - Fixed a risk of misread with Code 39 (Vesta)
+   Configurations Built:
+      - AN1
+
+2018.03.5760-------20.MAR.2018---------------------------------------------------------------
+   Test build based on 2018.03.5698
+   ID specific:
+      - Fix an error in the sampling of the image in the linear finder when using an ROI.
+   FLD specific:
+      - Revert the todification to the IQ scoring algorithm added in revision 2018.03.5735.
+   Configurations Built
+      - Gen7
+      - OPB2
+
+2018.03.5735-------09.MAR.2018---------------------------------------------------------------
+   Test build based on 2018.03.5698
+   ID specific:
+      - Improvements to linear finder algorithms for poor quality linear codes.
+      - Bug-fixes to linear finder algorithms which could prevent reading.
+   FLD specific:
+      - Modification to the IQ scoring algorithm.
+   Configurations Built
+      - Gen7
+      - OPB2
+   
+2018.02.5640-------09.FEB.2018---------------------------------------------------------------
+   Standard build based on 2017.12.5496
+   DCL specific:
+      - Added DEC_CODE39_UNCONV_INTER_CHAR to read Code 39 barcodes with unconventional interchars
+        (EWR-27521)
+      - Fixed bug in some linear codes lengths check (labels with less chars than required by Min length could be issued))
+   Configurations Built:
+      - AN1
+
+2018.02.5630-------07.FEB.2018---------------------------------------------------------------
+   Custom build based on 2018.01.5566
+   ID specific:
+      - Modification of Data Matrix decoding to reduce decode time.
+      - Several bugs in Data Matrix decoding and ROI modes have been corrected.
+   Configurations Built
+      - Gen7
+
+2018.01.5566-------18.JAN.2018---------------------------------------------------------------
+   Custom build based on 2017.12.5493
+   ID specific:
+      - New linear finder that improves decoding of low-contrast images (manual operating mode only)
+      - Improved estimation of edges of Data Matrix finder pattern
+   Configurations Built:
+      - Gen7
+
+2018.01.5529-------15.JAN.2018---------------------------------------------------------------
+   Custom build for EWR-26981 based on 2017.12.5493
+   ID specific:
+      - Fixed an issue with DPM and Windowing.
+      - Specific DPM configuration for EWR-26981.
+   Configurations Built:
+      - iMX25/iMX53 based product line
+
+2017.12.5496-------18.DEC.2017---------------------------------------------------------------
+   Standard build based on 2017.12.5453
+   ID specific:
+      - Fixed an aimer position issue in ROI.
+   DCL specific:
+      - Removed DEC_PDF417_SHOW_GLI property (deprecated).
+   Configurations Built:
+      - bcc_6sx (i.MX6SoloX for BCC team)
+      - iMX25/iMX53 based product line
+
+2017.12.5493-------15.DEC.2017---------------------------------------------------------------
+   Test build based on 2017.12.5453
+   ID specific:
+      - Improvements to the damaged Data Matrix finder. To improve decode rate and reduce processing time.
+      - Remove the need to set SD_PROP_DM_ENHANCED_DAMAGE_MODE to enable damaged Data Matrix finder.
+      - Several small bugs corrected within the Data Matrix processing.
+   Configurations Built
+      - Gen7
+
+2017.12.5453-------06.DEC.2017---------------------------------------------------------------
+   Standard build based on 2017.09.5162
+   ID specific:
+      - Fixed access violation issue when aimerX/aimerY were set at 75% of the image width/height (Mobility issue, ESTLD-244).
+      - Fixed memory release issues for SMALL STACK builds
+      - Fixed floating-point exceptions issues
+      - Datamatrix Improvements (module size and barcode size estimations)
+      - Binarization improvements (Datamatrix, QR)
+      - DPM improvements (dotpeen detection, ROI, ...)
+      - Relaxed MSI start verification (EWR-25983)
+      - Modified the external bar check for MSI to avoid a bar partially in the checked area
+      - Forced external bar check for MSI in case of short quiet zone active
+      - DotCode improvements for high PPM codes
+      - Fixed bug where the code 39 check character stripping was applied to trioptic code
+   DCL specific:
+      - Enabled by default the ID_PROP_CYCLING_FINDER property
+      - Trioptic formatting is applied only when the length is 6 characters
+   FLD specific:
+      - Clear RSS 14 and RSS Ex buffers at each new image
+   Configurations Built
+      - AN1
+      - ANSF
+      - IOSF
+      - UWP
+      - iMX25/iMX53 based product line
+
+2017.12.5323-------04.DEC.2017---------------------------------------------------------------
+   Custom build for EWR-25381
+   Update from 2017.09.5162
+      - Enhanced QR and Datamatrix (Dot Peen) decoding on reflective surface (EWR-25381)
+      - Fixed a bug where the code 39 check character stripping was applied to Trioptic code.
+   Configurations Built
+      - WP8
+
+2017.11.5406-------20.NOV.2017---------------------------------------------------------------
+   Demo build for DotCode demo based on 2017.07.5018
+   ID specific:
+      - By default, ID behavior is closer to SD (ID_PROP_CYCLING_FINDER is set to 0).
+      - Added support of Unattended operting mode.
+      - Reduced the number of thresholds used in the 1D finder to improve speed.
+      - Improved DotCode reading and speed.
+      - DPM and Datamatrix reading improvements.
+      - OCR bug fix for TD1 cards when check digit of the first line is in optional data field.
+      - OCR bug fix for French ID card when department of issuance is alpha (line 1 chars 31-36, line 2 chars 5-7).
+      - Relaxed MSI start and stop pattern verification.
+      - Improved MSI margin check and external bar check. 
+      - Forced external bar check for MSI in case of short quiet zone active.
+      - Added check in Label Code margin to prevent misreads.
+      - Fixed a bug where the code 39 check character stripping was applied to Trioptic code.
+      - Fixed bugs that could lead to floating-point exceptions in Data Matrix, Grid Matrix, MaxiCode and QR Code decoders.
+   DCL specific:
+      - French ID card: Added check that line 1 chars 31-33 are the same as line 2 chars 5-7.
+      - Made sure that the Trioptic formatting is applied only when the length is 6 characters.
+   Configurations Built
+      - iMX25 based product line
+      - ANSF (android)
+      - IOSF (IOS)
+      - UWP
+
+2017.09.5194--------14.SEP.2017-------------------------------------------------------------
+   Demo build for CT50 based on 2017.07.5018
+   ID specific
+      - Reduced set of thresholds in the 1D finder
+      - Dotcode improvements
+   DCL specific
+   Configurations Built
+      - AN1 (Android)
+      - iMX25 based product line
+      - ANSF (android)
+      - IOSF (IOS)
+      - UWP
+
+2017.09.5162--------08.SEP.2017-------------------------------------------------------------
+   Standard build based on 2017.09.5155
+   DCL specific
+      - Fixed build issue for WP8 targets
+   Configurations Built
+      - WP8 based product line
+
+2017.09.5155--------08.SEP.2017-------------------------------------------------------------
+   Standard build based on 2017.07.5018
+   ID specific
+      - Reduced set of thresholds in the 1D finder
+      - Improved reading of damaged MSI labels (EWR-25415)
+      - Bugfix for TD1 cards when check digit of the first line is in optional data field (EWR-25230)
+      - Bug fix for French ID card when department of issuance is alpha (EWR-25230)
+   DCL specific:
+      - Changed some properties from char to int:
+        DEC_C128_FNC1_SUBSTITUTE, DEC_RESULT_HHP_CODE_ID, DEC_RESULT_AIM_CODE_LETTER, DEC_RESULT_AIM_MODIFIER
+   Configurations Built
+      - iMX25 based product line
+      - WP8 based product line
+
+2017.08.5084--------22.AUG.2017-------------------------------------------------------------
+   Test build based on 2017.07.5018
+   ID specific
+      - Reduced set of thresholds in the 1D finder
+   Configurations Built
+      - iMX25 based product line
+      - Gen7
+
+2017.07.5021--------25.JUL.2017-------------------------------------------------------------
+   Build for Santorini
+   Included software components:
+      - ID  2017.07.5021
+      - FLD 2017.03.300
+   Configurations Built
+      - iMX25 based product line
+
+2017.07.5018--------25.JUL.2017--------------------------------------------------------------
+   Standard build based on 2017.07.4977
+      - Added DotCode decoding
+      - Added property DEC_DOTCODE_ENABLED (0x1a161001) to enable DotCode decoding
+      - Added property DEC_DOTCODE_EXTENSIVE_SEARCH (0x40016004) to improve decoding capabilities
+        on badly printed DotCode barcodes (more processing power is required)
+      - Added properties DEC_DOTCODE_MIN_LENGTH (0x1a161002) and DEC_DOTCODE_MAX_LENGTH (0x1a161003)
+   ID specific
+      - Added DotCode decoding
+   Configurations Built
+      - iMX25/iMX53 based product line
+      - ANSF (android)
+      - ANSRX (android)
+      - IOSF (IOS)
+      - UWP
+      - Gen7
+
+2017.07.4977--------7.JUL.2017--------------------------------------------------------------
+   Standard build based on 2017.06.4948
+   ID specific
+      - Fixed a bug with ROI mode 2 (Aimer Centred) in case of large images (> 1280x960)
+   Configurations Built
+      - iMX25 based product line
+      - ANSF (android)
+      - ANSRX (android)
+      - IOSF (IOS)
+      - Gen7
+      
+2017.06.4948--------27.JUN.2017--------------------------------------------------------------
+   Standard build based on 2017.05.4465
+      - Added support for Japanese addenda in EAN13: DEC_EAN13_491_ADDENDA_REQUIRED (0x1A013010)
+      - Added property DEC_FLD_CODE39_UNCONV_INTER_CHAR (0xFD004009) to manage Code39 barcodes with unconventional inter characters
+   Included software components:
+      - ID  2017.06.4948
+      - FLD 2017.06.4948
+   Configurations Built
+      - iMX25 based product line
+      - bcc_6sx
+
+2017.06.4556 --------15.JUN.2017--------------------------------------------------------------
+   DotCode Demo Build for Android based on 2017.06.4545
+      - Added setting to activate DotCode decoding (0x1a161001).
+      - Added setting to manage DotCode min/max length (0x1a161002 and 0x1a161003).
+   Included software components:
+      - ID  2017.06.4556
+      - FLD 2017.06.300
+   Configurations Built
+      - ANSF (android)
+      - ANSRX (android)
+
+2017.06.4545 --------13.JUN.2017--------------------------------------------------------------
+   DotCode Demo Build for Android based on 2017.05.4465
+      - Added DotCode decoding (always active).
+      - Added support for Japanese addenda in EAN13: DEC_EAN13_491_ADDENDA_REQUIRED (0x1A013010)
+      - Added property DEC_FLD_CODE39_UNCONV_INTER_CHAR (0xFD004009) to manage Code39 barcodes with unconventional inter characters
+   Included software components:
+      - ID  2017.06.4545
+      - FLD 2017.06.300
+   Configurations Built
+      - ANSF (android)
+
+2017.06.4530 --------12.JUN.2017--------------------------------------------------------------
+   Build for EWR-25060 based on 2017.05.4465
+      - Added support for Japanese addenda in EAN13: DEC_EAN13_491_ADDENDA_REQUIRED (0x1A013010)
+      - Added property DEC_FLD_CODE39_UNCONV_INTER_CHAR (0xFD004009) to manage Code39 barcodes with unconventional inter characters
+   Included software components:
+      - ID  2017.06.4530
+      - FLD 2017.06.314
+   Configurations Built
+      - iMX25 based product line
+
+2017.05.4465 --------23.MAY.2017--------------------------------------------------------------
+   Standard build based on 2016.12.1103
+      - Added new Code 93  property: DEC_CODE93_HIGH_DENSITY
+   Included software components:
+      - ID  2017.05.4465
+      - FLD 2017.03.300
+   Configurations Built
+      - Android (armeabi, arm64-v8a, x86, x86_64)
+
+2017.05.4427 --------15.MAY.2017--------------------------------------------------------------
+   Build for Santorini
+   Included software components:
+      - ID  2017.05.4427
+      - FLD 2017.03.300
+   Configurations Built
+      - iMX25 based product line
+
+2017.05.4400 --------5.MAY.2017--------------------------------------------------------------
+   Build for Santorini
+   Included software components:
+      - ID  2017.05.4400
+      - FLD 2017.03.300
+   Configurations Built
+      - iMX25 based product line
+
+2017.04.4373 --------21.APR.2017--------------------------------------------------------------
+   Build for EWRs 23178 and 23500
+   Included software components:
+      - ID  2017.04.4370
+      - FLD 2017.03.300
+   Configurations Built
+      - Android (armeabi, arm64-v8a, x86, x86_64)
+
+2017.03.4297 --------29.MAR.2017--------------------------------------------------------------
+   Build for UWP
+   Included software components:
+      - ID  2017.03.4293
+      - FLD 2017.03.300
+   Configurations Built
+      - UWP based product line
+
+2017.03.4279 --------23.MAR.2017--------------------------------------------------------------
+   Build for Santorini
+   Included software components:
+      - ID  2017.03.4276
+      - FLD 2017.03.300
+   Configurations Built
+      - iMX25 based product line
+
+2017.01.1139 --------27.JAN.2017--------------------------------------------------------------
+   Build for EWR 21409 (Halcyon/7980g)
+   Included software components:
+      - ID  2017.01.2533
+      - FLD 2016.08.268
+   Configurations Built
+      - iMX25 based product line
+
+2017.01.1122 --------20.JAN.2017--------------------------------------------------------------
+   Build for EWR 21409 (Halcyon/7980g)
+   Included software components:
+      - ID  2017.01.2514
+      - FLD 2016.08.268
+   Configurations Built
+      - iMX25 based product line
+
+2017.01.1111 --------01.JAN.2017--------------------------------------------------------------
+   MSI with intercharacter gap test build based on 2016.12.1103
+   Included software components:
+      - ID  2017.01.2476
+      - FLD 2016.08.268
+   Configurations Built
+      - Android (armeabi, arm64-v8a, x86, x86_64)
+
+2016.12.1103 --------19.DEC.2016--------------------------------------------------------------
+   Standard build based on 2016.10.1097
+   Included software components:
+      - ID  2016.12.2444
+      - FLD 2016.08.268
+   Configurations Built
+      - Android (armeabi, arm64-v8a, x86, x86_64)
+
+2016.12.1097 --------14.DEC.2016--------------------------------------------------------------
+   Standard build based on 2016.10.1077
+      - Added support of MSI short quite zone on one side (DEC_MSIP_SHORT_MARGIN)
+   Included software components:
+      - ID  2016.12.2444
+      - FLD 2016.08.268
+   Configurations Built
+      - iMX25 based product line
+
+2016.12.1092 --------08.DEC.2016--------------------------------------------------------------
+   MSI short margin test build based on 2016.11.1077
+   Included software components:
+      - ID  2016.12.2427
+      - FLD 2016.08.268
+   Configurations Built
+      - Win8/10
+
+2016.12.1086 --------02.DEC.2016--------------------------------------------------------------
+   ITF and UPC short margins test build based on 2016.11.1084
+   Included software components:
+      - ID  2016.12.2392
+      - FLD 2016.08.268
+   Configurations Built
+      - iMX25 based product line
+
+2016.11.1084 --------23.NOV.2016--------------------------------------------------------------
+   ITF and UPC short margins test build based on 2016.10.1077
+   Included software components:
+      - ID  2016.11.2366
+      - FLD 2016.08.268
+   Configurations Built
+      - iMX25 based product line
+
+2016.11.1082 --------11.NOV.2016--------------------------------------------------------------
+   DPM test build based on 2016.10.1077
+   Included software components:
+      - ID  2016.11.2341
+      - FLD 2016.08.268
+   Configurations Built
+      - Win8 ARM based product line (ID only)
+
+2016.10.1077 --------21.SEP.2016--------------------------------------------------------------
+   Standard build based on 2016.09.1060
+      - Added new properties in order to support ARQxxx menu commands (EWR-22175)
+         - DEC_EAN13_290_ADDENDA_REQUIRED: Requires 5 chars addenda for EAN13 starting with 290 to issue a result
+         - DEC_EAN13_378_ADDENDA_REQUIRED: Requires addenda (can be 2 chars, 5 chars or both) for EAN13 starting with 378 or 379 to issue a result
+         - DEC_EAN13_414_ADDENDA_REQUIRED: Requires addenda (can be 2 chars, 5 chars or both) for EAN13 starting with 414 or 419 to issue a result
+         - DEC_EAN13_434_ADDENDA_REQUIRED: Requires addenda (can be 2 chars, 5 chars or both) for EAN13 starting with 434 or 439 to issue a result
+         - DEC_EAN13_977_ADDENDA_REQUIRED: Requires 2 chars addenda for EAN13 starting with 977 to issue a result
+         - DEC_EAN13_978_ADDENDA_REQUIRED: Requires 5 chars addenda for EAN13 starting with 978 to issue a result
+         - DEC_EAN13_979_ADDENDA_REQUIRED: Requires 5 chars addenda for EAN13 starting with 979 to issue a result
+   Included software components:
+      - ID  2016.09.2252
+      - FLD 2016.08.268
+   Configurations Built
+      - iMX25 based product line 
+
+2016.09.1060 --------21.SEP.2016--------------------------------------------------------------
+   Standard build based on 2016.08.1033
+   Included software components:
+      - ID  2016.09.2252
+      - FLD 2016.08.268
+   Configurations Built
+      - iMX25 based product line 
+
+2016.08.1033 --------26.AUG.2016--------------------------------------------------------------
+   Standard build based on 2016.05.993
+      - Added support for MacroPDF codes with padding codewords after the Macro PDF417 control block (EWR-21622)
+      - Bugfix DecodeGet return value with some properties
+      - Commented out deprecated properties (DEC_PDF417_SHOW_MACRO, DEC_MIN_1D_HEIGHT, DEC_IQ_FILTER_MODE, 
+        DEC_SHOW_NO_READ_ENABLED, DEC_DATA_TYPE, DEC_DECODE_TIMING_CONTROL, DEC_SEARCH_TIME, DEC_DPM_ENABLED)
+   Included software components:
+      - ID  2016.08.2182
+      - FLD 2016.08.268
+   Configurations Built
+      - iMX25 based product line 
+
+2016.02.999 --------24.JUN.2016---------------------------------------------------------------
+   FLD+ test version
+   Included software components:
+      - ID   2016.05.1995
+      - FLD+ 2016.06.266
+
+2016.05.995 --------26.MAY.2016---------------------------------------------------------------
+   Added build project for VS2015 WIn 10 UWP Static Libs
+   Swift build (16.5.2)
+   No FLD
+   In SwiftDecoder Mobile for Win 10
+   
+2016.05.993 --------17.MAY.2016---------------------------------------------------------------
+   Standard build based on 2016.02.984
+   Included software components:
+      - ID  2016.05.1995
+      - FLD 2014.12.144
+   Configurations Built
+      - iMX25 based product line 
+      - Android (armeabi, arm64-v8a, x86, x86_64)
+      - WinCe (ARMV4, built on June 2016, 23rd)
+
+2016.02.984 --------01.APR.2016---------------------------------------------------------------
+   Standard build based on 2015.12.968
+      - Bugfix DecodeSet return value with some properties (W10MDEV-1061)
+      - Added support for Russian National ID OCR 
+   Included software components:
+      - ID  2016.02.1859
+      - FLD 2014.12.144
+   Configurations Built
+      - Win8 ARM (ID only)
+
+2016.02.972 --------23.FEB.2016---------------------------------------------------------------
+   Custom cross compiler build for Landi (LN1 config)
+   Swift build (16.2.1)
+   No FLD
+   In SwiftDecoderLinuxApi build for Landi
+   EWR 18705
+
+2016.02.968 --------23.FEB.2016---------------------------------------------------------------
+   Standard build based on 2015.12.939
+   Included software components:
+      - ID  2016.02.1859
+      - FLD 2014.12.144
+
+2016.01.951 --------22.DEC.2016---------------------------------------------------------------
+   Beta build for DPM (santorini project) based on 2015.12.939 
+      - Added DPM settings.
+   
+2015.12.939 --------11.DEC.2015---------------------------------------------------------------
+   Standard build based on 2015.12.932
+      - Fixed Maxicode issue in case of no primary message (ARS-859).
+   Included software components:
+      - ID  2015.12.1730
+      - FLD 2014.12.144
+
+2015.12.932 --------01.DEC.2015---------------------------------------------------------------
+   Standard build based on 2015.09.924
+      - Added DEC_MIN_PPM_1D and DEC_MIN_PPM_2D properties to check barcode resolution in the image
+      - Bugfix where HHPModifier wasn't set as expected for some FLD symbologies (ARS-643, ARS-593, ARS-624)
+   Included software components:
+      - ID  2015.12.1708
+      - FLD 2014.12.144
+
+2015.11.927 --------11.NOV.2015---------------------------------------------------------------
+   IOS specific build changes ONLY to support bitcode.
+
+2015.10.924 --------23.OCT.2015---------------------------------------------------------------
+   Standard build based on 2015.09.876
+      - Enable by default DEC_EAN13_ISBN_IDS_ENABLED (ARS-359, ARS-584, ARS-374)
+      - Fixed double read on Code128 append (LIFOU-56, 1452G-125)
+   Included software components:
+      - ID  2015.10.1641
+      - FLD 2014.12.144
+
+2015.10.921 --------23.OCT.2015---------------------------------------------------------------
+   Custom build based on 2015.10.912 for i.MX25 for Halcyon Island
+      - Enable by default DEC_EAN13_ISBN_IDS_ENABLED (ARS-359, ARS-584, ARS-374)
+      - Fixed double read on Code128 append (LIFOU-56, 1452G-125)
+   Included software components:
+      - ID  2015.10.1641
+      - FLD 2015.10.226
+
+2015.10.912 --------16.OCT.2015---------------------------------------------------------------
+   Custom build based on 2015.10.909 for i.MX25 for Halcyon Island
+      - Updated i.MX configurations of FLD to 2015.10.222 (custom build for Halcyon Island)
+   Included software components:
+      - ID  2015.10.1605
+      - FLD 2015.10.222
+
+2015.10.909 --------15.OCT.2015---------------------------------------------------------------
+   Custom build based on 2015.10.906 for i.MX25 for Halcyon Island
+      - Updated i.MX configurations of FLD to 2015.10.219 (custom build for Halcyon Island)
+      - As a 2nd Vesta filter is activated to improve reading distances, Vesta is no more activated in ID.
+   Included software components:
+      - ID  2015.10.1605
+      - FLD 2015.10.219
+
+2015.10.906 --------14.OCT.2015---------------------------------------------------------------
+   Custom build based on 2015.10.902 for i.MX25 for Halcyon Island
+      - When Vesta is active, Vesta is used in FLD and also in ID
+   Included software components:
+      - ID  2015.10.1605
+      - FLD 2015.10.216
+
+2015.10.902 --------12.OCT.2015---------------------------------------------------------------
+   Custom build based on 2015.09.898 for i.MX25 for Halcyon Island
+      - Updated i.MX configurations of ID to 2015.10.1605 (custom build for Halcyon Island)
+      - Updated i.MX configurations of FLD to 2015.10.216 (custom build for Halcyon Island)
+      - Added DEC_MIN_PPM_1D (0x1A003008) and DEC_MIN_PPM_2D (0x1A003009) properties to check
+        minimum resolution of the decoded barcodes (1D/2D)
+   Included software components:
+      - ID  2015.10.1605
+      - FLD 2015.10.216
+
+2015.10.898 --------07.OCT.2015---------------------------------------------------------------	
+   Tagged as 899
+   Tag created for Swift Mobile, most specifically to support x86 builds on Android.
+   Included software components:
+      - NONE
+      - Loosely packaged with Swift version 15.10.2015 - 1360 via DecodeComponent
+      - No FLD in Swift Mobile
+ 
+2015.09.888 --------15.SEP.2015---------------------------------------------------------------
+   Custom build based on 2015.09.876 for i.MX25 for Copernic
+      - Updated i.MX configurations of ID to 2015.09.1582 (custom build for Copernic)
+      - Accept up to 4 non-alpha characters on the first row   
+      - Modified checksum on the second row to accept empty expiry date.   
+      - EWR 17006 
+   Included software components:
+      - ID  2015.08.1545
+      - FLD 2014.12.144
+
+2015.09.876 --------02.SEP.2015---------------------------------------------------------------
+   Standard build based on 2015.09.865
+      - OCR passport reading release for Busicom
+      - Updated i.MX configurations of ID to 2015.09.1576 (additional OCR travel doc bug fix)
+      - NG2D-1933: Fixed Aztec and QR Code append issue (no read of config barcode when Enable)
+   Included software components:
+      - ID  2015.08.1576
+      - FLD 2014.12.144
+   
+2015.09.865 --------10.AUG.2015---------------------------------------------------------------
+   Standard build based on 2015.09.858
+      - Updated i.MX configurations of ID to 2015.08.1545 (additional OCR passport bug fix)
+      - EWR 16080: Busicom Xenon/1900 passport reading
+   Included software components:
+      - ID  2015.08.1545
+      - FLD 2014.12.144
+    
+2015.09.858 --------07.AUG.2015---------------------------------------------------------------
+   Standard build based on 2015.09.852
+      - Updated i.MX configurations of ID to 2015.08.1532
+      - Fixed bug in OCR user template processing that prevented the block checksum feature from working properly
+      - Improvements to passport template processing
+      - EWR 16080: Busicom Xenon/1900 passport reading
+      - NG2D-1921: OCR (couldn't decode checksum)
+   Included software components:
+      - ID  2015.08.1532
+      - FLD 2014.12.144
+
+2015.09.852 --------06.AUG.2015---------------------------------------------------------------
+   Custom build based on 2015.09.847
+      - Updated i.MX configurations of ID to 2015.08.1523
+      - EWR 16080: Busicom Xenon/1900 passport reading
+   Included software components:
+      - ID  2015.08.1523
+      - FLD 2014.12.144
+
+2015.09.847-------05.AUG.2015---------------------------------------------------------------
+   Custom build
+      - Updated i.MX configurations of ID to 2015.08.1519
+      - EWR 16080: Busicom Xenon/1900 passport reading
+   Included software components:
+      - ID  2015.08.1519
+      - FLD 2014.12.144
+      
+2015.09.822-----04.AUG.2015---------------------------------------------------------------
+   Standard build based on 2015.09.788
+      - Changed the internal mapping of the DEC_SECURITY_LEVEL property values to relax the Integrated Decoder's 
+        external boundary check.  The default value of 2 was causing issues decoding some bar codes at the near-end 
+        of the depth-of-field.
+      - Reduced near-field scanning of 20 mil Code 39 (no associated JIRA issue)
+   Included software components:
+      - ID  2015.08.1351
+      - FLD 2014.12.144
+
+2015.04.791-----08.APR.2015---------------------------------------------------------------
+   Custom build based on 2013.10.577
+      - Updated Decoder - started with 2013.4.702 and added the ability to configure for a LUHN checksum on numeric data.
+      - OCR Passport Security - adjust the number of images allowed between passport row reads. Default is 3 images.
+      - OCR Numeric LUHN Checksum - new configuration (control character 16 in user template) 
+      - EWR-14949: Include a LUHN checksum for numeric data for Adaptus backward compatability
+   Included software components:
+      - ID  2015.08.1369
+      - FLD 2012.12.103
+
+2015.03.788-----23.MAR.2015---------------------------------------------------------------
+   Standard build based on 2015.09.786
+      - Incorporation of 1351 ID Decoder
+      - Added DEC_USE_VESTA and DEC_PDF417_ENHANCED_DAMAGE_HANDLING? settings (see corresponding SD_* equivalent in 
+        ID documentation)
+      - Added boundary check to DEC_SECURITY_LEVEL
+      - Disable GS1-128 in FLD if composites are enabled to avoid conflict
+      - Fix for VIDREV2 which caused normal video reading to be disabled
+      - Fix to DEC_UPCA_ENABLE no longer requiring special order
+      - Fix to ISBN where certain supplements were suppressed (JIRA DCL1-116)
+   Included software components:
+      - ID  2015.08.1351
+      - FLD 2014.12.144
+
+2014.12.735-----05.DEC.2014---------------------------------------------------------------
+   Standard build based on 2014.10.713
+      - **IMPORTANT API CHANGE **
+         DEC_UPCA_ENABLE (which is tied to UPBENA in the Xenon menuing interface). 
+         DEC_UPCA_ENABLED is tied to UPAENA still, but the logic has been inverted.
+         Previously DEC_UPCA_ENABLED = UPAENA. 
+         With this release: DEC_UPCA_ENABLED = !UPAENA.
+         a new tag DEC_UPCA_TRANSLATE_TO_EAN13 was added with the same value as DEC_UPCA_ENABLED with the intent of 
+         backward compatibility. That's failed with the logic change, but the new macro describes DEC_UPCA_ENABLED's 
+         (and therefore UPAENA's) actual functionality, which was a translate to an EAN13 symbology. 
+      - ** INTEGRATION CONSIDERATIONS **
+         when moving to this release, you must invert your logic for the data that is tied to DEC_UPCA_ENABLED.
+         So for example in DecodeIFace.cpp for Xenon code, the previous setup was:
+            DecodeSet(DEC_UPCA_ENABLED, (void *)GET_SETTING(UPCAEnable));
+         So the minimal required change is this: 
+            DecodeSet(DEC_UPCA_ENABLE?D, (void *)!GET_SETTING(UPCAEnable));
+         with the preferred change to be: 
+            DecodeSet(DEC_UPCA_TRANSLATE_TO_EAN13, (void *)!GET_SETTING(UPCAEnable));?
+
+         Table to outline expected results when reading a UPC-A code:
+         UPBENA  UPAENA  E13ENA     RESULT
+            0       0       0       NR (No Read)
+            0       0       1       NR
+            0       1       0       NR
+            0       1       1       NR
+            1       0       0       NR
+            1       0       1       EAN-13
+            1       1       0       UPC-A
+            1       1       1       UPC-A
+      - Incorporation of 1198 ID Decoder
+      - Moved GS1 handing from FLD to DCL. Now will function exactly as ID does.
+      - Added Code 128 security level.
+      - 145XG-133: Fixed GS1 databar handling in terms of coupon codes.
+   Included software components:
+      - ID  2014.12.1198
+      - FLD 2014.12.144
+
+2014.10.713-----07.OCT.2014---------------------------------------------------------------
+   Standard build 
+      - Incorporation of 1142 ID Decoder 
+      - Incorporation of 144 FLD decoder
+   Included software components:
+      - ID  2014.10.1142
+      - FLD 2014.12.136
+
+2013.10.577-----01.OCT.2013---------------------------------------------------------------
+   Standard build based on 2013.06.564
+      - Improved handling of Passport TD-1.
+      - fixed issue with video reverse if a timer was not installed. 
+      - Improved handling of passports overall.
+      - Improved security of passport handling.
+      - EWR-09501: OCR passport TD-1 mismatching/misreading.
+   Included software components:
+      - ID  2013.04.702
+      - FLD 2012.12.103
+      
+2013.06.564-----17.JUN.2013---------------------------------------------------------------
+   Standard build based on 2013.04.554
+      - Update for EWR 09415 to add control so Micro QR has a different HHP Code ID (a dash instead of 's'). 
+   Included software components:
+      - ID  2013.04.702
+      - FLD 2012.12.103
+
+2013.04.554-----26.APR.2013---------------------------------------------------------------
+   Standard build based on 2013.03.511
+      - Incorporation of 702 ID Decoder 
+      - Incorporation of 103 FLD decoder
+      - Fix for Code 128 append AIM modifier.
+      - Fix for Aztec Append from JIRA 7580R-36.
+      - Change to defaults for coupon code and composite combines. Now both enabled by default so platforms 
+        need to be conscious of that. 
+   Included software components:
+      - ID  2013.04.702
+      - FLD 2012.12.103
+
+2013.03.511-----11.MAR.2013---------------------------------------------------------------
+   Standard build based on 2012.12.494
+      - Incorporation of 698 ID Decoder
+      - Moved API define for Code Z enabled from AdaptusSettings.h to DecoderSettings.h, 
+        since it is part of FLD in this version.    
+      - Fix for TLC 39 non-reading (DSVS8-344)
+      - Support for HIBC Append
+      - EWR-08680: French ID Card Support        
+   Included software components:
+      - ID  2013.03.698
+      - FLD 2012.12.103
+
+2012.12.494-----13.DEC.2012---------------------------------------------------------------
+   Standard build based on 2012.11.475
+      - Incorporation of 685 ID Decoder
+      - Added dump settings functionality: This is a diagnostic that we can use to show each level 
+        of decoder settings and allow us to compare dumps from different units and setups.
+   Included software components:
+      - ID  2012.12.685
+      - FLD 2012.12.103
+
+2012.11.475-----05.NOV.2012---------------------------------------------------------------
+   Standard build
+      - Added defaults for decoder that typically are not set on all platforms so that default performance 
+        will be similar across platforms.
+      - Removed heap usage. Some removed, some moved to stack (increased by MAX_OCR_TEMPLATE_lENGTH, which 
+        also puts the restriction on the length of the user template for OCR), the rest moved to static memory 
+        (the bulk of which is MAX_STORED_RESULTS*MAX_DECODED_DATA_LENGTH, now doubled).
+      - Fixed Macro PDF handling to allow for any length PDF control block. Now limit of 10 codewords are used 
+        for the unique sequence ID.
+      - EWR-07174: Fixed Codabar Concat for WINCE platform.
+      - Changed MAX_STORED_RESULT total from 10 to 12 (adding 2*MAX_DECODED_DATA_LENGTH to static memory) to 
+        handle 12 piece Aztec Append use case natively.
+      - Added new append modes to Aztec and QR.
+      - Fixed EAN-13 ISBN handling for certain appends with certain data.
+      - Fixed label code conversion for WINCE platform, which the decoder now has built in.
+      - Added linear video reverse pixel shift to allow reading of darker images.
+      - Changed Result Notify callback status flag meaning. Now flag shows which append is being built for all 
+        types of appends, which allows the distinction of "point and shoot" and "swipe" modes for Gen 6 scanner 
+        platforms.
+   Included software components:
+      - ID  2012.11.671
+      - FLD 1.29.1.1
