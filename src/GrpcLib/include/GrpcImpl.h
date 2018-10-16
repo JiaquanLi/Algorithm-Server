@@ -46,9 +46,10 @@ public:
 	Status SetIcpTemplet(ServerContext* context, ServerReader<TempletFileRequest>* reader,TempletFileReply* reply) override ;
 
 	Status RouteChat(ServerContext* context, ServerReaderWriter<RouteNote, RouteNote>* stream) override ;
-
 	
 	Status SetIcpMaxIterations(ServerContext* context, const IcpMaxIterationsRequest* request, IcpMaxIterationsReply* reply) override ;
+	//SetIcpFilter
+	Status SetIcpFilter(ServerContext* context, const IcpFilterRequest* request, IcpFilterReply* reply) override ;
 
 private:
 	ApiPCL objPcl;

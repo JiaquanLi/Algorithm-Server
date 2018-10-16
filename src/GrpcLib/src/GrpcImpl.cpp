@@ -6,7 +6,7 @@
 
 #include"GrpcImpl.h"
 
-
+//#define RPC_PCL_DEBUG	0
 #define TARGET_FILE   "target.txt"
 #define TEMPLET_FILE  "templet.txt"
 
@@ -50,19 +50,31 @@ Status RouteGuideImpl::RouteChat(ServerContext* context,
 
 	//char* targetFile = (char*)"target.txt";
 	//char* templetFile = (char*)"templet.txt";
+	RouteNote server_note;
+	RouteNote note;
+
+#ifdef RPC_PCL_DEBUG  //we will not update target file in debug model
+	while (stream->Read(&note)) {
+	
+	}
+	std::cout << "In debug model use local file: " <<TARGET_FILE<< std::endl;
+#else	
 	long fileSize = 0;
 	FILE* fileSave;
 	fileSave = fopen(TARGET_FILE, "wb+");
-	RouteNote server_note;
-	RouteNote note;
+
+
 	while (stream->Read(&note)) {
+
 		//stream->Write(note);
 		fwrite((void*)note.datasend().c_str(), note.size(), 1, fileSave);
 		fileSize += note.size();
 		//std::cout << "GetMessage" << note.datasend().c_str() << "size:" << note.size() << std::endl;
+	
 	}
 	fclose(fileSave);
 	std::cout << "Get Target File " << "size:" << fileSize << std::endl;
+#endif	
 
 	char tempMsg[500];
 	memset(tempMsg, '\0', 500);
@@ -80,7 +92,15 @@ Status RouteGuideImpl::RouteChat(ServerContext* context,
 Status RouteGuideImpl::SetIcpMaxIterations(ServerContext* context, const IcpMaxIterationsRequest* request, IcpMaxIterationsReply* reply) {
 
 	objPcl.SetMaxIterations(request->maxiterations());
-	std::cout << "request->maxiterations() " << request->maxiterations() << std::endl;
+	std::cout << "request->maxiterations(): " << request->maxiterations() << std::endl;
+	reply->set_retsts(true);
+	return Status::OK;
+}
+
+Status RouteGuideImpl::SetIcpFilter(ServerContext* context, const IcpFilterRequest* request, IcpFilterReply* reply) {
+
+	objPcl.SetIcpFilter(request->filter());
+	std::cout << "request->filter(): " << request->filter() << std::endl;
 	reply->set_retsts(true);
 	return Status::OK;
 }

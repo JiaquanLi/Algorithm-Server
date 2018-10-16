@@ -38,7 +38,7 @@ namespace protobuf_route_5fguide_2eproto {
 struct TableStruct {
   static const ::google::protobuf::internal::ParseTableField entries[];
   static const ::google::protobuf::internal::AuxillaryParseTableField aux[];
-  static const ::google::protobuf::internal::ParseTable schema[9];
+  static const ::google::protobuf::internal::ParseTable schema[11];
   static const ::google::protobuf::internal::FieldMetadata field_metadata[];
   static const ::google::protobuf::internal::SerializationTable serialization_table[];
   static const ::google::protobuf::uint32 offsets[];
@@ -46,6 +46,12 @@ struct TableStruct {
 void AddDescriptors();
 }  // namespace protobuf_route_5fguide_2eproto
 namespace routeguide {
+class IcpFilterReply;
+class IcpFilterReplyDefaultTypeInternal;
+extern IcpFilterReplyDefaultTypeInternal _IcpFilterReply_default_instance_;
+class IcpFilterRequest;
+class IcpFilterRequestDefaultTypeInternal;
+extern IcpFilterRequestDefaultTypeInternal _IcpFilterRequest_default_instance_;
 class IcpMaxIterationsReply;
 class IcpMaxIterationsReplyDefaultTypeInternal;
 extern IcpMaxIterationsReplyDefaultTypeInternal _IcpMaxIterationsReply_default_instance_;
@@ -76,6 +82,8 @@ extern TempletFileRequestDefaultTypeInternal _TempletFileRequest_default_instanc
 }  // namespace routeguide
 namespace google {
 namespace protobuf {
+template<> ::routeguide::IcpFilterReply* Arena::CreateMaybeMessage<::routeguide::IcpFilterReply>(Arena*);
+template<> ::routeguide::IcpFilterRequest* Arena::CreateMaybeMessage<::routeguide::IcpFilterRequest>(Arena*);
 template<> ::routeguide::IcpMaxIterationsReply* Arena::CreateMaybeMessage<::routeguide::IcpMaxIterationsReply>(Arena*);
 template<> ::routeguide::IcpMaxIterationsRequest* Arena::CreateMaybeMessage<::routeguide::IcpMaxIterationsRequest>(Arena*);
 template<> ::routeguide::LisenceInfoReply* Arena::CreateMaybeMessage<::routeguide::LisenceInfoReply>(Arena*);
@@ -636,6 +644,212 @@ class IcpMaxIterationsReply : public ::google::protobuf::Message /* @@protoc_ins
 };
 // -------------------------------------------------------------------
 
+class IcpFilterRequest : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:routeguide.IcpFilterRequest) */ {
+ public:
+  IcpFilterRequest();
+  virtual ~IcpFilterRequest();
+
+  IcpFilterRequest(const IcpFilterRequest& from);
+
+  inline IcpFilterRequest& operator=(const IcpFilterRequest& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  IcpFilterRequest(IcpFilterRequest&& from) noexcept
+    : IcpFilterRequest() {
+    *this = ::std::move(from);
+  }
+
+  inline IcpFilterRequest& operator=(IcpFilterRequest&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const IcpFilterRequest& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const IcpFilterRequest* internal_default_instance() {
+    return reinterpret_cast<const IcpFilterRequest*>(
+               &_IcpFilterRequest_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    5;
+
+  void Swap(IcpFilterRequest* other);
+  friend void swap(IcpFilterRequest& a, IcpFilterRequest& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline IcpFilterRequest* New() const final {
+    return CreateMaybeMessage<IcpFilterRequest>(NULL);
+  }
+
+  IcpFilterRequest* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<IcpFilterRequest>(arena);
+  }
+  void CopyFrom(const ::google::protobuf::Message& from) final;
+  void MergeFrom(const ::google::protobuf::Message& from) final;
+  void CopyFrom(const IcpFilterRequest& from);
+  void MergeFrom(const IcpFilterRequest& from);
+  void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) final;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const final;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(IcpFilterRequest* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // float filter = 1;
+  void clear_filter();
+  static const int kFilterFieldNumber = 1;
+  float filter() const;
+  void set_filter(float value);
+
+  // @@protoc_insertion_point(class_scope:routeguide.IcpFilterRequest)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  float filter_;
+  mutable ::google::protobuf::internal::CachedSize _cached_size_;
+  friend struct ::protobuf_route_5fguide_2eproto::TableStruct;
+};
+// -------------------------------------------------------------------
+
+class IcpFilterReply : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:routeguide.IcpFilterReply) */ {
+ public:
+  IcpFilterReply();
+  virtual ~IcpFilterReply();
+
+  IcpFilterReply(const IcpFilterReply& from);
+
+  inline IcpFilterReply& operator=(const IcpFilterReply& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  IcpFilterReply(IcpFilterReply&& from) noexcept
+    : IcpFilterReply() {
+    *this = ::std::move(from);
+  }
+
+  inline IcpFilterReply& operator=(IcpFilterReply&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const IcpFilterReply& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const IcpFilterReply* internal_default_instance() {
+    return reinterpret_cast<const IcpFilterReply*>(
+               &_IcpFilterReply_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    6;
+
+  void Swap(IcpFilterReply* other);
+  friend void swap(IcpFilterReply& a, IcpFilterReply& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline IcpFilterReply* New() const final {
+    return CreateMaybeMessage<IcpFilterReply>(NULL);
+  }
+
+  IcpFilterReply* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<IcpFilterReply>(arena);
+  }
+  void CopyFrom(const ::google::protobuf::Message& from) final;
+  void MergeFrom(const ::google::protobuf::Message& from) final;
+  void CopyFrom(const IcpFilterReply& from);
+  void MergeFrom(const IcpFilterReply& from);
+  void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) final;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const final;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(IcpFilterReply* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // bool retsts = 1;
+  void clear_retsts();
+  static const int kRetstsFieldNumber = 1;
+  bool retsts() const;
+  void set_retsts(bool value);
+
+  // @@protoc_insertion_point(class_scope:routeguide.IcpFilterReply)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  bool retsts_;
+  mutable ::google::protobuf::internal::CachedSize _cached_size_;
+  friend struct ::protobuf_route_5fguide_2eproto::TableStruct;
+};
+// -------------------------------------------------------------------
+
 class ServerInfoReply : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:routeguide.ServerInfoReply) */ {
  public:
   ServerInfoReply();
@@ -671,7 +885,7 @@ class ServerInfoReply : public ::google::protobuf::Message /* @@protoc_insertion
                &_ServerInfoReply_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    5;
+    7;
 
   void Swap(ServerInfoReply* other);
   friend void swap(ServerInfoReply& a, ServerInfoReply& b) {
@@ -812,7 +1026,7 @@ class ServerInfoRequest : public ::google::protobuf::Message /* @@protoc_inserti
                &_ServerInfoRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    6;
+    8;
 
   void Swap(ServerInfoRequest* other);
   friend void swap(ServerInfoRequest& a, ServerInfoRequest& b) {
@@ -923,7 +1137,7 @@ class LisenceInfoReply : public ::google::protobuf::Message /* @@protoc_insertio
                &_LisenceInfoReply_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    7;
+    9;
 
   void Swap(LisenceInfoReply* other);
   friend void swap(LisenceInfoReply& a, LisenceInfoReply& b) {
@@ -1041,7 +1255,7 @@ class LisenceInfoRequest : public ::google::protobuf::Message /* @@protoc_insert
                &_LisenceInfoRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    8;
+    10;
 
   void Swap(LisenceInfoRequest* other);
   friend void swap(LisenceInfoRequest& a, LisenceInfoRequest& b) {
@@ -1316,6 +1530,42 @@ inline void IcpMaxIterationsReply::set_retsts(bool value) {
   
   retsts_ = value;
   // @@protoc_insertion_point(field_set:routeguide.IcpMaxIterationsReply.retsts)
+}
+
+// -------------------------------------------------------------------
+
+// IcpFilterRequest
+
+// float filter = 1;
+inline void IcpFilterRequest::clear_filter() {
+  filter_ = 0;
+}
+inline float IcpFilterRequest::filter() const {
+  // @@protoc_insertion_point(field_get:routeguide.IcpFilterRequest.filter)
+  return filter_;
+}
+inline void IcpFilterRequest::set_filter(float value) {
+  
+  filter_ = value;
+  // @@protoc_insertion_point(field_set:routeguide.IcpFilterRequest.filter)
+}
+
+// -------------------------------------------------------------------
+
+// IcpFilterReply
+
+// bool retsts = 1;
+inline void IcpFilterReply::clear_retsts() {
+  retsts_ = false;
+}
+inline bool IcpFilterReply::retsts() const {
+  // @@protoc_insertion_point(field_get:routeguide.IcpFilterReply.retsts)
+  return retsts_;
+}
+inline void IcpFilterReply::set_retsts(bool value) {
+  
+  retsts_ = value;
+  // @@protoc_insertion_point(field_set:routeguide.IcpFilterReply.retsts)
 }
 
 // -------------------------------------------------------------------
@@ -1669,6 +1919,10 @@ inline void LisenceInfoRequest::set_allocated_clientlicense(::std::string* clien
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

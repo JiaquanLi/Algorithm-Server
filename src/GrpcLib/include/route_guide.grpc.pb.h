@@ -82,6 +82,14 @@ class RouteGuide final {
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::routeguide::IcpMaxIterationsReply>> PrepareAsyncSetIcpMaxIterations(::grpc::ClientContext* context, const ::routeguide::IcpMaxIterationsRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::routeguide::IcpMaxIterationsReply>>(PrepareAsyncSetIcpMaxIterationsRaw(context, request, cq));
     }
+    // set SetIcpFilter
+    virtual ::grpc::Status SetIcpFilter(::grpc::ClientContext* context, const ::routeguide::IcpFilterRequest& request, ::routeguide::IcpFilterReply* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::routeguide::IcpFilterReply>> AsyncSetIcpFilter(::grpc::ClientContext* context, const ::routeguide::IcpFilterRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::routeguide::IcpFilterReply>>(AsyncSetIcpFilterRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::routeguide::IcpFilterReply>> PrepareAsyncSetIcpFilter(::grpc::ClientContext* context, const ::routeguide::IcpFilterRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::routeguide::IcpFilterReply>>(PrepareAsyncSetIcpFilterRaw(context, request, cq));
+    }
     virtual ::grpc::Status CheckServer(::grpc::ClientContext* context, const ::routeguide::ServerInfoRequest& request, ::routeguide::ServerInfoReply* response) = 0;
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::routeguide::ServerInfoReply>> AsyncCheckServer(::grpc::ClientContext* context, const ::routeguide::ServerInfoRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::routeguide::ServerInfoReply>>(AsyncCheckServerRaw(context, request, cq));
@@ -105,6 +113,8 @@ class RouteGuide final {
     virtual ::grpc::ClientAsyncWriterInterface< ::routeguide::TempletFileRequest>* PrepareAsyncSetIcpTempletRaw(::grpc::ClientContext* context, ::routeguide::TempletFileReply* response, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::routeguide::IcpMaxIterationsReply>* AsyncSetIcpMaxIterationsRaw(::grpc::ClientContext* context, const ::routeguide::IcpMaxIterationsRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::routeguide::IcpMaxIterationsReply>* PrepareAsyncSetIcpMaxIterationsRaw(::grpc::ClientContext* context, const ::routeguide::IcpMaxIterationsRequest& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::routeguide::IcpFilterReply>* AsyncSetIcpFilterRaw(::grpc::ClientContext* context, const ::routeguide::IcpFilterRequest& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::routeguide::IcpFilterReply>* PrepareAsyncSetIcpFilterRaw(::grpc::ClientContext* context, const ::routeguide::IcpFilterRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::routeguide::ServerInfoReply>* AsyncCheckServerRaw(::grpc::ClientContext* context, const ::routeguide::ServerInfoRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::routeguide::ServerInfoReply>* PrepareAsyncCheckServerRaw(::grpc::ClientContext* context, const ::routeguide::ServerInfoRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::routeguide::LisenceInfoReply>* AsyncCheckLisenceRaw(::grpc::ClientContext* context, const ::routeguide::LisenceInfoRequest& request, ::grpc::CompletionQueue* cq) = 0;
@@ -138,6 +148,13 @@ class RouteGuide final {
     std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::routeguide::IcpMaxIterationsReply>> PrepareAsyncSetIcpMaxIterations(::grpc::ClientContext* context, const ::routeguide::IcpMaxIterationsRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::routeguide::IcpMaxIterationsReply>>(PrepareAsyncSetIcpMaxIterationsRaw(context, request, cq));
     }
+    ::grpc::Status SetIcpFilter(::grpc::ClientContext* context, const ::routeguide::IcpFilterRequest& request, ::routeguide::IcpFilterReply* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::routeguide::IcpFilterReply>> AsyncSetIcpFilter(::grpc::ClientContext* context, const ::routeguide::IcpFilterRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::routeguide::IcpFilterReply>>(AsyncSetIcpFilterRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::routeguide::IcpFilterReply>> PrepareAsyncSetIcpFilter(::grpc::ClientContext* context, const ::routeguide::IcpFilterRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::routeguide::IcpFilterReply>>(PrepareAsyncSetIcpFilterRaw(context, request, cq));
+    }
     ::grpc::Status CheckServer(::grpc::ClientContext* context, const ::routeguide::ServerInfoRequest& request, ::routeguide::ServerInfoReply* response) override;
     std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::routeguide::ServerInfoReply>> AsyncCheckServer(::grpc::ClientContext* context, const ::routeguide::ServerInfoRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::routeguide::ServerInfoReply>>(AsyncCheckServerRaw(context, request, cq));
@@ -163,6 +180,8 @@ class RouteGuide final {
     ::grpc::ClientAsyncWriter< ::routeguide::TempletFileRequest>* PrepareAsyncSetIcpTempletRaw(::grpc::ClientContext* context, ::routeguide::TempletFileReply* response, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::routeguide::IcpMaxIterationsReply>* AsyncSetIcpMaxIterationsRaw(::grpc::ClientContext* context, const ::routeguide::IcpMaxIterationsRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::routeguide::IcpMaxIterationsReply>* PrepareAsyncSetIcpMaxIterationsRaw(::grpc::ClientContext* context, const ::routeguide::IcpMaxIterationsRequest& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::routeguide::IcpFilterReply>* AsyncSetIcpFilterRaw(::grpc::ClientContext* context, const ::routeguide::IcpFilterRequest& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::routeguide::IcpFilterReply>* PrepareAsyncSetIcpFilterRaw(::grpc::ClientContext* context, const ::routeguide::IcpFilterRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::routeguide::ServerInfoReply>* AsyncCheckServerRaw(::grpc::ClientContext* context, const ::routeguide::ServerInfoRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::routeguide::ServerInfoReply>* PrepareAsyncCheckServerRaw(::grpc::ClientContext* context, const ::routeguide::ServerInfoRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::routeguide::LisenceInfoReply>* AsyncCheckLisenceRaw(::grpc::ClientContext* context, const ::routeguide::LisenceInfoRequest& request, ::grpc::CompletionQueue* cq) override;
@@ -170,6 +189,7 @@ class RouteGuide final {
     const ::grpc::internal::RpcMethod rpcmethod_RouteChat_;
     const ::grpc::internal::RpcMethod rpcmethod_SetIcpTemplet_;
     const ::grpc::internal::RpcMethod rpcmethod_SetIcpMaxIterations_;
+    const ::grpc::internal::RpcMethod rpcmethod_SetIcpFilter_;
     const ::grpc::internal::RpcMethod rpcmethod_CheckServer_;
     const ::grpc::internal::RpcMethod rpcmethod_CheckLisence_;
   };
@@ -189,6 +209,8 @@ class RouteGuide final {
     virtual ::grpc::Status SetIcpTemplet(::grpc::ServerContext* context, ::grpc::ServerReader< ::routeguide::TempletFileRequest>* reader, ::routeguide::TempletFileReply* response);
     // set MaximumIterations
     virtual ::grpc::Status SetIcpMaxIterations(::grpc::ServerContext* context, const ::routeguide::IcpMaxIterationsRequest* request, ::routeguide::IcpMaxIterationsReply* response);
+    // set SetIcpFilter
+    virtual ::grpc::Status SetIcpFilter(::grpc::ServerContext* context, const ::routeguide::IcpFilterRequest* request, ::routeguide::IcpFilterReply* response);
     virtual ::grpc::Status CheckServer(::grpc::ServerContext* context, const ::routeguide::ServerInfoRequest* request, ::routeguide::ServerInfoReply* response);
     virtual ::grpc::Status CheckLisence(::grpc::ServerContext* context, const ::routeguide::LisenceInfoRequest* request, ::routeguide::LisenceInfoReply* response);
   };
@@ -253,12 +275,32 @@ class RouteGuide final {
     }
   };
   template <class BaseClass>
+  class WithAsyncMethod_SetIcpFilter : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithAsyncMethod_SetIcpFilter() {
+      ::grpc::Service::MarkMethodAsync(3);
+    }
+    ~WithAsyncMethod_SetIcpFilter() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status SetIcpFilter(::grpc::ServerContext* context, const ::routeguide::IcpFilterRequest* request, ::routeguide::IcpFilterReply* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestSetIcpFilter(::grpc::ServerContext* context, ::routeguide::IcpFilterRequest* request, ::grpc::ServerAsyncResponseWriter< ::routeguide::IcpFilterReply>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(3, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
   class WithAsyncMethod_CheckServer : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_CheckServer() {
-      ::grpc::Service::MarkMethodAsync(3);
+      ::grpc::Service::MarkMethodAsync(4);
     }
     ~WithAsyncMethod_CheckServer() override {
       BaseClassMustBeDerivedFromService(this);
@@ -269,7 +311,7 @@ class RouteGuide final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestCheckServer(::grpc::ServerContext* context, ::routeguide::ServerInfoRequest* request, ::grpc::ServerAsyncResponseWriter< ::routeguide::ServerInfoReply>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(3, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(4, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -278,7 +320,7 @@ class RouteGuide final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_CheckLisence() {
-      ::grpc::Service::MarkMethodAsync(4);
+      ::grpc::Service::MarkMethodAsync(5);
     }
     ~WithAsyncMethod_CheckLisence() override {
       BaseClassMustBeDerivedFromService(this);
@@ -289,10 +331,10 @@ class RouteGuide final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestCheckLisence(::grpc::ServerContext* context, ::routeguide::LisenceInfoRequest* request, ::grpc::ServerAsyncResponseWriter< ::routeguide::LisenceInfoReply>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(4, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(5, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
-  typedef WithAsyncMethod_RouteChat<WithAsyncMethod_SetIcpTemplet<WithAsyncMethod_SetIcpMaxIterations<WithAsyncMethod_CheckServer<WithAsyncMethod_CheckLisence<Service > > > > > AsyncService;
+  typedef WithAsyncMethod_RouteChat<WithAsyncMethod_SetIcpTemplet<WithAsyncMethod_SetIcpMaxIterations<WithAsyncMethod_SetIcpFilter<WithAsyncMethod_CheckServer<WithAsyncMethod_CheckLisence<Service > > > > > > AsyncService;
   template <class BaseClass>
   class WithGenericMethod_RouteChat : public BaseClass {
    private:
@@ -345,12 +387,29 @@ class RouteGuide final {
     }
   };
   template <class BaseClass>
+  class WithGenericMethod_SetIcpFilter : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithGenericMethod_SetIcpFilter() {
+      ::grpc::Service::MarkMethodGeneric(3);
+    }
+    ~WithGenericMethod_SetIcpFilter() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status SetIcpFilter(::grpc::ServerContext* context, const ::routeguide::IcpFilterRequest* request, ::routeguide::IcpFilterReply* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+  };
+  template <class BaseClass>
   class WithGenericMethod_CheckServer : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_CheckServer() {
-      ::grpc::Service::MarkMethodGeneric(3);
+      ::grpc::Service::MarkMethodGeneric(4);
     }
     ~WithGenericMethod_CheckServer() override {
       BaseClassMustBeDerivedFromService(this);
@@ -367,7 +426,7 @@ class RouteGuide final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_CheckLisence() {
-      ::grpc::Service::MarkMethodGeneric(4);
+      ::grpc::Service::MarkMethodGeneric(5);
     }
     ~WithGenericMethod_CheckLisence() override {
       BaseClassMustBeDerivedFromService(this);
@@ -439,12 +498,32 @@ class RouteGuide final {
     }
   };
   template <class BaseClass>
+  class WithRawMethod_SetIcpFilter : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithRawMethod_SetIcpFilter() {
+      ::grpc::Service::MarkMethodRaw(3);
+    }
+    ~WithRawMethod_SetIcpFilter() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status SetIcpFilter(::grpc::ServerContext* context, const ::routeguide::IcpFilterRequest* request, ::routeguide::IcpFilterReply* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestSetIcpFilter(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(3, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
   class WithRawMethod_CheckServer : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithRawMethod_CheckServer() {
-      ::grpc::Service::MarkMethodRaw(3);
+      ::grpc::Service::MarkMethodRaw(4);
     }
     ~WithRawMethod_CheckServer() override {
       BaseClassMustBeDerivedFromService(this);
@@ -455,7 +534,7 @@ class RouteGuide final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestCheckServer(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(3, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(4, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -464,7 +543,7 @@ class RouteGuide final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithRawMethod_CheckLisence() {
-      ::grpc::Service::MarkMethodRaw(4);
+      ::grpc::Service::MarkMethodRaw(5);
     }
     ~WithRawMethod_CheckLisence() override {
       BaseClassMustBeDerivedFromService(this);
@@ -475,7 +554,7 @@ class RouteGuide final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestCheckLisence(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(4, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(5, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -499,12 +578,32 @@ class RouteGuide final {
     virtual ::grpc::Status StreamedSetIcpMaxIterations(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::routeguide::IcpMaxIterationsRequest,::routeguide::IcpMaxIterationsReply>* server_unary_streamer) = 0;
   };
   template <class BaseClass>
+  class WithStreamedUnaryMethod_SetIcpFilter : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithStreamedUnaryMethod_SetIcpFilter() {
+      ::grpc::Service::MarkMethodStreamed(3,
+        new ::grpc::internal::StreamedUnaryHandler< ::routeguide::IcpFilterRequest, ::routeguide::IcpFilterReply>(std::bind(&WithStreamedUnaryMethod_SetIcpFilter<BaseClass>::StreamedSetIcpFilter, this, std::placeholders::_1, std::placeholders::_2)));
+    }
+    ~WithStreamedUnaryMethod_SetIcpFilter() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable regular version of this method
+    ::grpc::Status SetIcpFilter(::grpc::ServerContext* context, const ::routeguide::IcpFilterRequest* request, ::routeguide::IcpFilterReply* response) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    // replace default version of method with streamed unary
+    virtual ::grpc::Status StreamedSetIcpFilter(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::routeguide::IcpFilterRequest,::routeguide::IcpFilterReply>* server_unary_streamer) = 0;
+  };
+  template <class BaseClass>
   class WithStreamedUnaryMethod_CheckServer : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithStreamedUnaryMethod_CheckServer() {
-      ::grpc::Service::MarkMethodStreamed(3,
+      ::grpc::Service::MarkMethodStreamed(4,
         new ::grpc::internal::StreamedUnaryHandler< ::routeguide::ServerInfoRequest, ::routeguide::ServerInfoReply>(std::bind(&WithStreamedUnaryMethod_CheckServer<BaseClass>::StreamedCheckServer, this, std::placeholders::_1, std::placeholders::_2)));
     }
     ~WithStreamedUnaryMethod_CheckServer() override {
@@ -524,7 +623,7 @@ class RouteGuide final {
     void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithStreamedUnaryMethod_CheckLisence() {
-      ::grpc::Service::MarkMethodStreamed(4,
+      ::grpc::Service::MarkMethodStreamed(5,
         new ::grpc::internal::StreamedUnaryHandler< ::routeguide::LisenceInfoRequest, ::routeguide::LisenceInfoReply>(std::bind(&WithStreamedUnaryMethod_CheckLisence<BaseClass>::StreamedCheckLisence, this, std::placeholders::_1, std::placeholders::_2)));
     }
     ~WithStreamedUnaryMethod_CheckLisence() override {
@@ -538,9 +637,9 @@ class RouteGuide final {
     // replace default version of method with streamed unary
     virtual ::grpc::Status StreamedCheckLisence(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::routeguide::LisenceInfoRequest,::routeguide::LisenceInfoReply>* server_unary_streamer) = 0;
   };
-  typedef WithStreamedUnaryMethod_SetIcpMaxIterations<WithStreamedUnaryMethod_CheckServer<WithStreamedUnaryMethod_CheckLisence<Service > > > StreamedUnaryService;
+  typedef WithStreamedUnaryMethod_SetIcpMaxIterations<WithStreamedUnaryMethod_SetIcpFilter<WithStreamedUnaryMethod_CheckServer<WithStreamedUnaryMethod_CheckLisence<Service > > > > StreamedUnaryService;
   typedef Service SplitStreamedService;
-  typedef WithStreamedUnaryMethod_SetIcpMaxIterations<WithStreamedUnaryMethod_CheckServer<WithStreamedUnaryMethod_CheckLisence<Service > > > StreamedService;
+  typedef WithStreamedUnaryMethod_SetIcpMaxIterations<WithStreamedUnaryMethod_SetIcpFilter<WithStreamedUnaryMethod_CheckServer<WithStreamedUnaryMethod_CheckLisence<Service > > > > StreamedService;
 };
 
 }  // namespace routeguide

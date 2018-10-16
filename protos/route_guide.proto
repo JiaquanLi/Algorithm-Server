@@ -35,6 +35,9 @@ service RouteGuide {
   rpc SetIcpTemplet(stream TempletFileRequest) returns (TempletFileReply) {}
   //set MaximumIterations
   rpc SetIcpMaxIterations(IcpMaxIterationsRequest) returns (IcpMaxIterationsReply) {}
+  
+  //set SetIcpFilter
+  rpc SetIcpFilter(IcpFilterRequest) returns (IcpFilterReply) {}
 
 
   rpc CheckServer(ServerInfoRequest) returns (ServerInfoReply) {}
@@ -58,16 +61,23 @@ message TempletFileReply {
 }
 
 
-// A RouteNote is a message sent while at a given point.
+//IcpMaxIterationsRequest.
 message IcpMaxIterationsRequest {
   int32 maxiterations=1;
 }
-// A RouteNote is a message sent while at a given point.
+// IcpMaxIterationsReply.
 message IcpMaxIterationsReply {
   bool retsts=1;
 }
 
-
+// IcpFilterRequest.
+message IcpFilterRequest {
+  float filter=1;
+}
+// IcpFilterReply.
+message IcpFilterReply {
+  bool retsts=1;
+}
 
 // Read Server information
 message ServerInfoReply{

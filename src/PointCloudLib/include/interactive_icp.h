@@ -20,8 +20,10 @@ public:
 	bool InteractiveIcp(char* fileTarget, char* result);
 	void SetMaxIterations(int iterNumber);
 	bool CreateLoadIcpPcdFile(char* templetFileTxt);
+	void SetIcpFilter(float filter);
 private:
 	int iterations ;//= 100;  // Default number of ICP iterations
+	float filter;
 	PointCloudT::Ptr cloud_in;  // Original point cloud
 	PointCloudT::Ptr cloud_tr;  // Transformed point cloud
 	const PointCloudT::Ptr cloud_icp;  // ICP output point cloud

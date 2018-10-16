@@ -3,6 +3,9 @@
 #include <string>
 #include "logging.h"
 #include <vector>
+
+#include<pcl/filters/voxel_grid.h>
+
 using namespace std;
 
 
@@ -95,6 +98,7 @@ bool CreatePcd(char* fileScr, char* filePcdDes)
 ApiPCL::ApiPCL(): cloud_in(new PointCloudT), cloud_tr(new PointCloudT), cloud_icp(new PointCloudT)
 {
 	iterations = 100;
+	filter = 4;
 
 	if (pcl::io::loadPCDFile(pcdIcp, *cloud_icp) < 0)
 	{
@@ -113,10 +117,16 @@ ApiPCL::~ApiPCL()
 
 void ApiPCL:: SetMaxIterations(int iterNumber)
 {
-	iterations = iterNumber;
+	this->iterations = iterNumber;
 	cout << "Set max iterations: " << iterNumber << endl;
 	log_print(LOG_DEBUG, "ICP_SetMaxIterations", "MaxIterations=%d", iterations);
 }
+
+void ApiPCL::SetIcpFilter(float filter)
+{
+	this->filter = filter;
+}
+
 bool ApiPCL::CreateLoadIcpPcdFile(char* templetFileTxt)
 {
 	if (CreatePcd(templetFileTxt, pcdIcp) == false) {
@@ -153,7 +163,10 @@ bool ApiPCL::InteractiveIcp(char* fileTarget, char* result)
 	// The point clouds we will be using
 	//PointCloudT::Ptr cloud_in(new PointCloudT);  // Original point cloud
 	//PointCloudT::Ptr cloud_tr(new PointCloudT);  // Transformed point cloud
-	//PointCloudT::Ptr cloud_icp(new PointCloudT);  // ICP output point cloud
+	PointCloudT::Ptr cloud_icp_templet(new PointCloudT);  // ICP output point cloud
+	PointCloudT::Ptr cloud_icp_target(new PointCloudT);  // ICP output point cloud
+
+
 	PointCloudT::Ptr cloud_temp(new PointCloudT);
 
 	//Read Pcd files
@@ -167,27 +180,35 @@ bool ApiPCL::InteractiveIcp(char* fileTarget, char* result)
 	}
 	std::cout << "\nLoaded file " << pcdTarget << " (" << cloud_in->size() << " points) in " << time.toc() << " ms\n" << std::endl;
 
-	//time.tic();
-	//if (pcl::io::loadPCDFile(pcdIcp, *cloud_icp) < 0)
-	//{
-	//	PCL_ERROR("Error loading cloud %s.\n", pcdIcp);
-	//	return false;
-	//}
-	//std::cout << "\nLoaded file " << pcdIcp << " (" << cloud_icp->size() << " points) in " << time.toc() << " ms\n" << std::endl;
+	pcl::VoxelGrid<PointT> grid;
+	grid.setLeafSize(this->filter, this->filter, this->filter);    //ÉèÖÃÂË²¨Ê±²ÉÓÃµÄÌåËØ´óÐ¡
+	grid.setInputCloud(cloud_in);
+	grid.filter(*cloud_icp_target);
 
-	*cloud_tr = *cloud_icp;  // We backup cloud_icp  cloud_tr for later use
-	*cloud_temp = *cloud_icp;//use cloud_temp to save templet file ,make sure templet keep the same
+	grid.setInputCloud(cloud_icp);
+	grid.filter(*cloud_icp_templet);
+
+	pcl::PCDWriter writer;
+	writer.write<pcl::PointXYZ>("filter_templet.pcd", *cloud_icp_templet, false);
+
+	pcl::PCDWriter writer2;
+	writer2.write<pcl::PointXYZ>("filter_target.pcd", *cloud_icp_target, false);
+
+
+
+	*cloud_tr = *cloud_icp_target;  // We backup cloud_icp  cloud_tr for later use
+	//*cloud_temp = *cloud_icp;//use cloud_temp to save templet file ,make sure templet keep the same
 	time.tic();
 	pcl::IterativeClosestPoint<PointT, PointT> icp;
 	icp.setMaximumIterations(iterations);
 
 	//icp.setInputSource(cloud_icp);
-	icp.setInputSource(cloud_temp);
+	icp.setInputSource(cloud_icp_templet);
 
-	icp.setInputTarget(cloud_in);
+	icp.setInputTarget(cloud_icp_target);
 
 	//icp.align(*cloud_icp);
-	icp.align(*cloud_temp);
+	icp.align(*cloud_icp_templet);
 
 	icp.setMaximumIterations(1);  // We set this variable to 1 for the next time we will call .align () function
 	std::cout << "Applied " << iterations << " ICP iteration(s) in " << time.toc() << " ms" << std::endl;

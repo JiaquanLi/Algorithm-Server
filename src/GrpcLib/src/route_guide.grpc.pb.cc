@@ -19,6 +19,7 @@ static const char* RouteGuide_method_names[] = {
   "/routeguide.RouteGuide/RouteChat",
   "/routeguide.RouteGuide/SetIcpTemplet",
   "/routeguide.RouteGuide/SetIcpMaxIterations",
+  "/routeguide.RouteGuide/SetIcpFilter",
   "/routeguide.RouteGuide/CheckServer",
   "/routeguide.RouteGuide/CheckLisence",
 };
@@ -33,8 +34,9 @@ RouteGuide::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel
   : channel_(channel), rpcmethod_RouteChat_(RouteGuide_method_names[0], ::grpc::internal::RpcMethod::BIDI_STREAMING, channel)
   , rpcmethod_SetIcpTemplet_(RouteGuide_method_names[1], ::grpc::internal::RpcMethod::CLIENT_STREAMING, channel)
   , rpcmethod_SetIcpMaxIterations_(RouteGuide_method_names[2], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_CheckServer_(RouteGuide_method_names[3], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_CheckLisence_(RouteGuide_method_names[4], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_SetIcpFilter_(RouteGuide_method_names[3], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_CheckServer_(RouteGuide_method_names[4], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_CheckLisence_(RouteGuide_method_names[5], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
   {}
 
 ::grpc::ClientReaderWriter< ::routeguide::RouteNote, ::routeguide::RouteNote>* RouteGuide::Stub::RouteChatRaw(::grpc::ClientContext* context) {
@@ -71,6 +73,18 @@ RouteGuide::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel
 
 ::grpc::ClientAsyncResponseReader< ::routeguide::IcpMaxIterationsReply>* RouteGuide::Stub::PrepareAsyncSetIcpMaxIterationsRaw(::grpc::ClientContext* context, const ::routeguide::IcpMaxIterationsRequest& request, ::grpc::CompletionQueue* cq) {
   return ::grpc::internal::ClientAsyncResponseReaderFactory< ::routeguide::IcpMaxIterationsReply>::Create(channel_.get(), cq, rpcmethod_SetIcpMaxIterations_, context, request, false);
+}
+
+::grpc::Status RouteGuide::Stub::SetIcpFilter(::grpc::ClientContext* context, const ::routeguide::IcpFilterRequest& request, ::routeguide::IcpFilterReply* response) {
+  return ::grpc::internal::BlockingUnaryCall(channel_.get(), rpcmethod_SetIcpFilter_, context, request, response);
+}
+
+::grpc::ClientAsyncResponseReader< ::routeguide::IcpFilterReply>* RouteGuide::Stub::AsyncSetIcpFilterRaw(::grpc::ClientContext* context, const ::routeguide::IcpFilterRequest& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::routeguide::IcpFilterReply>::Create(channel_.get(), cq, rpcmethod_SetIcpFilter_, context, request, true);
+}
+
+::grpc::ClientAsyncResponseReader< ::routeguide::IcpFilterReply>* RouteGuide::Stub::PrepareAsyncSetIcpFilterRaw(::grpc::ClientContext* context, const ::routeguide::IcpFilterRequest& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::routeguide::IcpFilterReply>::Create(channel_.get(), cq, rpcmethod_SetIcpFilter_, context, request, false);
 }
 
 ::grpc::Status RouteGuide::Stub::CheckServer(::grpc::ClientContext* context, const ::routeguide::ServerInfoRequest& request, ::routeguide::ServerInfoReply* response) {
@@ -116,10 +130,15 @@ RouteGuide::Service::Service() {
   AddMethod(new ::grpc::internal::RpcServiceMethod(
       RouteGuide_method_names[3],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
+      new ::grpc::internal::RpcMethodHandler< RouteGuide::Service, ::routeguide::IcpFilterRequest, ::routeguide::IcpFilterReply>(
+          std::mem_fn(&RouteGuide::Service::SetIcpFilter), this)));
+  AddMethod(new ::grpc::internal::RpcServiceMethod(
+      RouteGuide_method_names[4],
+      ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< RouteGuide::Service, ::routeguide::ServerInfoRequest, ::routeguide::ServerInfoReply>(
           std::mem_fn(&RouteGuide::Service::CheckServer), this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      RouteGuide_method_names[4],
+      RouteGuide_method_names[5],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< RouteGuide::Service, ::routeguide::LisenceInfoRequest, ::routeguide::LisenceInfoReply>(
           std::mem_fn(&RouteGuide::Service::CheckLisence), this)));
@@ -142,6 +161,13 @@ RouteGuide::Service::~Service() {
 }
 
 ::grpc::Status RouteGuide::Service::SetIcpMaxIterations(::grpc::ServerContext* context, const ::routeguide::IcpMaxIterationsRequest* request, ::routeguide::IcpMaxIterationsReply* response) {
+  (void) context;
+  (void) request;
+  (void) response;
+  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+}
+
+::grpc::Status RouteGuide::Service::SetIcpFilter(::grpc::ServerContext* context, const ::routeguide::IcpFilterRequest* request, ::routeguide::IcpFilterReply* response) {
   (void) context;
   (void) request;
   (void) response;
